@@ -5,7 +5,10 @@ local function InterpretCommand(_, arg, val1, val2)
         end,
         PrintVar = function(v1, _)
             Log('%s: %s', v1, PersistentVars[v1])
-        end
+        end,
+        DmpDB = function()
+            Dmp(DynamicSortingDB:Read())
+        end,
     }
 
     local fnc = arguments[arg]

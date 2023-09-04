@@ -24,6 +24,8 @@ Osiris = {
         AddedTo = OsirisEvt:New({ Name = 'AddedTo', Arity = 3 }),
         -- event RemovedFrom((GUIDSTRING)_Object, (GUIDSTRING)_InventoryHolder)
         RemovedFrom = OsirisEvt:New({ Name = 'RemovedFrom', Arity = 2 }),
+        -- event MovedFromTo((GUIDSTRING)_MovedObject, (GUIDSTRING)_FromObject, (GUIDSTRING)_ToObject, (INTEGER)_IsTrade)
+        MovedFromTo = OsirisEvt:New({ Name = 'MovedFromTo', Arity = 4 }),
     },
     ExecTime = {
         After = 'after',

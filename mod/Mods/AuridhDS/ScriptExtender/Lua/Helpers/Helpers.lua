@@ -39,10 +39,25 @@ function GetObjectInfo(entity)
     }
 end
 
-function GetTemplate(templateUid, containerUid)
-    return {
-        UUID = templateUid,
-        Container = containerUid,
-        Items = {}
-    }
+
+function GetCharacter(characterUid)
+    local entityId, uuid = SplitEntityString(characterUid)
+    return CharacterEntry:New({
+        UUID = uuid,
+        EntityId = entityId,
+    })
+end
+function GetContainer(containerUid)
+    local entityId, uuid = SplitEntityString(containerUid)
+    return ContainerEntry:New({
+        UUID = uuid,
+        EntityId = entityId,
+    })
+end
+function GetTemplate(templateUid)
+    local entityId, uuid = SplitEntityString(templateUid)
+    return TemplateEntry:New({
+        UUID = uuid,
+        EntityId = entityId,
+    })
 end

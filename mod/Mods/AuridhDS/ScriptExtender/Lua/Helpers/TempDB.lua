@@ -27,12 +27,28 @@ function TempDB:Get(key)
     return self.DB[key]
 end
 
+function TempDB:Exists(key)
+    return self.DB[key] ~= nil
+end
+
 function TempDB:Read()
     return self.DB
 end
 
 function TempDB:Update(value)
     self.DB = value
+end
+
+function TempDB:UpdateIfNil(value)
+    if self.DB == nil then
+        self.DB = value
+    else
+        for k, v in pairs(value) do
+            if self.DB[k] == nil then
+                self.DB[k] = v
+            end
+        end
+    end
 end
 
 function TempDB:Delete()

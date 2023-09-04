@@ -1,97 +1,103 @@
-local DB = TempDB:New()
+local TemplateDB
+local CharacterDB
+local ContainerDB
 
 -- Self defined events
-local Evt_GetContainers_Srt = 'Evt_GetContainers_Srt'
-local Evt_GetContainers_End = 'Evt_GetContainers_End'
+local Evt_InitContainerDB_Srt = 'Evt_InitContainerDB_Srt'
+local Evt_InitContainerDB_End = 'Evt_InitContainerDB_End'
+local Evt_InitTemplateDB_Srt = 'Evt_InitTemplateDB_Srt'
+local Evt_InitTemplateDB_End = 'Evt_InitTemplateDB_End'
 local Evt_MoveFromTo = 'Evt_MoveFromTo'
 
-function AddObjectToDB(objectUid)
-    local object = GetObjectInfo(objectUid)
-    if object.IsStoryItem and object.IsContainer then
-        return
-    end
 
-    local owner = GetObjectInfo(object.DirectOwner)
-    if owner.IsStoryItem then
-        return
-    end
-
-    -- Create object and owner in db
-    object = DB:CreateIfNotExists(object.UUID, object):Read()
-    owner = DB:CreateIfNotExists(owner.UUID, owner):Read()
-    owner.Items[object.UUID] = 1
-
-    -- Template
-    local template = DB:Get(object.Template)
-    if template == nil then
-        template = DB:Create(object.Template, GetTemplate(object.Template, owner.UUID))
-        owner.Templates[object.Template] = 1
-    end
-    template:Read().Items[object.UUID] = 1
-end
-function RemoveObjectFromDB(objectUid)
-    local object = DB:Get(objectUid)
-    if object == nil then
-        return
-    end
-
-    local owner = DB:Get(object:Read().DirectOwner)
-    local template = DB:Get(object:Read().Template)
-
-    owner:Read().Items[object:Read().UUID] = nil
-    template:Read().Items[object:Read().UUID] = nil
-
-    if #template:Read().Items == 0 then
-        template:Delete()
-    end
-
-    object:Delete()
-end
-
-Osiris.Evt.SavegameLoaded:Register(Osiris.ExecTime.After, function()
+-- DB initialization
+local function InitCharacterDB()
     IteratePlayerDB(function(playerUid)
-        --Log('IterateInventory for %s', playerUid)
-        Osi.IterateInventory(playerUid, Evt_GetContainers_Srt, Evt_GetContainers_End)
+        local player = GetCharacter(playerUid)
+        CharacterDB:Create(player.UUID, player)
     end)
-end)
-Osiris.Evt.EntityEvent:Register(Osiris.ExecTime.After, function(objectUid, event)
-    --Log('EntityEvent: %s - %s', event, objectUid)
-    if event == Evt_GetContainers_Srt and Osi.IsContainer(objectUid) ~= 1 then
-        AddObjectToDB(objectUid)
-    end
-end)
-Osiris.Evt.AddedTo:Register(Osiris.ExecTime.After, function(objectUid, holderUid, _)
-    objectUid = GetUUID(objectUid)
-    holderUid = GetUUID(holderUid)
+end
 
-    Log('AddedTo -  %s | %s', objectUid, holderUid)
-    if DB:Get(holderUid) == nil then
+local function InitContainerDB()
+    for _, playerEntry in ipairs(CharacterDB:Read()) do
+        Osi.IterateInventory(playerEntry:Read().UUID, Evt_InitContainerDB_Srt, Evt_InitContainerDB_End)
+    end
+end
+
+local function InitTemplateDB()
+    for _, playerEntry in ipairs(CharacterDB:Read()) do
+        Osi.IterateInventory(playerEntry:Read().UUID, Evt_InitTemplateDB_Srt, Evt_InitTemplateDB_End)
+    end
+end
+
+local function InitDB()
+    DynamicSortingDB = TempDB:New()
+
+    TemplateDB = DynamicSortingDB:Create('Templates', TempDB:New())
+    CharacterDB = DynamicSortingDB:Create('Characters', TempDB:New())
+    ContainerDB = DynamicSortingDB:Create('Containers', TempDB:New())
+
+    InitCharacterDB()
+    InitContainerDB()
+    InitTemplateDB()
+end
+
+local function HandleInitEvents(objectUid, eventId)
+    if eventId == Evt_InitContainerDB_Srt and Osi.IsContainer(objectUid) == 1 then
+        local container = GetContainer(objectUid)
+        Log('InitContainer: %s', container)
+        ContainerDB:Create(container.UUID, container)
+    elseif eventId == Evt_InitTemplateDB_Srt and Osi.IsContainer(objectUid) ~= 1 then
+        local template = GetTemplate(Osi.GetTemplate(objectUid))
+        Log('InitTemplate: %s', template)
+        template.Items[GetUUID(objectUid)] = 1
+        local dbEntry = TemplateDB:CreateIfNotExists(template.UUID, template)
+        dbEntry:UpdateIfNil(template)
+    end
+end
+
+-- Add and remove handlers
+local function HandleAddedTo(objectUid, holderUid, _)
+    Log('AddedTo: %s | %s', objectUid, holderUid)
+
+    -- Check if the object was added to a players inventory
+    if (Osi.IsCharacter(holderUid) and not CharacterDB:Exists(GetUUID(holderUid)))
+        -- Check if the item was moved from a owned container
+        or ContainerDB:Exists(GetUUID(Osi.GetDirectInventoryOwner(objectUid)))
+    then
         return
     end
 
-    local object = DB:Get(objectUid)
-    Log('Object: ')
-    Dmp(object)
-    if object == nil then
-        AddObjectToDB(objectUid)
-        object = DB:Get(objectUid)
-        Log('AddedObject: ')
-        Dmp(object)
-    end
-
-    local template = DB:Get(object:Read().Template)
-    Log('Template: ')
-    Dmp(template)
-    if template:Read().UUID ~= holderUid then
+    -- Check if the template already exists in the db
+    local templateUid = GetUUID(Osi.GetTemplate(objectUid))
+    if TemplateDB:Exists(templateUid) then
+        local template = TemplateDB:Get(templateUid)
+        local stackAmount = Osi.GetStackAmount(objectUid)
         -- call MoveItemTo((CHARACTER)_Character, (ITEM)_Item, (GUIDSTRING)_Target, (INTEGER)_Amount, (STRING)_Event)
-        Osi.MoveItemTo(holderUid, objectUid, template:Read().Container, object:Read().StackAmount, Evt_MoveFromTo)
-        Log('MOVED!')
+        Osi.MoveItemTo(holderUid, objectUid, template:Read().ContainerUid, stackAmount, Evt_MoveFromTo)
+    elseif ContainerDB:Exists(GetUUID(holderUid)) then
+        local template = GetTemplate(templateUid)
+        TemplateDB:Create(template.UUID, templateUid)
     end
-end)
-Osiris.Evt.RemovedFrom:Register(Osiris.ExecTime.After, function(objectUid, holderUid)
-    objectUid = GetUUID(objectUid)
-    RemoveObjectFromDB(objectUid)
+end
 
-    Log('Removed - %s | %s', objectUid, holderUid)
-    Dmp(DB)
-end)
+local function HandleRemovedFrom(objectUid, holderUid)
+    Log('RemovedFrom: %s | %s', objectUid, holderUid)
+    if not ContainerDB:Exists(GetUUID(holderUid)) then
+        return
+    end
+    local template = TemplateDB:Get(GetUUID(Osi.GetTemplate(objectUid)))
+    local itemUid = GetUUID(objectUid)
+    if template:Read().Items[itemUid] == 1 then
+        template:Read().Items[itemUid] = nil
+        if #template:Read().Items == 0 then
+            template:Delete()
+        end
+    end
+end
+
+-- Osi event listeners
+Osiris.Evt.SavegameLoaded:Register(Osiris.ExecTime.After, InitDB)
+Osiris.Evt.EntityEvent:Register(Osiris.ExecTime.After, HandleInitEvents)
+Osiris.Evt.AddedTo:Register(Osiris.ExecTime.Before, HandleAddedTo)
+Osiris.Evt.RemovedFrom:Register(Osiris.ExecTime.After, HandleRemovedFrom)
