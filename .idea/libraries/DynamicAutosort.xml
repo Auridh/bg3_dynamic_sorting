@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="DynamicAutosort">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/compile/files/DynamicAutosort.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
