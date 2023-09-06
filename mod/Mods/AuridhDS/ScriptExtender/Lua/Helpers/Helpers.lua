@@ -20,26 +20,18 @@ function SplitEntityString(mergeString)
     return mergeString, nil
 end
 
-function GetObjectInfo(entity)
-    local isContainer = Osi.IsContainer(entity) == 1
-    local isCharacter = isContainer and false or Osi.IsCharacter(entity) == 1
-    local entityString, uuid = SplitEntityString(entity)
+function GetObject(entity)
+    local entityId, uuid = SplitEntityString(entity)
     return {
         UUID = uuid,
-        EntityString = entityString,
-        IsContainer = isContainer,
-        IsCharacter = isCharacter,
-        IsStoryItem = Osi.IsStoryItem(entity) == 1,
+        EntityId = entityId,
         MaxStackAmount = Osi.GetMaxStackAmount(entity),
         StackAmount = Osi.GetStackAmount(entity),
-        Template = GetUUID(Osi.GetTemplate(entity)),
-        DirectOwner = Osi.GetDirectInventoryOwner(entity),
-        Items = (isContainer or isCharacter) and {} or nil,
-        Templates = (isContainer or isCharacter) and {} or nil,
+        TemplateUuid = GetUUID(Osi.GetTemplate(entity)),
+        DirectOwnerUuid = GetUUID(Osi.GetDirectInventoryOwner(entity)),
+        OwnerUuid = GetUUID(Osi.GetOwner(entity)),
     }
 end
-
-
 function GetCharacter(characterUid)
     local entityId, uuid = SplitEntityString(characterUid)
     return CharacterEntry:New({
@@ -59,5 +51,6 @@ function GetTemplate(templateUid)
     return TemplateEntry:New({
         UUID = uuid,
         EntityId = entityId,
+        Objects = TempDB:New()
     })
 end

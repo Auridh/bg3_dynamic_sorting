@@ -31,12 +31,22 @@ function TempDB:Exists(key)
     return self.DB[key] ~= nil
 end
 
+function TempDB:IsEmpty()
+    return #self.DB <= 1
+end
+
 function TempDB:Read()
     return self.DB
 end
 
 function TempDB:Update(value)
-    self.DB = value
+    if self.DB == nil then
+        self.DB = value
+    else
+        for k, v in pairs(value) do
+            self.DB[k] = v
+        end
+    end
 end
 
 function TempDB:UpdateIfNil(value)
@@ -51,6 +61,6 @@ function TempDB:UpdateIfNil(value)
     end
 end
 
-function TempDB:Delete()
-    self = nil
+function TempDB:Delete(key)
+    self.DB[key] = nil
 end
