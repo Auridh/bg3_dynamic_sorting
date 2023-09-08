@@ -26,6 +26,14 @@ Osiris = {
         RemovedFrom = OsirisEvt:New({ Name = 'RemovedFrom', Arity = 2 }),
         -- event MovedFromTo((GUIDSTRING)_MovedObject, (GUIDSTRING)_FromObject, (GUIDSTRING)_ToObject, (INTEGER)_IsTrade)
         MovedFromTo = OsirisEvt:New({ Name = 'MovedFromTo', Arity = 4 }),
+        -- event CharacterJoinedParty((CHARACTER)_Character)
+        CharacterJoinedParty = OsirisEvt:New({ Name = 'CharacterJoinedParty', Arity = 1 }),
+        -- event CharacterLeftParty((CHARACTER)_Character)
+        CharacterLeftParty = OsirisEvt:New({ Name = 'CharacterLeftParty', Arity = 1 }),
+        -- event DroppedBy((GUIDSTRING)_Object, (CHARACTER)_Mover)
+        DroppedBy = OsirisEvt:New({ Name = 'DroppedBy', Arity = 2 }),
+        -- event MessageBoxYesNoClosed((CHARACTER)_Character, (STRING)_Message, (INTEGER)_Result)
+        MessageBoxYesNoClosed = OsirisEvt:New({ Name = 'MessageBoxYesNoClosed', Arity = 3 }),
     },
     ExecTime = {
         After = 'after',

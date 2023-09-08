@@ -1,0 +1,11 @@
+new entry "DS_REDUCE_WEIGHT_MAIN"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StatusPropertyFlags" "ForGameMaster;DisableOverhead;DisableCombatlog;DisablePortraitIndicator;IgnoreResting;ApplyToDead"
+data "Boosts" "Weight(-10000)"
+
+new entry "DS_REDUCE_WEIGHT_FIX"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StatusPropertyFlags" "ForGameMaster;DisableOverhead;DisableCombatlog;DisablePortraitIndicator;ApplyToDead"
+data "Boosts" "CarryCapacityMultiplier(1.0)"

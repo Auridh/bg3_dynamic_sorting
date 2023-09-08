@@ -19,38 +19,3 @@ function SplitEntityString(mergeString)
     end
     return mergeString, nil
 end
-
-function GetObject(entity)
-    local entityId, uuid = SplitEntityString(entity)
-    return {
-        UUID = uuid,
-        EntityId = entityId,
-        MaxStackAmount = Osi.GetMaxStackAmount(entity),
-        StackAmount = Osi.GetStackAmount(entity),
-        TemplateUuid = GetUUID(Osi.GetTemplate(entity)),
-        DirectOwnerUuid = GetUUID(Osi.GetDirectInventoryOwner(entity)),
-        OwnerUuid = GetUUID(Osi.GetOwner(entity)),
-    }
-end
-function GetCharacter(characterUid)
-    local entityId, uuid = SplitEntityString(characterUid)
-    return CharacterEntry:New({
-        UUID = uuid,
-        EntityId = entityId,
-    })
-end
-function GetContainer(containerUid)
-    local entityId, uuid = SplitEntityString(containerUid)
-    return ContainerEntry:New({
-        UUID = uuid,
-        EntityId = entityId,
-    })
-end
-function GetTemplate(templateUid)
-    local entityId, uuid = SplitEntityString(templateUid)
-    return TemplateEntry:New({
-        UUID = uuid,
-        EntityId = entityId,
-        Objects = TempDB:New()
-    })
-end

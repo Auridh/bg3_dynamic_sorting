@@ -1,0 +1,7 @@
+new treasuretable "TUT_Chest_Potions"
+CanMerge 1
+new subtable "1,1"
+object category "I_DS_OBJ_SortingTag",1,0,0,0,0,0,0,0
+
+new treasuretable "DS_SortingTag_TT"
+CanMerge 1

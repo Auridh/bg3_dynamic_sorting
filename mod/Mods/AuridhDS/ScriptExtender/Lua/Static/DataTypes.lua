@@ -1,62 +1,58 @@
----@class CharacterEntry
-CharacterEntry = {
-    UUID = nil,
-    EntityId = nil,
-}
-
----@vararg CharacterEntry
-function CharacterEntry:New(value)
-    value = value or {}
-    setmetatable(value, self)
-    self.__index = self
-    return value
-end
-
----@class ContainerEntry
-ContainerEntry = {
-    UUID = nil,
-    EntityId = nil,
-}
-
----@vararg ContainerEntry
-function ContainerEntry:New(value)
-    value = value or {}
-    setmetatable(value, self)
-    self.__index = self
-    return value
-end
-
 ---@class TemplateEntry
 TemplateEntry = {
     UUID = nil,
     EntityId = nil,
-    ContainerUuid = nil,
-    Objects = nil,
+    SortingTagUuid = nil,
 }
 
 ---@vararg TemplateEntry
+---@return TemplateEntry
 function TemplateEntry:New(value)
     value = value or {}
     setmetatable(value, self)
-    self.__index = self
     return value
 end
 
----@class ObjectEntry
-ObjectEntry = {
+---@vararg string
+---@return TemplateEntry
+function TemplateEntry:Get(entityUid, overwrite)
+    local entityId, uuid = SplitEntityString(entityUid)
+    local rootEntry = TemplateEntry:New({
+        UUID = uuid,
+        EntityId = entityId,
+        SortingTagUuid = Osi.GetDirectInventoryOwner(entityUid),
+    })
+
+    if overwrite == nil then
+        return rootEntry
+    end
+
+    return rootEntry:New(overwrite)
+end
+
+---@class TagEntry
+SortingTagEntry = {
     UUID = nil,
     EntityId = nil,
-    TemplateUuid = nil,
-    MaxStackAmount = nil,
-    StackAmount = nil,
     DirectOwnerUuid = nil,
-    OwnerUuid = nil,
+    Templates = TempDB:New(),
 }
 
----@vararg ObjectEntry
-function ObjectEntry:New(value)
+---@vararg TagEntry
+---@return TagEntry
+function SortingTagEntry:New(value)
     value = value or {}
     setmetatable(value, self)
-    self.__index = self
     return value
+end
+
+---@vararg string
+---@return TagEntry
+function SortingTagEntry:Get(entityUid)
+    local entityId, uuid = SplitEntityString(entityUid)
+    return SortingTagEntry:New({
+        UUID = uuid,
+        EntityId = entityId,
+        DirectOwnerUuid = Osi.GetDirectInventoryOwner(entityUid),
+    })
 end

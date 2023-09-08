@@ -1,150 +1,174 @@
-local TemplateDB
-local CharacterDB
-local ContainerDB
-local ObjectDB
+-- TempDBs
+local SortingTags = TempDB:New()
+local Templates = TempDB:New()
+local OriginalItems = {}
+local MessageBoxYesNo
 
--- Self defined events
-local Evt_InitObjectDBs_Srt = 'Evt_InitObjectDBs_Srt'
-local Evt_InitObjectDBs_End = 'Evt_InitObjectDBs_End'
-local Evt_MoveFromTo = 'Evt_MoveFromTo'
+-- Sorting Tags
+local Template_SortingTag = '834c78a0-4758-457b-aa45-74a179a3b3be'
+local Template_SortingTagCreator = '8ea7b456-364a-421d-abdc-2b7cd7ca5b21'
+
+-- Events
+local Evt_SearchBag = 'Evt_SearchBag'
+local Evt_SearchBagEnd = 'Evt_SearchBagEnd'
+local Evt_InitSortingTag = 'Evt_InitSortingTag'
+local Evt_InitSortingTagEnd = 'Evt_InitSortingTagEnd'
 
 
--- DB initialization
-local function InitCharacterDB()
-    IteratePlayerDB(function(playerUid)
-        local player = GetCharacter(playerUid)
-        CharacterDB:Create(player.UUID, player)
-    end)
+-- This and that
+local function AddTemplate(entityUid)
+    local entry = TemplateEntry:Get(Osi.GetTemplate(entityUid))
+    local listId = IsTemplateList(entry.UUID)
+
+    -- Template lists get handled separately
+    if listId ~= nil then
+        entry.UUID = listId
+        Templates:Create(listId, entry)
+        SortingTags:Get(entry.SortingTagUuid):Read().Templates:Create(listId, entry)
+        return
+    end
+
+    Templates:Create(entry.UUID, entry)
+    SortingTags:Get(entry.SortingTagUuid):Read().Templates:Create(entry.UUID, entry)
 end
 
-local function InitObjectDBs()
-    for _, playerEntry in pairs(CharacterDB:Read()) do
-        Osi.IterateInventory(playerEntry:Read().UUID, Evt_InitObjectDBs_Srt, Evt_InitObjectDBs_End)
-    end
+local function AddSortingTag(entityUid)
+    local entry = SortingTagEntry:Get(entityUid)
+    SortingTags:Create(entry.UUID, entry)
+    Osi.IterateInventory(entityUid, Evt_InitSortingTag, Evt_InitSortingTagEnd)
+end
+
+local function SearchForTags(holderUid)
+    -- call IterateInventoryByTemplate((GUIDSTRING)_InventoryHolder, (GUIDSTRING)_Template, (STRING)_Event, (STRING)_CompletionEvent)
+    Osi.IterateInventoryByTemplate(holderUid, Template_SortingTag, Evt_SearchBag, Evt_SearchBagEnd)
 end
 
 local function InitDB()
-    DynamicSortingDB = TempDB:New()
-
-    TemplateDB = DynamicSortingDB:Create('Templates', TempDB:New())
-    CharacterDB = DynamicSortingDB:Create('Characters', TempDB:New())
-    ContainerDB = DynamicSortingDB:Create('Containers', TempDB:New())
-    ObjectDB = DynamicSortingDB:Create('Objects', TempDB:New())
-
-    InitCharacterDB()
-    InitObjectDBs()
+    IteratePlayerDB(SearchForTags)
 end
 
-local function HandleInitEvents(objectUid, eventId)
-    if eventId == Evt_InitObjectDBs_Srt then
-        -- Add to container db
-        if Osi.IsContainer(objectUid) == 1 then
-            local container = GetContainer(objectUid)
-            ContainerDB:Create(container.UUID, container)
+
+-- Handlers
+local function OnSavegameLoaded()
+    InitDB()
+end
+
+local function OnEntityEvent(entityUid, eventId)
+    if eventId == Evt_SearchBag then
+        AddSortingTag(entityUid)
+        return
+    end
+    if eventId == Evt_InitSortingTag then
+        AddTemplate(entityUid)
+        return
+    end
+end
+
+local function OnDroppedBy(entityUid, _)
+    local entityUUID = GetUUID(entityUid)
+    -- Delete a sorting tag if it is dropped
+    if SortingTags:Exists(entityUUID) then
+        local entry = SortingTags:Get(entityUUID):Read()
+        for key, _ in pairs(entry.Templates:Read()) do
+            Templates:Delete(key)
         end
 
-        -- Add object to db
-        local object = ObjectDB:CreateIfNotExists(GetUUID(objectUid), GetObject(objectUid))
-
-        -- Add template to db
-        local templateUid = Osi.GetTemplate(objectUid)
-        local template = TemplateDB:CreateIfNotExists(GetUUID(templateUid), GetTemplate(templateUid))
-
-        -- Assign the object to its template
-        template:Read().Objects:CreateIfNotExists(GetUUID(objectUid), object)
-        object:Read().TemplateUuid = template:Read().UUID
+        SortingTags:Delete(entityUUID)
+        Osi.RequestDelete(entityUid)
+        return
     end
 end
 
-
--- Add and remove handlers
-local function HandleAddedTo(objectUid, holderUid, addType)
-    Log('AddedTo: %s | %s | %s', objectUid, holderUid, addType)
-    local holderUuid = GetUUID(holderUid)
-
-    -- If the item wasn't added to a characters inventory abort
-    if not CharacterDB:Exists(holderUuid) and not CharacterDB:Exists(GetUUID(Osi.GetOwner(holderUid))) then
-        Log('Character does not exist and container is not owned by character in db.')
+local function OnRemovedFrom(entityUid, holderUid)
+    -- Items removed from a sorting tag get deleted
+    if SortingTags:Exists(GetUUID(holderUid)) then
+        local template = Templates:Get(Osi.GetTemplate(entityUid)):Read()
+        SortingTags:Get(GetUUID(holderUid)):Read().Templates:Delete(template.UUID)
+        Templates:Delete(template.UUID)
+        Osi.RequestDelete(entityUid)
         return
     end
+end
 
-    -- Create object if it not exists
-    local objectUuid = GetUUID(objectUid)
-    local object = ObjectDB:Get(objectUuid)
+local function OnAddedTo(entityUid, holderUid)
+    local holderUUID = GetUUID(holderUid)
 
-    -- If the object didn't exist before it's obviously new
-    if object == nil then
-        Log('Add object to db')
-        object = ObjectDB:Create(objectUuid, GetObject(objectUid))
-    -- If the object only moved from a characters inventory to the same characters inventory nothing needs to be done
-    elseif object:Read().OwnerUuid == GetUUID(Osi.GetOwner(objectUid)) and CharacterDB:Exists(holderUuid) then
-        Log('Same inventory. No action needed!')
-        return
-    end
+    -- An object was sorted added to a sorting tag
+    if SortingTags:Exists(holderUUID) then
+        local template = GetUUID(Osi.GetTemplate(entityUid))
+        local owner = Osi.GetOwner(entityUid)
 
-    -- If the object is a container it should be added to the database
-    if Osi.IsContainer(objectUid) == 1 and not ContainerDB:Exists(objectUuid) then
-        Log('Add container to db')
-        ContainerDB:Create(objectUuid, GetContainer(objectUid))
-    end
-
-    -- Create or/and update template
-    local template = TemplateDB:Get(object:Read().TemplateUuid) or TemplateDB.Create(object:Read().TemplateUuid, GetTemplate(object:Read().TemplateUuid))
-    template = template:Read()
-    template.Objects:Update({ [object:Read().UUID] = object })
-    Log('Template: ')
-    Dmp(template)
-
-    -- If the template has no assigned container assign the new container (except for characters)
-    if template.ContainerUuid == nil then
-        if Osi.IsCharacter(holderUid) == 1 then
-            Log('No assigned container found.')
+        -- Ignore our own items
+        if template == Template_SortingTag or template == Template_SortingTagCreator then
+            Osi.MagicPocketsMoveTo(owner, entityUid, owner, 0, 1)
             return
         end
 
-        Log('Container assigned to template')
-        template.ContainerUuid = holderUuid
-        ContainerDB:Get(template.ContainerUuid):Update({ TemplateUuid = template.UUID })
-    elseif template.ContainerUuid ~= holderUuid then
-        Log('Move item to container: %s', ContainerDB:Get(template.ContainerUuid):Read().EntityId .. '_' .. template.ContainerUuid)
-        local stackAmount = Osi.GetStackAmount(objectUid)
-        -- call MoveItemTo((CHARACTER)_Character, (ITEM)_Item, (GUIDSTRING)_Target, (INTEGER)_Amount, (STRING)_Event)
-        Osi.MoveItemTo(holderUid, objectUid, template.ContainerUuid, stackAmount, Evt_MoveFromTo)
-    end
-end
-
-local function HandleRemovedFrom(objectUid, holderUid)
-    Log('RemovedFrom: %s | %s', objectUid, holderUid)
-    local holderUuid = GetUUID(holderUid)
-
-    -- Remove object from inventory
-    if CharacterDB:Exists(holderUuid) then
-        local object = ObjectDB:Get(GetUUID(objectUid))
-        if object ~= nil and object:Read().OwnerUuid == holderUuid then
-            Log('Remove object from db')
-            ObjectDB:Delete(object:Read().UUID)
+        -- If the template count in the inventory is greater than one nothing needs to be done
+        if OriginalItems[template] ~= nil then
+            OriginalItems[template] = nil
+            return
         end
-    end
 
-    -- If it wasn't one of our containers nothing is happening
-    if not ContainerDB:Exists(GetUUID(holderUid)) then
-        Log('Was not removed from an owned container.')
+        -- call MagicPocketsMoveTo((CHARACTER)_Player, (GUIDSTRING)_Object, (GUIDSTRING)_DestinationInventory, (INTEGER)_ShowNotification, (INTEGER)_ClearOriginalOwner)
+        Osi.MagicPocketsMoveTo(owner, entityUid, owner, 0, 1)
+
+        -- Add the template to the sorting tag, if it doesn't exist
+        if SortingTags:Get(holderUUID):Read().Templates:Exists(template) then
+            -- call TemplateAddTo((ITEMROOT)_ItemTemplate, (GUIDSTRING)_InventoryHolder, (INTEGER)_Count, (INTEGER)_ShowNotification)
+            OriginalItems[template] = entityUid
+            Osi.TemplateAddTo(template, holderUid, 1, 0)
+
+            -- Ask if all items of this type should be sorted in this container
+            local listId = GetBestTmpLst(entityUid, template)
+            if listId ~= nil and not SortingTags:Get(holderUUID):Read().Templates:Exists(listId) then
+                Osi.OpenMessageBoxYesNo(owner, TmpLstIds[listId].Message)
+                MessageBoxYesNo = { Id = listId, Message = TmpLstIds[listId].Message, SortingTagUuid = holderUUID }
+            end
+        end
         return
     end
 
-    -- Remove template references
-    local objectUuid = GetUUID(objectUid)
-    local templateUuid = GetUUID(Osi.GetTemplate(objectUid))
-    TemplateDB:Get(templateUuid).Objects:Delete(objectUuid)
-    if TemplateDB:Get(templateUuid):IsEmpty() then
-        Log('Template removed!')
-        TemplateDB:Delete(templateUuid)
+    -- An item was added to a player inventory and should get sorted
+    if Osi.IsPlayer(holderUid) == 1 then
+        local template = GetUUID(Osi.GetTemplate(entityUid))
+        local owner = Osi.GetOwner(entityUid)
+        if Templates:Exists(template) then
+            Osi.MagicPocketsMoveTo(owner, entityUid, Templates:Get(template):Read().SortingTagUuid, 0, 1)
+            return
+        end
+
+        local listId = CheckTmpLsts(entityUid, template)
+        if Templates:Exists(listId) then
+            Osi.MagicPocketsMoveTo(owner, entityUid, Templates:Get(listId):Read().SortingTagUuid, 0, 1)
+            return
+        end
+        return
+    end
+
+    -- Add sorting tag to containers
+    if Osi.IsContainer(holderUid) == 1 and Osi.GetTemplate(entityUid) == Template_SortingTagCreator then
+        local owner = Osi.GetOwner(entityUid)
+        Osi.TemplateAddTo(Template_SortingTag, holderUid, 1, 1)
+        Osi.MagicPocketsMoveTo(owner, entityUid, owner, 0, 1)
+        return
     end
 end
 
+local function OnMessageBoxYesNoClosed(_, message, result)
+    if MessageBoxYesNo == nil or message ~= MessageBoxYesNo.Message then
+        return
+    end
 
--- Osi event listeners
-Osiris.Evt.SavegameLoaded:Register(Osiris.ExecTime.After, InitDB)
-Osiris.Evt.EntityEvent:Register(Osiris.ExecTime.After, HandleInitEvents)
-Osiris.Evt.AddedTo:Register(Osiris.ExecTime.After , HandleAddedTo)
-Osiris.Evt.RemovedFrom:Register(Osiris.ExecTime.After, HandleRemovedFrom)
+    if result == 1 then
+        Osi.TemplateAddTo(Template_SortingTag, MessageBoxYesNo.SortingTagUuid, 1, 1)
+    end
+end
+
+-- Osiris Event Handlers
+Osiris.Evt.MessageBoxYesNoClosed:Register(Osiris.ExecTime.After, OnMessageBoxYesNoClosed)
+Osiris.Evt.AddedTo:Register(Osiris.ExecTime.After, OnAddedTo)
+Osiris.Evt.RemovedFrom:Register(Osiris.ExecTime.After, OnRemovedFrom)
+Osiris.Evt.DroppedBy:Register(Osiris.ExecTime.After, OnDroppedBy)
+Osiris.Evt.EntityEvent:Register(Osiris.ExecTime.After, OnEntityEvent)
+Osiris.Evt.SavegameLoaded:Register(Osiris.ExecTime.After, OnSavegameLoaded)
