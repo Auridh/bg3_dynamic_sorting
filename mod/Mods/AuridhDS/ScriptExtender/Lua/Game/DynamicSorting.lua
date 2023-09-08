@@ -14,6 +14,10 @@ local Evt_SearchBagEnd = 'Evt_SearchBagEnd'
 local Evt_InitSortingTag = 'Evt_InitSortingTag'
 local Evt_InitSortingTagEnd = 'Evt_InitSortingTagEnd'
 
+-- Status names
+local Status_ReduceWeight = 'DS_REDUCE_WEIGHT_MAIN'
+local Status_WeightDisplayFix = 'DS_REDUCE_WEIGHT_FIX'
+
 
 -- This and that
 local function AddTemplate(entityUid)
@@ -107,6 +111,8 @@ local function OnAddedTo(entityUid, holderUid)
         -- If the template count in the inventory is greater than one nothing needs to be done
         if OriginalItems[template] ~= nil then
             OriginalItems[template] = nil
+            Osi.ApplyStatus(entityUid, Status_ReduceWeight, -1, 1, entityUid)
+            Osi.ApplyStatus(owner, Status_WeightDisplayFix, 0, 1, entityUid)
             return
         end
 
