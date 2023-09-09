@@ -62,6 +62,9 @@ end
 -- Handlers
 local function OnSavegameLoaded()
     InitDB()
+    if not PersistentState.ModState.Installed then
+        DSFirstInstall()
+    end
 end
 
 local function OnEntityEvent(entityUid, eventId)

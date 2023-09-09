@@ -1,4 +1,6 @@
 function DSFirstInstall()
+    Log('DSFirstInstall')
+
     PersistentState.ModState = {
         Installed = true,
     }
