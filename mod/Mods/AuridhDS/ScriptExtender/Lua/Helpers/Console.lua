@@ -1,5 +1,11 @@
 local function InterpretCommand(_, arg, val1, val2)
     local arguments = {
+        SetModStateVar = function(v1, v2)
+            PersistentState.ModState[v1] = v2
+        end,
+        PrintModState = function(_, _)
+            Log('ModState: %s', PersistentState.ModState)
+        end,
         SetVar = function(v1, v2)
             PersistentState[v1] = v2
         end,

@@ -172,36 +172,43 @@ function CheckTmpLst(listId, entityUid, templateUid)
     -- Check custom evaluator function
     if list.evaluator ~= nil then
         isInList = list.Evaluator(entityUid, template)
+        Log('CheckTmpLst: list.evaluator > %s - %s, %s, %s', listId, isInList, entityUid, template)
     end
 
     -- Check if entity is excluded by tag
     for key, _ in pairs(list.ExcludeTags) do
         if Osi.IsTagged(entityUid, key) == 1 then
+            Log('CheckTmpLst: is excluded by tag > %s - %s, %s', key, listId, entityUid)
             return false
         end
     end
 
     -- Check if entity is excluded by template
     if list.ExcludeTemplates[template] ~= nil then
+        Log('CheckTmpLst: is excluded by template > %s - %s, %s', template, listId, entityUid)
         return false
     end
 
+    if isInList then
+        return true
+    end
+
     -- Check included tags
-    if not isInList then
-        for key, _ in pairs(list.IncludeTags) do
-            if Osi.IsTagged(entityUid, key) == 1 then
-                isInList = true
-                break
-            end
+    for key, _ in pairs(list.IncludeTags) do
+        if Osi.IsTagged(entityUid, key) == 1 then
+            Log('CheckTmpLst: is included by tag > %s - %s, %s', key, listId, entityUid)
+            return true
         end
     end
 
     -- Check included templates
-    if not isInList and list.IncludeTemplates[template] ~= nil then
-        isInList = true
+    if list.IncludeTemplates[template] ~= nil then
+        Log('CheckTmpLst: is included by template > %s - %s, %s', template, listId, entityUid)
+        return true
     end
 
-    return isInList
+    Log('CheckTmpLst: no match found > %s, %s, %s', template, listId, entityUid)
+    return false
 end
 
 function GetBestTmpLst(entityUid, templateUid)

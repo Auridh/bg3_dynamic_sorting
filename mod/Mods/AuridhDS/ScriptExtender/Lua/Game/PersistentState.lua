@@ -1,6 +1,7 @@
 PersistentState = {
     ModState = {
         Installed = false,
+        LoggingEnabled = true,
     },
 }
 
