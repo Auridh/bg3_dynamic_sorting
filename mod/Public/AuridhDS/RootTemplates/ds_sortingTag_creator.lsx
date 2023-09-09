@@ -7,7 +7,6 @@
 				<node id="GameObjects">
 					<attribute id="MapKey" type="FixedString" value="8ea7b456-364a-421d-abdc-2b7cd7ca5b21" />
 					<attribute id="DisplayName" type="TranslatedString" handle="hbfbb30f6gdd3cg4323ga621ga921a5b51b77" version="1" />
-					<attribute id="Description" type="TranslatedString" handle="" version="" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="h1f6904a8g7f2ag4140ga465gf241cff80363" version="1" />
 					<attribute id="Icon" type="FixedString" value="Item_LOOT_GEN_Backpack_A_Posed_A" />
 					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag" />

@@ -8,7 +8,6 @@
 					<!-- Story !-->
 					<attribute id="MapKey" type="FixedString" value="5ebe9ee1-c640-402d-8dfa-26ea32a4fab1" />
 					<attribute id="DisplayName" type="TranslatedString" handle="h94718baag52b2g42aag8ff9gce551c357901" version="1" />
-					<attribute id="Description" type="TranslatedString" handle="" version="" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="h19fee701g1742g463fg8223g261a00a4ffe1" version="1" />
 					<attribute id="Icon" type="FixedString" value="Item_LOOT_GEN_Backpack_A_Posed_A" />
 					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag" />
@@ -30,7 +29,6 @@
 					<!-- Scrolls !-->
 					<attribute id="MapKey" type="FixedString" value="aec0d6f0-826d-40af-8d99-8cccd7c0ce7d" />
 					<attribute id="DisplayName" type="TranslatedString" handle="hab14774dg518fg4d8egb804g357e0b881839" version="1" />
-					<attribute id="Description" type="TranslatedString" handle="" version="" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="h8f597a3fgdac2g48d8ga676gd0227b54b435" version="1" />
 					<attribute id="Icon" type="FixedString" value="Item_LOOT_GEN_Backpack_A_Posed_A" />
 					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag" />
@@ -52,7 +50,6 @@
 					<!-- Books !-->
 					<attribute id="MapKey" type="FixedString" value="894b4fc4-e9bd-433a-888b-3be440d3d24a" />
 					<attribute id="DisplayName" type="TranslatedString" handle="h234780d1g7dccg4fe2g8a53gd38c9ae9909b" version="1" />
-					<attribute id="Description" type="TranslatedString" handle="" version="" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="he18e78d0g69a2g4e4dgbd6agfc486b0fca19" version="1" />
 					<attribute id="Icon" type="FixedString" value="Item_LOOT_GEN_Backpack_A_Posed_A" />
 					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag" />
@@ -74,7 +71,6 @@
 					<!-- Potions !-->
 					<attribute id="MapKey" type="FixedString" value="0878ab5a-5dbd-4ef9-b69c-2afb58583cc2" />
 					<attribute id="DisplayName" type="TranslatedString" handle="hfc182432gbfedg43e7ga5c7g408e8f4396ea" version="1" />
-					<attribute id="Description" type="TranslatedString" handle="" version="" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="he09ab1ddgb7dfg4142gb077g66d3c9926d93" version="1" />
 					<attribute id="Icon" type="FixedString" value="Item_LOOT_GEN_Backpack_A_Posed_A" />
 					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag" />
@@ -96,7 +92,6 @@
 					<!-- Arrows !-->
 					<attribute id="MapKey" type="FixedString" value="bdab071f-b7ed-436f-8e91-c22235b363f3" />
 					<attribute id="DisplayName" type="TranslatedString" handle="hc7b249d4gaca7g48c3ga719g47f67f79aea1" version="1" />
-					<attribute id="Description" type="TranslatedString" handle="" version="" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="h49b9d3d8g46b4g450fg87bcgfdb9c30b1304" version="1" />
 					<attribute id="Icon" type="FixedString" value="Item_LOOT_GEN_Backpack_A_Posed_A" />
 					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag" />
@@ -118,7 +113,6 @@
 					<!-- Grenades !-->
 					<attribute id="MapKey" type="FixedString" value="5c0316f2-a3d8-4cad-8d72-527ae795c856" />
 					<attribute id="DisplayName" type="TranslatedString" handle="hd6cd1ad3g117fg4c38gb36eg7e539ea6cfd2" version="1" />
-					<attribute id="Description" type="TranslatedString" handle="" version="" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="hb93aa928gaf80g496fg82e0gec634b42a8e0" version="1" />
 					<attribute id="Icon" type="FixedString" value="Item_LOOT_GEN_Backpack_A_Posed_A" />
 					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag" />
@@ -140,7 +134,6 @@
 					<!-- Coatings !-->
 					<attribute id="MapKey" type="FixedString" value="986c92d4-63b6-4689-a322-51583df72123" />
 					<attribute id="DisplayName" type="TranslatedString" handle="h7a490747g80fag4275gaf73gf3edc0cacfa8" version="1" />
-					<attribute id="Description" type="TranslatedString" handle="" version="" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="h63b4661eg048ag44abgabf7gaa0b6d98b0f4" version="1" />
 					<attribute id="Icon" type="FixedString" value="Item_LOOT_GEN_Backpack_A_Posed_A" />
 					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag" />
@@ -162,7 +155,6 @@
 					<!-- Junk !-->
 					<attribute id="MapKey" type="FixedString" value="28e3351a-e041-42fb-9a84-f50aea36426f" />
 					<attribute id="DisplayName" type="TranslatedString" handle="h11086262gfd46g49d5gb718gf9314e5acf48" version="1" />
-					<attribute id="Description" type="TranslatedString" handle="" version="" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="h37f13c8fgabb1g4701g9513g5eb1d3586b87" version="1" />
 					<attribute id="Icon" type="FixedString" value="Item_LOOT_GEN_Backpack_A_Posed_A" />
 					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag" />
@@ -184,7 +176,6 @@
 					<!-- Armor !-->
 					<attribute id="MapKey" type="FixedString" value="aa0b4e5c-3c07-4995-abb8-281669010e3e" />
 					<attribute id="DisplayName" type="TranslatedString" handle="h9531b284g3ee3g4b1fga95bgcb72ee40ff4c" version="1" />
-					<attribute id="Description" type="TranslatedString" handle="" version="" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="hb40956b4ga87ag47acga4bfgb879db83f29d" version="1" />
 					<attribute id="Icon" type="FixedString" value="Item_LOOT_GEN_Backpack_A_Posed_A" />
 					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag" />
@@ -206,7 +197,6 @@
 					<!-- Weapon !-->
 					<attribute id="MapKey" type="FixedString" value="96dc40c0-51fb-401e-ba92-707e0ac31794" />
 					<attribute id="DisplayName" type="TranslatedString" handle="hc9e96eb8gaf08g49e5g9e31g8fe0cae37bc9" version="1" />
-					<attribute id="Description" type="TranslatedString" handle="" version="" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="h76826812g802bg4f14ga6d4gd10e281a4733" version="1" />
 					<attribute id="Icon" type="FixedString" value="Item_LOOT_GEN_Backpack_A_Posed_A" />
 					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag" />
@@ -228,7 +218,6 @@
 					<!-- Ranged Weapon !-->
 					<attribute id="MapKey" type="FixedString" value="c185b9df-2478-4c65-87be-79a6c5e708bf" />
 					<attribute id="DisplayName" type="TranslatedString" handle="h1c8d70d4g258eg4781gbfbfga6c02d2a7cba" version="1" />
-					<attribute id="Description" type="TranslatedString" handle="" version="" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="h9d632fadg3acbg4feegbcc4g489fae166d4a" version="1" />
 					<attribute id="Icon" type="FixedString" value="Item_LOOT_GEN_Backpack_A_Posed_A" />
 					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag" />
@@ -250,7 +239,6 @@
 					<!-- Body !-->
 					<attribute id="MapKey" type="FixedString" value="310e53c2-1f33-4eed-8d71-6714099c5262" />
 					<attribute id="DisplayName" type="TranslatedString" handle="h76ecc594gcd01g40c6g9ac9g0faf112c9d9d" version="1" />
-					<attribute id="Description" type="TranslatedString" handle="" version="" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="h8b10e9f9g85afg46b5ga90cg6318bd74aa31" version="1" />
 					<attribute id="Icon" type="FixedString" value="Item_LOOT_GEN_Backpack_A_Posed_A" />
 					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag" />
