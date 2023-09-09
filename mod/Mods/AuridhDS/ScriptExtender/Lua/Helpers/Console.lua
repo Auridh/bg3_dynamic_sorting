@@ -1,13 +1,13 @@
 local function InterpretCommand(_, arg, val1, val2)
     local arguments = {
         SetVar = function(v1, v2)
-            PersistentVars[v1] = v2
+            PersistentState[v1] = v2
         end,
         PrintVar = function(v1, _)
-            Log('%s: %s', v1, PersistentVars[v1])
+            Log('%s: %s', v1, PersistentState[v1])
         end,
         DmpDB = function()
-            Dmp(DynamicSortingDB:Read())
+            Dmp(DBLink)
         end,
     }
 

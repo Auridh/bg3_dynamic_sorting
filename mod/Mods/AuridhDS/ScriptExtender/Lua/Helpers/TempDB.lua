@@ -24,6 +24,10 @@ function TempDB:CreateIfNotExists(key, value)
 end
 
 function TempDB:Get(key)
+    if key == nil then
+        return
+    end
+
     return self.DB[key]
 end
 
