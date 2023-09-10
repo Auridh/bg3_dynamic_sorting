@@ -1,19 +1,19 @@
 ---@class TemplateList
-local TemplateList = {
-    Evaluator = nil,
-    IncludedTags = {},
-    ExcludedTags = {},
-    IncludedTemplates = {},
-    ExcludedTemplates = {},
-    Message = 'Should all items of this type be moved to this container?',
-    SortingTagUuid = '',
-}
+local TemplateList = {}
 
-function TemplateList:New(o)
-    o = o or {}
-    setmetatable(o, self)
+function TemplateList:New()
+    local newList = {
+        Evaluator = nil,
+        IncludedTags = {},
+        ExcludedTags = {},
+        IncludedTemplates = {},
+        ExcludedTemplates = {},
+        Message = 'Should all items of this type be moved to this container?',
+        SortingTagUuid = '',
+    }
+    setmetatable(newList, self)
     self.__index = self
-    return o
+    return newList
 end
 
 function TemplateList:SetEvaluator(func)
@@ -229,18 +229,6 @@ function CheckTmpLst(listId, entityUid, templateUid)
 
     Log('CheckTmpLst: no match found > %s, %s, %s', template, listId, entityUid)
     return false
-end
-
-function GetBestTmpLst(entityUid, templateUid)
-    local template = templateUid or Osi.GetTemplate(entityUid)
-
-    for _, listId in pairs(TmpLstIds) do
-        if CheckTmpLst(listId, entityUid, template) then
-            return listId
-        end
-    end
-
-    return nil
 end
 
 function IsTemplateList(templateUid)
