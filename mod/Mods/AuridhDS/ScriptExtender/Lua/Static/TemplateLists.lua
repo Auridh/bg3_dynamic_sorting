@@ -78,14 +78,14 @@ TmpLstIds = {
 TmpLst = {
     [TmpLstIds.Scrolls] = TemplateList:New()
             :IncludeTags({
-                    ['dd86c045-0370-4ec9-c5b7-b1b07060096f'] = {}, -- SCROLL
+                    ['dd86c045-0370-4ec9-b7c5-b0b160706f09'] = {}, -- SCROLL
                 })
             :SetMessage('Should all scrolls be moved to this container?')
             :SetSortingTag(TmpLstIds.Scrolls),
     [TmpLstIds.Potions] = TemplateList:New()
             :IncludeTags({
-                    ['56c99a77-8f6a-4584-418e-3b2a6b9f6152'] = {}, -- POTION
-                    ['8798a644-4720-4487-1abc-4b6af3f826a1'] = {}, -- ALCH_SOLUTION_POTION
+                    ['56c99a77-8f6a-4584-8e41-2a3b9f6b5261'] = {}, -- POTION
+                    ['8798a644-4720-4487-bc1a-6a4bf8f3a126'] = {}, -- ALCH_SOLUTION_POTION
                 })
             :IncludeTemplates({
                     ['212ca846-4766-4370-8847-454e59751598'] = {}, -- CONS_Oil_Of_The_Basilisk
@@ -94,24 +94,24 @@ TmpLst = {
             :SetSortingTag(TmpLstIds.Potions),
     [TmpLstIds.Arrows] = TemplateList:New()
             :IncludeTags({
-                    ['fa8afea4-4742-4467-efbd-8569d11b7858'] = {}, -- ARROW
+                    ['fa8afea4-4742-4467-bdef-69851bd15878'] = {}, -- ARROW
                 })
             :SetMessage('Should all arrows be moved to this container?')
             :SetSortingTag(TmpLstIds.Arrows),
     [TmpLstIds.Books] = TemplateList:New()
             :IncludeTags({
-                    ['8a8e253a-c081-45a1-a29f-b6911d9068c5'] = {}, -- BOOK
+                    ['8a8e253a-c081-45a1-9fa2-91b6901dc568'] = {}, -- BOOK
                 })
             :ExcludeTags({
-                    ['dd86c045-0370-4ec9-c5b7-b1b07060096f'] = {}, -- SCROLL
+                    ['dd86c045-0370-4ec9-b7c5-b0b160706f09'] = {}, -- SCROLL
                 })
             :SetMessage('Should all books and letters be moved to this container?')
             :SetSortingTag(TmpLstIds.Books),
     [TmpLstIds.Grenades] = TemplateList:New()
             :IncludeTags({
-                    ['fe0d86c3-a562-430e-33a6-bfd8b29b8472'] = {}, -- GRENADE
-                    ['f87b203d-75ad-4527-17b7-7013bc44a12e'] = {}, -- ALCH_SOLUTION_GRENADE
-                    ['f6e89388-0e91-4e9d-b7b5-491ddd3840a5'] = {}, -- EXPLOSIVES
+                    ['fe0d86c3-a562-430e-a633-d8bf9bb27284'] = {}, -- GRENADE
+                    ['f87b203d-75ad-4527-b717-137044bc2ea1'] = {}, -- ALCH_SOLUTION_GRENADE
+                    ['f6e89388-0e91-4e9d-b5b7-1d4938dda540'] = {}, -- EXPLOSIVES
                 })
             :IncludeTemplates({
                     ['f8a1cb8d-3e40-4c33-8a92-92ee742b6439'] = {}, -- WPN_Grenade_Orthon_A
@@ -127,7 +127,7 @@ TmpLst = {
             :SetSortingTag(TmpLstIds.Grenades),
     [TmpLstIds.Coatings] = TemplateList:New()
             :IncludeTags({
-                    ['9a42f996-decf-4fcc-11ad-a62badab87a2'] = {}, -- ALCH_SOLUTION_COATING
+                    ['9a42f996-decf-4fcc-ad11-2ba6abada287'] = {}, -- ALCH_SOLUTION_COATING
                 })
             :SetMessage('Should all weapon coatings be moved to this container?')
             :SetSortingTag(TmpLstIds.Coatings),
