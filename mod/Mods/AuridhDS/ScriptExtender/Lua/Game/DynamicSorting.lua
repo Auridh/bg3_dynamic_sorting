@@ -110,7 +110,7 @@ end
 local function OnAddedTo(entityUid, holderUid)
     Log('OnAddedTo > %s, %s', entityUid, holderUid)
 
-    if ShouldIgnore(entityUid, holderUid) then return end
+    if IsSpecialTag(entityUid, holderUid) then return end
     if CreateSortingTag(entityUid, holderUid) then return end
     if AddSortingTagToDB(entityUid, holderUid) then return end
     if IsAddedByTag(entityUid, holderUid) then return end

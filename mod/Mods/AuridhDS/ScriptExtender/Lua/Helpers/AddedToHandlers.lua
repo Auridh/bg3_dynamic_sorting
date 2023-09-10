@@ -72,9 +72,15 @@ function AddSortingTagToDB(entityUid, holderUid)
     return false
 end
 
-function ShouldIgnore(entityUid, holderUid)
-    Log('ShouldIgnore > %s', TmpLst[entityUid] and true or false)
-    return TmpLst[entityUid] ~= nil
+function IsSpecialTag(entityUid, holderUid)
+    Log('IsSpecialTag > %s', TmpLst[entityUid] and true or false)
+
+    if TmpLst[entityUid] ~= nil then
+        DBLink.TP:Create(GetUUID(Osi.GetTemplate(entityUid)), TemplateEntry:Get(entityUid))
+        return true
+    end
+
+    return false
 end
 
 function IsAddedByTag(entityUid, holderUid)
@@ -107,14 +113,14 @@ function RegisterInSortingTag(entityUid, holderUid)
     if SortingTags:Exists(onlyUUID) then
         Log('RegisterInSortingTag > SortingTag:Exists')
         local templateUUID = GetUUID(Osi.GetTemplate(entityUid))
-        local owner = Osi.GetOwner(entityUid)
+        local directOwner = Osi.GetDirectInventoryOwner(Osi.GetDirectInventoryOwner(entityUid))
 
-        Log('RegisterInSortingTag > MagicPocketsMoveTo - %s', owner)
-        MoveItemToContainer(entityUid, owner)
+        Log('RegisterInSortingTag > MagicPocketsMoveTo - %s', directOwner)
+        MoveItemToContainer(entityUid, directOwner)
 
         -- Ignore our own items
         if templateUUID == Template_SortingTag or templateUUID == Template_SortingTagCreator then
-            Log('RegisterInSortingTag > IgnoreOwnItems - %s, %s', owner, templateUUID)
+            Log('RegisterInSortingTag > IgnoreOwnItems - %s, %s', directOwner, templateUUID)
             return true
         end
 
@@ -129,7 +135,7 @@ function RegisterInSortingTag(entityUid, holderUid)
             if listId ~= nil and not SortingTags:Get(onlyUUID):Read().Templates:Exists(listId) then
                 Log('RegisterInSortingTag > OpenMessageBoxYesNo - %s', listId)
                 MessageBoxYesNo = { Id = listId, Message = TmpLst[listId].Message, SortingTagUuid = onlyUUID }
-                Osi.OpenMessageBoxYesNo(owner, TmpLst[listId].Message)
+                Osi.OpenMessageBoxYesNo(Osi.GetOwner(entityUid), TmpLst[listId].Message)
             end
         end
 
