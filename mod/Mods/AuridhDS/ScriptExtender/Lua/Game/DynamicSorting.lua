@@ -14,6 +14,7 @@ local Evt_SearchBag = 'Evt_SearchBag'
 local Evt_SearchBagEnd = 'Evt_SearchBagEnd'
 local Evt_InitSortingTag = 'Evt_InitSortingTag'
 local Evt_InitSortingTagEnd = 'Evt_InitSortingTagEnd'
+local Evt_TimerInit = 'Evt_TimerInit'
 
 -- Status names
 local Status_ReduceWeight = 'DS_REDUCE_WEIGHT_MAIN'
@@ -60,11 +61,21 @@ end
 
 
 -- Handlers
-local function OnSavegameLoaded()
+local function OnTimerFinished(timer)
+    if timer ~= Evt_TimerInit then
+        return
+    end
+
+    AuridhDS:Load()
     InitDB()
-    if not PersistentState.ModState.Installed then
+
+    if not AuridhDS:Read().ModState.Installed then
         DSFirstInstall()
     end
+end
+
+local function OnSavegameLoaded()
+    Osi.TimerLaunch(Evt_TimerInit, 2000)
 end
 
 local function OnEntityEvent(entityUid, eventId)
@@ -202,3 +213,4 @@ Osiris.Evt.RemovedFrom:Register(Osiris.ExecTime.After, OnRemovedFrom)
 Osiris.Evt.DroppedBy:Register(Osiris.ExecTime.After, OnDroppedBy)
 Osiris.Evt.EntityEvent:Register(Osiris.ExecTime.After, OnEntityEvent)
 Osiris.Evt.SavegameLoaded:Register(Osiris.ExecTime.After, OnSavegameLoaded)
+Osiris.Evt.TimerFinished:Register(Osiris.ExecTime.After, OnTimerFinished)

@@ -1,5 +1,6 @@
 Ext.Require('Helpers/Logger.lua')
 Ext.Require('Helpers/Console.lua')
+Ext.Require('Helpers/ModState.lua')
 Ext.Require('Game/FirstInstall.lua')
 Ext.Require('Game/PersistentState.lua')
 Ext.Require('Helpers/Helpers.lua')

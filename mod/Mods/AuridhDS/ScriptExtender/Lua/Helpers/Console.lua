@@ -1,16 +1,16 @@
 local function InterpretCommand(_, arg, val1, val2)
     local arguments = {
         SetModStateVar = function(v1, v2)
-            PersistentState.ModState[v1] = v2
+            AuridhDS:Read().ModState[v1] = v2
         end,
         PrintModState = function(_, _)
-            Log('ModState: %s', PersistentState.ModState)
+            Log('ModState: %s', AuridhDS:Read().ModState)
         end,
         SetVar = function(v1, v2)
-            PersistentState[v1] = v2
+            AuridhDS[v1] = v2
         end,
         PrintVar = function(v1, _)
-            Log('%s: %s', v1, PersistentState[v1])
+            Log('%s: %s', v1, AuridhDS[v1])
         end,
         DmpDB = function()
             Dmp(DBLink)

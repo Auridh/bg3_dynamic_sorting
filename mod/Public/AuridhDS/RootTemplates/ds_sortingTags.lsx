@@ -10,7 +10,9 @@
 					<attribute id="DisplayName" type="TranslatedString" handle="h94718baag52b2g42aag8ff9gce551c357901" version="1" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="h19fee701g1742g463fg8223g261a00a4ffe1" version="1" />
 					<attribute id="Icon" type="FixedString" value="Item_LOOT_GEN_Backpack_A_Posed_A" />
-					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_StoryItems" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
 					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
@@ -31,7 +33,9 @@
 					<attribute id="DisplayName" type="TranslatedString" handle="hab14774dg518fg4d8egb804g357e0b881839" version="1" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="h8f597a3fgdac2g48d8ga676gd0227b54b435" version="1" />
 					<attribute id="Icon" type="FixedString" value="Item_LOOT_GEN_Backpack_A_Posed_A" />
-					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_Scrolls" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
 					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
@@ -52,7 +56,9 @@
 					<attribute id="DisplayName" type="TranslatedString" handle="h234780d1g7dccg4fe2g8a53gd38c9ae9909b" version="1" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="he18e78d0g69a2g4e4dgbd6agfc486b0fca19" version="1" />
 					<attribute id="Icon" type="FixedString" value="Item_LOOT_GEN_Backpack_A_Posed_A" />
-					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_Books" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
 					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
@@ -73,7 +79,9 @@
 					<attribute id="DisplayName" type="TranslatedString" handle="hfc182432gbfedg43e7ga5c7g408e8f4396ea" version="1" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="he09ab1ddgb7dfg4142gb077g66d3c9926d93" version="1" />
 					<attribute id="Icon" type="FixedString" value="Item_LOOT_GEN_Backpack_A_Posed_A" />
-					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_Potions" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
 					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
@@ -94,7 +102,9 @@
 					<attribute id="DisplayName" type="TranslatedString" handle="hc7b249d4gaca7g48c3ga719g47f67f79aea1" version="1" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="h49b9d3d8g46b4g450fg87bcgfdb9c30b1304" version="1" />
 					<attribute id="Icon" type="FixedString" value="Item_LOOT_GEN_Backpack_A_Posed_A" />
-					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_Arrows" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
 					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
@@ -115,7 +125,9 @@
 					<attribute id="DisplayName" type="TranslatedString" handle="hd6cd1ad3g117fg4c38gb36eg7e539ea6cfd2" version="1" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="hb93aa928gaf80g496fg82e0gec634b42a8e0" version="1" />
 					<attribute id="Icon" type="FixedString" value="Item_LOOT_GEN_Backpack_A_Posed_A" />
-					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_Grenades" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
 					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
@@ -136,7 +148,9 @@
 					<attribute id="DisplayName" type="TranslatedString" handle="h7a490747g80fag4275gaf73gf3edc0cacfa8" version="1" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="h63b4661eg048ag44abgabf7gaa0b6d98b0f4" version="1" />
 					<attribute id="Icon" type="FixedString" value="Item_LOOT_GEN_Backpack_A_Posed_A" />
-					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_Coatings" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
 					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
@@ -157,7 +171,9 @@
 					<attribute id="DisplayName" type="TranslatedString" handle="h11086262gfd46g49d5gb718gf9314e5acf48" version="1" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="h37f13c8fgabb1g4701g9513g5eb1d3586b87" version="1" />
 					<attribute id="Icon" type="FixedString" value="Item_LOOT_GEN_Backpack_A_Posed_A" />
-					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_Junk" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
 					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
@@ -178,7 +194,9 @@
 					<attribute id="DisplayName" type="TranslatedString" handle="h9531b284g3ee3g4b1fga95bgcb72ee40ff4c" version="1" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="hb40956b4ga87ag47acga4bfgb879db83f29d" version="1" />
 					<attribute id="Icon" type="FixedString" value="Item_LOOT_GEN_Backpack_A_Posed_A" />
-					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_Armor" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
 					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
@@ -199,7 +217,9 @@
 					<attribute id="DisplayName" type="TranslatedString" handle="hc9e96eb8gaf08g49e5g9e31g8fe0cae37bc9" version="1" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="h76826812g802bg4f14ga6d4gd10e281a4733" version="1" />
 					<attribute id="Icon" type="FixedString" value="Item_LOOT_GEN_Backpack_A_Posed_A" />
-					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_Weapons" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
 					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
@@ -220,7 +240,9 @@
 					<attribute id="DisplayName" type="TranslatedString" handle="h1c8d70d4g258eg4781gbfbfga6c02d2a7cba" version="1" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="h9d632fadg3acbg4feegbcc4g489fae166d4a" version="1" />
 					<attribute id="Icon" type="FixedString" value="Item_LOOT_GEN_Backpack_A_Posed_A" />
-					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_WeaponsRanged" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
 					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
@@ -241,7 +263,9 @@
 					<attribute id="DisplayName" type="TranslatedString" handle="h76ecc594gcd01g40c6g9ac9g0faf112c9d9d" version="1" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="h8b10e9f9g85afg46b5ga90cg6318bd74aa31" version="1" />
 					<attribute id="Icon" type="FixedString" value="Item_LOOT_GEN_Backpack_A_Posed_A" />
-					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_Bodies" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
 					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />

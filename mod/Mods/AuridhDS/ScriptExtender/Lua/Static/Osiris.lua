@@ -34,6 +34,10 @@ Osiris = {
         DroppedBy = OsirisEvt:New({ Name = 'DroppedBy', Arity = 2 }),
         -- event MessageBoxYesNoClosed((CHARACTER)_Character, (STRING)_Message, (INTEGER)_Result)
         MessageBoxYesNoClosed = OsirisEvt:New({ Name = 'MessageBoxYesNoClosed', Arity = 3 }),
+        -- event LevelGameplayStarted((STRING)_LevelName, (INTEGER)_IsEditorMode)
+        LevelGameplayStarted = OsirisEvt:New({ Name = 'LevelGameplayStarted', Arity = 2 }),
+        -- event TimerFinished((STRING)_Timer)
+        TimerFinished = OsirisEvt:New({ Name = 'TimerFinished', Arity = 1 }),
     },
     ExecTime = {
         After = 'after',

@@ -19,3 +19,18 @@ function SplitEntityString(mergeString)
     end
     return mergeString, nil
 end
+
+function FilePath(filename)
+    local host = Osi.GetHostCharacter()
+    local region = Osi.GetRegion(host)
+    local pX, pY, pZ = Osi.GetPosition(host)
+    local rX, rY, rZ = Osi.GetRotation(host)
+    pX = Osi.RealToInteger(pX)
+    pY = Osi.RealToInteger(pY)
+    pZ = Osi.RealToInteger(pZ)
+    rX = Osi.RealToInteger(rX)
+    rY = Osi.RealToInteger(rY)
+    rZ = Osi.RealToInteger(rZ)
+    Ext.Utils.Print(string.format('AuridhDS/%s/%s_%s.%s.%s.%s.%s.%s/%s', host, region, pX, pY, pZ, rX, rY, rZ, filename))
+    return string.format('AuridhDS/%s/%s_%s.%s.%s.%s.%s.%s/%s', host, region, pX, pY, pZ, rX, rY, rZ, filename)
+end

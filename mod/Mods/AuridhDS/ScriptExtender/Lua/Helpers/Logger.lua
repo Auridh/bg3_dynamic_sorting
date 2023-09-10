@@ -1,7 +1,7 @@
 local LogPrefix = 'Auridh/DS'
 
 function Log(...)
-    if not PersistentState.ModState.LoggingEnabled then
+    if not AuridhDS:Read().ModState.LoggingEnabled then
         return
     end
 
@@ -18,7 +18,7 @@ function Log(...)
 end
 
 function Dmp(info)
-    if not PersistentState.ModState.LoggingEnabled then
+    if not AuridhDS:Read().ModState.LoggingEnabled then
         return
     end
 
