@@ -34,3 +34,8 @@ function FilePath(filename)
     Ext.Utils.Print(string.format('AuridhDS/%s/%s_%s.%s.%s.%s.%s.%s/%s', host, region, pX, pY, pZ, rX, rY, rZ, filename))
     return string.format('AuridhDS/%s/%s_%s.%s.%s.%s.%s.%s/%s', host, region, pX, pY, pZ, rX, rY, rZ, filename)
 end
+
+function MoveItemToContainer(entityUid, containerUid)
+    Osi.TemplateAddTo(Osi.GetTemplate(entityUid), containerUid, Osi.GetStackAmount(entityUid), 0)
+    Osi.RequestDelete(entityUid)
+end

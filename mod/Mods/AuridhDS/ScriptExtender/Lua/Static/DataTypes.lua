@@ -10,6 +10,7 @@ TemplateEntry = {
 function TemplateEntry:New(value)
     value = value or {}
     setmetatable(value, self)
+    self.__index = self
     return value
 end
 
@@ -43,6 +44,7 @@ SortingTagEntry = {
 function SortingTagEntry:New(value)
     value = value or {}
     setmetatable(value, self)
+    self.__index = self
     return value
 end
 

@@ -7,7 +7,7 @@ local MessageBoxYesNo
 
 -- Sorting Tags
 local Template_SortingTag = '834c78a0-4758-457b-aa45-74a179a3b3be'
-local Template_SortingTagCreator = '8ea7b456-364a-421d-abdc-2b7cd7ca5b21'
+local Template_SortingTagCreator = '27097129-2259-4a84-ac40-c27229c1093e'
 
 -- Events
 local Evt_SearchBag = 'Evt_SearchBag'
@@ -23,20 +23,8 @@ local Status_WeightDisplayFix = 'DS_REDUCE_WEIGHT_FIX'
 
 -- This and that
 local function AddTemplate(entityUid)
-    Log('AddTemplate > %s', entityUid)
     local entry = TemplateEntry:Get(Osi.GetTemplate(entityUid))
-    local listId = IsTemplateList(entry.UUID)
-
-    -- Template lists get handled separately
-    if listId ~= nil then
-        Log('AddTemplate > ListId - %s', listId)
-        entry.UUID = listId
-        Templates:Create(listId, entry)
-        SortingTags:Get(entry.SortingTagUuid):Read().Templates:Create(listId, entry)
-        return
-    end
-
-    Log('AddTemplate > templateUid - %s', entry.UUID)
+    Log('AddTemplate > templateUid - %s, %s', entry.UUID, IsTemplateList(entry.UUID))
     Templates:Create(entry.UUID, entry)
     SortingTags:Get(entry.SortingTagUuid):Read().Templates:Create(entry.UUID, entry)
 end
@@ -66,16 +54,16 @@ local function OnTimerFinished(timer)
         return
     end
 
+    DSFirstInstall()
+end
+
+local function OnSavegameLoaded()
     AuridhDS:Load()
     InitDB()
 
     if not AuridhDS:Read().ModState.Installed then
-        DSFirstInstall()
+        Osi.TimerLaunch(Evt_TimerInit, 3210)
     end
-end
-
-local function OnSavegameLoaded()
-    Osi.TimerLaunch(Evt_TimerInit, 2000)
 end
 
 local function OnEntityEvent(entityUid, eventId)
@@ -112,8 +100,14 @@ local function OnRemovedFrom(entityUid, holderUid)
     Log('OnRemovedFrom > %s, %s', entityUid, holderUid)
     -- Items removed from a sorting tag get deleted
     if SortingTags:Exists(GetUUID(holderUid)) then
-        local template = Templates:Get(Osi.GetTemplate(entityUid)):Read()
+        local templateUid = Osi.GetTemplate(entityUid)
+        if templateUid == nil then
+            return
+        end
+
+        local template = Templates:Get(GetUUID(templateUid)):Read()
         Log('OnRemovedFrom > SortingTags:Exists - %s, %s, %s', entityUid, holderUid, template.UUID)
+
         SortingTags:Get(GetUUID(holderUid)):Read().Templates:Delete(template.UUID)
         Templates:Delete(template.UUID)
         Osi.RequestDelete(entityUid)
@@ -125,6 +119,13 @@ local function OnAddedTo(entityUid, holderUid)
     Log('OnAddedTo > %s, %s', entityUid, holderUid)
     local holderUUID = GetUUID(holderUid)
 
+    if not SortingTags:Exists(holderUUID) and GetUUID(Osi.GetTemplate(entityUid)) == Template_SortingTag then
+        Log('OnAddedTo > AddSortingTag', entityUid)
+        local entry = SortingTagEntry:Get(entityUid)
+        SortingTags:Create(entry.UUID, entry)
+        return
+    end
+
     -- An object was sorted added to a sorting tag
     if SortingTags:Exists(holderUUID) then
         Log('OnAddedTo > SortingTag:Exists')
@@ -134,7 +135,7 @@ local function OnAddedTo(entityUid, holderUid)
         -- Ignore our own items
         if template == Template_SortingTag or template == Template_SortingTagCreator then
             Log('OnAddedTo > IgnoreOwnItems - %s, %s', owner, template)
-            Osi.MagicPocketsMoveTo(owner, entityUid, owner, 0, 1)
+            MoveItemToContainer(entityUid, owner)
             return
         end
 
@@ -149,10 +150,10 @@ local function OnAddedTo(entityUid, holderUid)
 
         Log('OnAddedTo > MagicPocketsMoveTo - %s', owner)
         -- call MagicPocketsMoveTo((CHARACTER)_Player, (GUIDSTRING)_Object, (GUIDSTRING)_DestinationInventory, (INTEGER)_ShowNotification, (INTEGER)_ClearOriginalOwner)
-        Osi.MagicPocketsMoveTo(owner, entityUid, owner, 0, 1)
+        MoveItemToContainer(entityUid, owner)
 
         -- Add the template to the sorting tag, if it doesn't exist
-        if SortingTags:Get(holderUUID):Read().Templates:Exists(template) then
+        if not SortingTags:Get(holderUUID):Read().Templates:Exists(template) then
             Log('OnAddedTo > AddTemplateToSortingTag - %s', template)
             -- call TemplateAddTo((ITEMROOT)_ItemTemplate, (GUIDSTRING)_InventoryHolder, (INTEGER)_Count, (INTEGER)_ShowNotification)
             OriginalItems[template] = entityUid
@@ -162,35 +163,35 @@ local function OnAddedTo(entityUid, holderUid)
             local listId = GetBestTmpLst(entityUid, template)
             if listId ~= nil and not SortingTags:Get(holderUUID):Read().Templates:Exists(listId) then
                 Log('OnAddedTo > OpenMessageBoxYesNo - %s', listId)
-                Osi.OpenMessageBoxYesNo(owner, TmpLstIds[listId].Message)
-                MessageBoxYesNo = { Id = listId, Message = TmpLstIds[listId].Message, SortingTagUuid = holderUUID }
+                Osi.OpenMessageBoxYesNo(owner, TmpLst[listId].Message)
+                MessageBoxYesNo = { Id = listId, Message = TmpLst[listId].Message, SortingTagUuid = holderUUID }
             end
         end
         return
     end
 
+    -- Add sorting tag to containers
+    if Osi.IsContainer(holderUid) == 1 and GetUUID(Osi.GetTemplate(entityUid)) == Template_SortingTagCreator then
+        local owner = Osi.GetDirectInventoryOwner(entityUid)
+        Log('OnAddedTo > CreateSortingTag - %s, %s, %s', holderUid, entityUid, owner)
+        Osi.TemplateAddTo(Template_SortingTag, holderUid, 1, 1)
+        MoveItemToContainer(entityUid, owner)
+        return
+    end
+
     -- An item was added to a player inventory and should get sorted
-    if Osi.IsPlayer(holderUid) == 1 then
+    if Osi.IsPlayer(holderUid) == 1 and GetUUID(Osi.GetTemplate(entityUid)) ~= Template_SortingTagCreator then
         local templateUid = Osi.GetTemplate(entityUid)
-        local template = Templates:Get(GetUUID(templateUid)) or Templates:Get(CheckTmpLsts(entityUid, templateUid))
+        local template = Templates:Get(GetUUID(templateUid)) or Templates:Get(SearchForTemplateList(entityUid, templateUid))
         local owner = Osi.GetOwner(entityUid)
 
         Log('OnAddedTo > AddedToPlayerInventory - %s, %s, %s', holderUid, templateUid, owner)
 
         if template ~= nil then
             Log('OnAddedTo > TemplateExists - %s', templateUid, Osi.GetDirectInventoryOwner(template:Read().SortingTagUuid))
-            Osi.MagicPocketsMoveTo(owner, entityUid, Osi.GetDirectInventoryOwner(template:Read().SortingTagUuid), 0, 1)
+            MoveItemToContainer(entityUid, Osi.GetDirectInventoryOwner(template:Read().SortingTagUuid))
             return
         end
-        return
-    end
-
-    -- Add sorting tag to containers
-    if Osi.IsContainer(holderUid) == 1 and Osi.GetTemplate(entityUid) == Template_SortingTagCreator then
-        local owner = Osi.GetDirectInventoryOwner(entityUid)
-        Log('OnAddedTo > CreateSortingTag - %s, %s, %s', holderUid, entityUid, owner)
-        Osi.TemplateAddTo(Template_SortingTag, holderUid, 1, 1)
-        Osi.MagicPocketsMoveTo(owner, entityUid, owner, 0, 1)
         return
     end
 end
