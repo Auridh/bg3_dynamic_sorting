@@ -74,9 +74,10 @@ end
 
 function IsSpecialTag(entityUid, holderUid)
     Log('IsSpecialTag > %s', TmpLst[entityUid] and true or false)
+    local templateUid = GetUUID(Osi.GetTemplate(entityUid))
 
-    if TmpLst[entityUid] ~= nil then
-        DBLink.TP:Create(GetUUID(Osi.GetTemplate(entityUid)), TemplateEntry:Get(entityUid))
+    if TmpLst[templateUid] ~= nil then
+        DBLink.TP:Create(templateUid, TemplateEntry:Get(entityUid))
         return true
     end
 
