@@ -12,11 +12,26 @@
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
 					<attribute id="DisplayName" type="TranslatedString" handle="hbfbb30f6gdd3cg4323ga621ga921a5b51b77" version="1" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="h1f6904a8g7f2ag4140ga465gf241cff80363" version="1" />
-					<attribute id="Icon" type="FixedString" value="Item_LOOT_GEN_Backpack_A_Posed_A" />
-					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
+					<attribute id="Icon" type="FixedString" value="AuridhDS_Icon_Pin_Blue" />
+					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag_Creator" />
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
 					<children>
 						<node id="GameMaster" />
+						<node id="OnUsePeaceActions">
+							<children>
+								<node id="Action">
+									<attribute id="ActionType" type="int32" value="23" />
+									<children>
+										<node id="Attributes">
+											<attribute id="Animation" type="FixedString" value="" />
+											<attribute id="Conditions" type="LSString" value="" />
+											<attribute id="CombineSlots" type="int8" value="1" />
+											<attribute id="IsBase" type="bool" value="True" />
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
 					</children>
 				</node>
 			</children>

@@ -6,8 +6,9 @@
 			<children>
 				<node id="GameObjects">
 					<attribute id="DisplayName" type="TranslatedString" handle="h8cc9cef5g0ee1g44f5ga016g546bc2e79467" version="1" />
+					<attribute id="Description" type="TranslatedString" handle="" version="0" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="h47613913gefa3g4431gb60aga5ea01d7cbe9" version="1" />
-					<attribute id="Icon" type="FixedString" value="Item_LOOT_GEN_Backpack_A_Posed_A" />
+					<attribute id="Icon" type="FixedString" value="AuridhDS_Icon_Pin_Red" />
 					<attribute id="InventoryType" type="uint8" value="11" />
 					<attribute id="IsInspector" type="bool" value="False" />
 					<attribute id="LevelName" type="FixedString" value="" />
