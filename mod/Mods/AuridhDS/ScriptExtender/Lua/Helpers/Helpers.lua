@@ -36,6 +36,6 @@ function FilePath(filename)
 end
 
 function MoveItemToContainer(entityUid, containerUid)
-    Osi.TemplateAddTo(Osi.GetTemplate(entityUid), containerUid, Osi.GetStackAmount(entityUid), 0)
-    Osi.RequestDelete(entityUid)
+    -- call ToInventory((GUIDSTRING)_Object, (GUIDSTRING)_TargetObject, (INTEGER)_Amount, (INTEGER)_ShowNotification, (INTEGER)_ClearOriginalOwner)
+    Osi.ToInventory(entityUid, containerUid, Osi.GetStackAmount(entityUid), 0, 1)
 end
