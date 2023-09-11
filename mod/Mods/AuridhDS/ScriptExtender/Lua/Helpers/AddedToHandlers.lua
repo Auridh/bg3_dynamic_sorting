@@ -11,10 +11,14 @@ local OriginalItems = {}
 
 -- Add sorting tag to containers
 function CreateSortingTag(entityUid, holderUid)
+    local template = GetUUID(Osi.GetTemplate(entityUid))
     local isContainer = Osi.IsContainer(holderUid) == 1
-    local isCreatorTag = GetUUID(Osi.GetTemplate(entityUid)) == Template_SortingTagCreator
+    local isCreatorTag = template == Template_SortingTagCreator
+    local isContainerInPlayerInventory = Osi.ItemIsInPartyInventory(entityUid, Osi.GetOwner(holderUid)) == 1
+    local hasTagInInventory = Osi.TemplateIsInInventory(Template_SortingTag, holderUid) == 1
+    Log('CreateSortingTag > %s, %s, %s, %s, %s', template, isContainer, isCreatorTag, isContainerInPlayerInventory, hasTagInInventory)
 
-    if isContainer and isCreatorTag then
+    if isContainer and isCreatorTag and not isContainerInPlayerInventory and not hasTagInInventory then
         local owner = Osi.GetOwner(entityUid)
         Log('CreateSortingTag > %s, %s, %s', holderUid, entityUid, owner)
         Osi.TemplateAddTo(Template_SortingTag, holderUid, 1, 0)

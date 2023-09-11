@@ -70,9 +70,10 @@ end
 local function OnDroppedBy(entityUid, holderUid)
     Log('OnDroppedBy > %s, %s', entityUid, holderUid)
     local entityUUID = GetUUID(entityUid)
+    local templateUUID = GetUUID(Osi.GetTemplate(entityUid))
 
     -- Delete a sorting tag if it is dropped
-    if SortingTags:Exists(entityUUID) then
+    if templateUUID == Template_SortingTag then
         Log('OnDroppedBy > SortingTag:Exists - %s, %s', entityUid, holderUid)
 
         local entry = SortingTags:Get(entityUUID):Read()
@@ -83,6 +84,14 @@ local function OnDroppedBy(entityUid, holderUid)
 
         SortingTags:Delete(entityUUID)
         Osi.RequestDelete(entityUid)
+        return
+    end
+
+    -- tag creators STAY IN THE INVENTORY
+    if templateUUID == Template_SortingTagCreator then
+        Log('OnDroppedBy > Creator back to inventory')
+        Osi.RequestDelete(entityUid)
+        Osi.TemplateAddTo(Template_SortingTagCreator, holderUid, 1, 1)
         return
     end
 end
@@ -131,6 +140,11 @@ local function OnMessageBoxYesNoClosed(characterUid, message, result)
     end
 end
 
+local function OnCombined(item1, item2, item3, item4, item5, characterUid, newItem)
+    Log('OnCombined > %s, %s, %s, %s, %s, %s, %s', item1, item2, item3, item4, item5, characterUid, newItem)
+end
+
+
 -- Osiris Event Handlers
 Osiris.Evt.MessageBoxYesNoClosed:Register(Osiris.ExecTime.After, OnMessageBoxYesNoClosed)
 Osiris.Evt.AddedTo:Register(Osiris.ExecTime.After, OnAddedTo)
@@ -139,3 +153,4 @@ Osiris.Evt.DroppedBy:Register(Osiris.ExecTime.After, OnDroppedBy)
 Osiris.Evt.EntityEvent:Register(Osiris.ExecTime.After, OnEntityEvent)
 Osiris.Evt.SavegameLoaded:Register(Osiris.ExecTime.After, OnSavegameLoaded)
 Osiris.Evt.TimerFinished:Register(Osiris.ExecTime.After, OnTimerFinished)
+Osiris.Evt.Combined:Register(Osiris.ExecTime.After, OnCombined)

@@ -38,6 +38,8 @@ Osiris = {
         LevelGameplayStarted = OsirisEvt:New({ Name = 'LevelGameplayStarted', Arity = 2 }),
         -- event TimerFinished((STRING)_Timer)
         TimerFinished = OsirisEvt:New({ Name = 'TimerFinished', Arity = 1 }),
+        -- event Combined((ITEM)_Item_1, (ITEM)_Item_2, (ITEM)_Item_3, (ITEM)_Item_4, (ITEM)_Item_5, (CHARACTER)_Character, (ITEM)_NewItem)
+        Combined = OsirisEvt:New({ Name = 'Combined', Arity = 7 })
     },
     ExecTime = {
         After = 'after',
