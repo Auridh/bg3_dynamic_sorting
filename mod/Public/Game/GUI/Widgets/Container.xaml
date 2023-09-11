@@ -329,7 +329,7 @@
                                                                 </ls:LSButton>
 
                                                                 <!--SortingInventory Toggle Button-->
-                                                                <ls:LSButton Grid.Column="1" Margin="16,0,36,0" x:Name="PlayerSortInvToggle" ToolTipService.Placement="Center" ToolTipService.VerticalOffset="-84" Command="{Binding DataContext.CustomEvent,RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="OpenSortingInventory">
+                                                                <ls:LSButton Grid.Column="2" Margin="96,0,36,0" x:Name="PlayerSortInvToggle" ToolTipService.Placement="Center" ToolTipService.VerticalOffset="-84" Command="{Binding DataContext.CustomEvent,RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="OpenSortingInventory">
                                                                     <ls:LSButton.ToolTip>
                                                                         <ls:LSTooltip Content="{Binding Source='h1e3ecf3cg33fbg4a8dg8f9fg2c5c07ec0a3e' , Converter={StaticResource TranslatedStringConverter}}" />
                                                                     </ls:LSButton.ToolTip>

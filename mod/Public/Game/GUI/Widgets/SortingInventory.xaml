@@ -111,7 +111,7 @@
     <Grid>
         <Border ls:TooltipExtender.Owner="{Binding CurrentPlayer.SelectedCharacter}">
 		<!--Whole container calls on this margin relative to container     original 0,0,0,240-->
-            <ListBox x:Name="MainList" ItemsSource="{Binding CurrentPlayer.ContainerInventoryList}" SelectedItem="{Binding  CurrentPlayer.UIData.CurrentContainer}" Margin="0,0,0,240" Background="{x:Null}" >
+            <ListBox x:Name="MainList" ItemsSource="{Binding CurrentPlayer.ContainerInventoryList}" SelectedItem="{Binding  CurrentPlayer.UIData.CurrentContainer}" Margin="400,50,0,0" Background="{x:Null}" >
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <Grid/>
@@ -463,7 +463,7 @@
 
 																	<!--Container Grid original size 5x3 568 -->
 																	<ItemsPanelTemplate>
-																		<ls:LSGrid x:Name="ContainerGrid" Columns="5" Rows="5" Width="568" ContainerData="{Binding LootInventory}"  noesis:Element.PPAAMode="Disabled"
+																		<ls:LSGrid x:Name="ContainerGrid" Columns="7" Rows="6" Width="788" ContainerData="{Binding LootInventory}"  noesis:Element.PPAAMode="Disabled"
                                                                                    SnapsToDevicePixels="True" ScrollAmount="114"  CellWidth="{DynamicResource ScaledNewSlotSize}" CellHeight="{DynamicResource ScaledNewSlotSize}"
                                                                                    VerticalSpacing="{DynamicResource ContInvSpacing}" DisableScrolling="True"
                                                                                    HorizontalSpacing="{DynamicResource ContInvSpacing}" ActionUpEvent="UIUp" ActionDownEvent="UIDown" ActionRightEvent="UIRight"
