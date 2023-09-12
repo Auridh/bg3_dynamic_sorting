@@ -1,5 +1,5 @@
----@class ModState
-ModState = {
+-- init global
+Auridh.DS.Classes.ModState = {
     StateFile = 'State.json',
     PersistentState = {
         ModState = {
@@ -8,6 +8,9 @@ ModState = {
         },
     },
 }
+
+---@class ModState
+local ModState = Auridh.DS.Classes.ModState
 
 function ModState:New(o)
     o = o or {}
@@ -20,17 +23,17 @@ function ModState:Read()
     return self.PersistentState
 end
 
-function ModState:Write()
-    Ext.IO.SaveFile(FilePath(self.StateFile), Ext.Json.Stringify(self.PersistentState))
+function ModState:Save()
+    Ext.IO.SaveFile(Auridh.DS.Helpers.Misc:FilePath(self.StateFile), Ext.Json.Stringify(self.PersistentState))
 end
 
 function ModState:Load()
-    local fileContent = Ext.IO.LoadFile(FilePath(self.StateFile))
+    local fileContent = Ext.IO.LoadFile(Auridh.DS.Helpers.Misc:FilePath(self.StateFile))
 
     if fileContent ~= nil then
         self.PersistentState = Ext.Json.Parse(fileContent)
     end
 
-    Log('PersistentState Loaded')
-    Dmp(self.PersistentState)
+    Auridh.DS.Helpers.Logger:Log('PersistentState Loaded')
+    Auridh.DS.Helpers.Logger:Dmp(self.PersistentState)
 end

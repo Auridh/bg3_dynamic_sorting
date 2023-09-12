@@ -1,7 +1,10 @@
---@class TempDB
-TempDB = {
+-- init global
+Auridh.DS.Classes.TempDB = {
     DB = {}
 }
+
+---@class TempDB
+local TempDB = Auridh.DS.Classes.TempDB
 
 function TempDB:New(o)
     o = o or {}
@@ -33,10 +36,6 @@ end
 
 function TempDB:Exists(key)
     return self.DB[key] ~= nil
-end
-
-function TempDB:IsEmpty()
-    return #self.DB <= 1
 end
 
 function TempDB:Read()

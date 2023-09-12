@@ -1,66 +1,7 @@
----@class TemplateList
-local TemplateList = {}
+-- init global
+Auridh.DS.Static.SortingTemplates = {}
 
-function TemplateList:New()
-    local newList = {
-        Evaluator = nil,
-        IncludedTags = {},
-        ExcludedTags = {},
-        IncludedTemplates = {},
-        ExcludedTemplates = {},
-        Message = 'Should all items of this type be moved to this container?',
-        SortingTagUuid = '',
-    }
-    setmetatable(newList, self)
-    self.__index = self
-    return newList
-end
-
-function TemplateList:SetEvaluator(func)
-    self.Evaluator = func
-    return self
-end
-
-function TemplateList:SetMessage(message)
-    self.Message = message
-    return self
-end
-
-function TemplateList:SetSortingTag(uuid)
-    self.SortingTagUuid = uuid
-    return self
-end
-
-function TemplateList:IncludeTags(tags)
-    for key, value in pairs(tags) do
-        self.IncludedTags[key] = value
-    end
-    return self
-end
-
-function TemplateList:ExcludeTags(tags)
-    for key, value in pairs(tags) do
-        self.ExcludedTags[key] = value
-    end
-    return self
-end
-
-function TemplateList:IncludeTemplates(tags)
-    for key, value in pairs(tags) do
-        self.IncludedTemplates[key] = value
-    end
-    return self
-end
-
-function TemplateList:ExcludeTemplates(tags)
-    for key, value in pairs(tags) do
-        self.ExcludedTemplates[key] = value
-    end
-    return self
-end
-
-
-TmpLstIds = {
+Auridh.DS.Static.SortingTemplates.Ids = {
     Story = '5ebe9ee1-c640-402d-8dfa-26ea32a4fab1',
     Junk = '28e3351a-e041-42fb-9a84-f50aea36426f',
     Scrolls = 'aec0d6f0-826d-40af-8d99-8cccd7c0ce7d',
@@ -75,14 +16,18 @@ TmpLstIds = {
     Body = '310e53c2-1f33-4eed-8d71-6714099c5262',
 }
 
-TmpLst = {
-    [TmpLstIds.Scrolls] = TemplateList:New()
+-- locals for easy access
+local ListIds = Auridh.DS.Static.SortingTemplates.Ids
+local SortingTemplate = Auridh.DS.Classes.SortingTemplate
+
+Auridh.DS.Static.SortingTemplates.Templates = {
+    [ListIds.Scrolls] = SortingTemplate:New()
             :IncludeTags({
                     ['dd86c045-0370-4ec9-b7c5-b0b160706f09'] = {}, -- SCROLL
                 })
             :SetMessage('Should all scrolls be moved to this container?')
-            :SetSortingTag(TmpLstIds.Scrolls),
-    [TmpLstIds.Potions] = TemplateList:New()
+            :SetSortingTag(ListIds.Scrolls),
+    [ListIds.Potions] = SortingTemplate:New()
             :IncludeTags({
                     ['56c99a77-8f6a-4584-8e41-2a3b9f6b5261'] = {}, -- POTION
                     ['8798a644-4720-4487-bc1a-6a4bf8f3a126'] = {}, -- ALCH_SOLUTION_POTION
@@ -91,14 +36,14 @@ TmpLst = {
                     ['212ca846-4766-4370-8847-454e59751598'] = {}, -- CONS_Oil_Of_The_Basilisk
                 })
             :SetMessage('Should all potions be moved to this container?')
-            :SetSortingTag(TmpLstIds.Potions),
-    [TmpLstIds.Arrows] = TemplateList:New()
+            :SetSortingTag(ListIds.Potions),
+    [ListIds.Arrows] = SortingTemplate:New()
             :IncludeTags({
                     ['fa8afea4-4742-4467-bdef-69851bd15878'] = {}, -- ARROW
                 })
             :SetMessage('Should all arrows be moved to this container?')
-            :SetSortingTag(TmpLstIds.Arrows),
-    [TmpLstIds.Books] = TemplateList:New()
+            :SetSortingTag(ListIds.Arrows),
+    [ListIds.Books] = SortingTemplate:New()
             :IncludeTags({
                     ['8a8e253a-c081-45a1-9fa2-91b6901dc568'] = {}, -- BOOK
                 })
@@ -106,8 +51,8 @@ TmpLst = {
                     ['dd86c045-0370-4ec9-b7c5-b0b160706f09'] = {}, -- SCROLL
                 })
             :SetMessage('Should all books and letters be moved to this container?')
-            :SetSortingTag(TmpLstIds.Books),
-    [TmpLstIds.Grenades] = TemplateList:New()
+            :SetSortingTag(ListIds.Books),
+    [ListIds.Grenades] = SortingTemplate:New()
             :IncludeTags({
                     ['fe0d86c3-a562-430e-a633-d8bf9bb27284'] = {}, -- GRENADE
                     ['f87b203d-75ad-4527-b717-137044bc2ea1'] = {}, -- ALCH_SOLUTION_GRENADE
@@ -124,118 +69,49 @@ TmpLst = {
                     ['00253e1b-375c-4ef4-8808-974cab615ff7'] = {}, -- CONS_Drink_Water_A_Wicker
                 })
             :SetMessage('Should all grenades be moved to this container?')
-            :SetSortingTag(TmpLstIds.Grenades),
-    [TmpLstIds.Coatings] = TemplateList:New()
+            :SetSortingTag(ListIds.Grenades),
+    [ListIds.Coatings] = SortingTemplate:New()
             :IncludeTags({
                     ['9a42f996-decf-4fcc-ad11-2ba6abada287'] = {}, -- ALCH_SOLUTION_COATING
                 })
             :SetMessage('Should all weapon coatings be moved to this container?')
-            :SetSortingTag(TmpLstIds.Coatings),
-    [TmpLstIds.Junk] = TemplateList:New()
+            :SetSortingTag(ListIds.Coatings),
+    [ListIds.Junk] = SortingTemplate:New()
             :SetEvaluator(
                 function(entityUid, _)
                     return Osi.IsJunk(entityUid) == 1
                 end)
             :SetMessage('Should all your junk be moved to this container?')
-            :SetSortingTag(TmpLstIds.Junk),
-    [TmpLstIds.Armor] = TemplateList:New()
+            :SetSortingTag(ListIds.Junk),
+    [ListIds.Armor] = SortingTemplate:New()
             :SetMessage('Should all armor be moved to this container?')
-            :SetSortingTag(TmpLstIds.Armor),
-    [TmpLstIds.Weapon] = TemplateList:New()
+            :SetSortingTag(ListIds.Armor),
+    [ListIds.Weapon] = SortingTemplate:New()
             :SetEvaluator(
                 function(entityUid, _)
                     return Osi.IsWeapon(entityUid) == 1 and Osi.IsRangedWeapon(entityUid) ~= 1
                 end)
             :SetMessage('Should all close range weapons be moved to this container?')
-            :SetSortingTag(TmpLstIds.Weapon),
-    [TmpLstIds.WeaponRanged] = TemplateList:New()
+            :SetSortingTag(ListIds.Weapon),
+    [ListIds.WeaponRanged] = SortingTemplate:New()
             :SetEvaluator(
                 function(entityUid, _)
                     return Osi.IsRangedWeapon(entityUid, 0) == 1
                 end)
             :SetMessage('Should all ranged weapons be moved to this container?')
-            :SetSortingTag(TmpLstIds.WeaponRanged),
-    [TmpLstIds.Body] = TemplateList:New()
+            :SetSortingTag(ListIds.WeaponRanged),
+    [ListIds.Body] = SortingTemplate:New()
             :SetEvaluator(
                 function(entityUid, _)
                     return Osi.IsCharacter(entityUid) == 1
                 end)
             :SetMessage('Should all dead bodies be moved to this container?')
-            :SetSortingTag(TmpLstIds.Body),
-    [TmpLstIds.Story] = TemplateList:New()
+            :SetSortingTag(ListIds.Body),
+    [ListIds.Story] = SortingTemplate:New()
             :SetEvaluator(
                 function(entityUid, _)
                     return Osi.IsStoryItem(entityUid) == 1
                 end)
             :SetMessage('Should all story items be moved to this container?')
-            :SetSortingTag(TmpLstIds.Story),
+            :SetSortingTag(ListIds.Story),
 }
-
-
-function SearchForTemplateList(entityUid, templateUid)
-    local template = templateUid or Osi.GetTemplate(entityUid)
-
-    for _, listId in pairs(TmpLstIds) do
-        if CheckTmpLst(listId, entityUid, template) then
-            return listId
-        end
-    end
-
-    return nil
-end
-
-function CheckTmpLst(listId, entityUid, templateUid)
-    local list = TmpLst[listId]
-    local template = GetUUID(templateUid or Osi.GetTemplate(entityUid))
-    local isInList = false
-
-    -- Check custom evaluator function
-    if list.Evaluator ~= nil then
-        isInList = list.Evaluator(entityUid, template)
-        Log('CheckTmpLst: list.evaluator > %s - %s, %s, %s', listId, isInList, entityUid, template)
-    end
-
-    -- Check if entity is excluded by tag
-    for key, _ in pairs(list.ExcludedTags) do
-        if Osi.IsTagged(entityUid, key) == 1 then
-            Log('CheckTmpLst: is excluded by tag > %s - %s, %s', key, listId, entityUid)
-            return false
-        end
-    end
-
-    -- Check if entity is excluded by template
-    if list.ExcludedTemplates[template] ~= nil then
-        Log('CheckTmpLst: is excluded by template > %s - %s, %s', template, listId, entityUid)
-        return false
-    end
-
-    if isInList then
-        return true
-    end
-
-    -- Check included tags
-    for key, _ in pairs(list.IncludedTags) do
-        if Osi.IsTagged(entityUid, key) == 1 then
-            Log('CheckTmpLst: is included by tag > %s - %s, %s', key, listId, entityUid)
-            return true
-        end
-    end
-
-    -- Check included templates
-    if list.IncludedTemplates[template] ~= nil then
-        Log('CheckTmpLst: is included by template > %s - %s, %s', template, listId, entityUid)
-        return true
-    end
-
-    Log('CheckTmpLst: no match found > %s, %s, %s', template, listId, entityUid)
-    return false
-end
-
-function IsTemplateList(templateUid)
-    for listId, listEntry in pairs(TmpLst) do
-        if listEntry.SortingTagUuid == templateUid then
-            return listId
-        end
-    end
-    return nil
-end

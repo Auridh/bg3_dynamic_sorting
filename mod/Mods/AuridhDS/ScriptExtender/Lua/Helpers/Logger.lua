@@ -1,7 +1,11 @@
+-- init global
+Auridh.DS.Helpers.Logger = {}
+
+local Logger = Auridh.DS.Helpers.Logger
 local LogPrefix = 'Auridh/DS'
 
-function Log(...)
-    if not AuridhDS:Read().ModState.LoggingEnabled then
+function Logger:Log(...)
+    if not Auridh.DS.Current.State:Read().ModState.LoggingEnabled then
         return
     end
 
@@ -17,8 +21,8 @@ function Log(...)
     Ext.Utils.Print(s..f)
 end
 
-function Dmp(info)
-    if not AuridhDS:Read().ModState.LoggingEnabled then
+function Logger:Dmp(info)
+    if not Auridh.DS.Current.State:Read().ModState.LoggingEnabled then
         return
     end
 
