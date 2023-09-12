@@ -1,3 +1,5 @@
+Auridh.DS.Helpers.Misc = {}
+
 local Helpers = Auridh.DS.Helpers.Misc
 local SortingTemplates = Auridh.DS.Static.SortingTemplates.Templates
 local SortingTemplateIds = Auridh.DS.Static.SortingTemplates.Ids

@@ -14,11 +14,12 @@ function Handlers:CreateSortingTag(entityUid, holderUid)
     local template = Helpers:GetUUID(Osi.GetTemplate(entityUid))
     local isContainer = Osi.IsContainer(holderUid) == 1
     local isCreatorTag = template == TemplateIds.SortingTagCreator
-    local isContainerInPlayerInventory = Osi.ItemIsInPartyInventory(entityUid, Osi.GetOwner(holderUid), 0) == 1
+    local owner = Osi.GetOwner(holderUid)
+    local isContainerInPlayerInventory = owner ~= nil and Osi.ItemIsInPartyInventory(entityUid, owner, 0) == 1 or false
     local hasTagInInventory = Osi.TemplateIsInInventory(TemplateIds.SortingTag, holderUid) == 1
     Logger:Log('CreateSortingTag > %s, %s, %s, %s, %s', template, isContainer, isCreatorTag, isContainerInPlayerInventory, hasTagInInventory)
 
-    if isContainer and isCreatorTag and not isContainerInPlayerInventory and not hasTagInInventory then
+    if isContainer and isCreatorTag and isContainerInPlayerInventory and not hasTagInInventory then
         local owner = Osi.GetOwner(entityUid)
         Logger:Log('CreateSortingTag > %s, %s, %s', holderUid, entityUid, owner)
         Osi.TemplateAddTo(TemplateIds.SortingTag, holderUid, 1, 0)

@@ -3,7 +3,7 @@ Auridh.DS.Classes.DbEntries.SortingTag = {
     UUID = nil,
     EntityId = nil,
     DirectOwnerUuid = nil,
-    Templates = TempDB:New(),
+    Templates = Auridh.DS.Classes.TempDB:New(),
 }
 
 ---@class TagEntry

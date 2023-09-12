@@ -8,9 +8,9 @@ Auridh.DS.Classes.DbEntries = {}
 Ext.Require('Classes/ModState.lua')
 Ext.Require('Classes/OsirisEvent.lua')
 Ext.Require('Classes/SortingTemplate.lua')
+Ext.Require('Classes/TempDB.lua')
 Ext.Require('Classes/DbEntries/Template.lua')
 Ext.Require('Classes/DbEntries/SortingTag.lua')
-Ext.Require('Classes/TempDB.lua')
 
 -- Init static vars
 Auridh.DS.Static = {}
