@@ -27,7 +27,11 @@ Auridh.DS.Static.Osiris = {
         -- event TimerFinished((STRING)_Timer)
         TimerFinished = OsirisEvent:New({ Name = 'TimerFinished', Arity = 1 }),
         -- event Combined((ITEM)_Item_1, (ITEM)_Item_2, (ITEM)_Item_3, (ITEM)_Item_4, (ITEM)_Item_5, (CHARACTER)_Character, (ITEM)_NewItem)
-        Combined = OsirisEvent:New({ Name = 'Combined', Arity = 7 })
+        Combined = OsirisEvent:New({ Name = 'Combined', Arity = 7 }),
+        -- event UseStarted((CHARACTER)_Character, (ITEM)_Item)
+        UseStarted = OsirisEvent:New({ Name = 'UseStarted', Arity = 2 }),
+        -- event UseFinished((CHARACTER)_Character, (ITEM)_Item, (INTEGER)_Sucess)
+        UseFinished = OsirisEvent:New({ Name = 'UseFinished', Arity = 3 }),
     },
     ExecTime = {
         After = 'after',

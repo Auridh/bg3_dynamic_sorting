@@ -27,4 +27,6 @@
   <content contentuid="h9d632fadg3acbg4feegbcc4g489fae166d4a" version="1">Represents ranged weapons</content>
   <content contentuid="h76ecc594gcd01g40c6g9ac9g0faf112c9d9d" version="1">Bodies Tag</content>
   <content contentuid="h8b10e9f9g85afg46b5ga90cg6318bd74aa31" version="1">Represents bodies</content>
+
+  <content contentuid="h2bef2a0cg83c0g4190g876cg9f7910174136" version="1">Sortable Container</content>
 </contentList>

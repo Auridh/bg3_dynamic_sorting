@@ -124,6 +124,7 @@ local function OnAddedTo(entityUid, holderUid)
     Logger:Log('OnAddedTo > %s, %s', entityUid, holderUid)
 
     if AddedTo:IsSpecialTag(entityUid, holderUid) then return end
+    -- TODO: Replace with 'Combine'
     if AddedTo:CreateSortingTag(entityUid, holderUid) then return end
     if AddedTo:AddSortingTagToDB(entityUid, holderUid) then return end
     if AddedTo:IsAddedByTag(entityUid, holderUid) then return end

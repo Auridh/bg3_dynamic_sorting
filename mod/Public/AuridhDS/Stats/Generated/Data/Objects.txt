@@ -38,6 +38,8 @@ using "DS_OBJ_ContainerIndestructible"
 data "RootTemplate" "27097129-2259-4a84-ac40-c27229c1093e"
 data "ValueOverride" "0"
 data "Weight" "0"
+data "Flags" "Grounded"
+data "Priority" "1"
 
 new entry "DS_OBJ_SortingTag_Story"
 type "Object"
