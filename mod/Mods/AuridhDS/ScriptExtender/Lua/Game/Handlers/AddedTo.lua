@@ -7,47 +7,26 @@ local Logger = Auridh.DS.Helpers.Logger
 local TemplateIds = Auridh.DS.Static.UniqueIds.Templates
 local StatusEffects = Auridh.DS.Static.UniqueIds.StatusEffects
 local SortingTemplates = Auridh.DS.Static.SortingTemplates.Templates
-local OriginalItems = {}
+local EventIds = Auridh.DS.Static.UniqueIds.Events
+local OsirisEntity = Auridh.DS.Classes.OsirisEntity
+local OriginalItems = Classes.TempDB:New()
 
--- Add sorting tag to containers
-function Handlers:CreateSortingTag(entityUid, holderUid)
-    local template = Helpers:GetUUID(Osi.GetTemplate(entityUid))
-    local isContainer = Osi.IsContainer(holderUid) == 1
-    local isCreatorTag = template == TemplateIds.SortingTagCreator
-    local owner = Osi.GetOwner(holderUid)
-    local isContainerInPlayerInventory = owner ~= nil and Osi.ItemIsInPartyInventory(entityUid, owner, 0) == 1 or false
-    local hasTagInInventory = Osi.TemplateIsInInventory(TemplateIds.SortingTag, holderUid) == 1
-    Logger:Log('CreateSortingTag > %s, %s, %s, %s, %s', template, isContainer, isCreatorTag, isContainerInPlayerInventory, hasTagInInventory)
-
-    if isContainer and isCreatorTag and isContainerInPlayerInventory and not hasTagInInventory then
-        local owner = Osi.GetOwner(entityUid)
-        Logger:Log('CreateSortingTag > %s, %s, %s', holderUid, entityUid, owner)
-        Osi.TemplateAddTo(TemplateIds.SortingTag, holderUid, 1, 0)
-        Helpers:MoveItemToContainer(entityUid, owner)
-
-        return true
-    end
-
-    return false
-end
 
 -- An item was added to a player inventory and should get sorted
-function Handlers:SortItem(entityUid, holderUid)
+function Handlers:SortItem(itemEntity, holderEntity)
     local Templates = Auridh.DS.Current.Database.TP
 
-    local isPlayer = Osi.IsPlayer(holderUid) == 1
-    local playerIsDirectOwner = Helpers:GetUUID(holderUid) == Helpers:GetUUID(Osi.GetDirectInventoryOwner(entityUid))
+    itemEntity:SaveToDB()
+    holderEntity:SaveToDB()
 
-    if isPlayer and playerIsDirectOwner then
-        local templateUid = Osi.GetTemplate(entityUid)
-        local template = Templates:Get(Helpers:GetUUID(templateUid)) or Templates:Get(Helpers:SearchForTemplateList(entityUid, templateUid))
-        local owner = Osi.GetOwner(entityUid)
+    if holderEntity:IsPlayer() and holderEntity:Owns(itemEntity, { DirectOwner = true }) then
+        local templateEntity = itemEntity:Template()
+        Logger:Log('SortItem > %s, %s, %s', holderEntity.UUID, templateEntity.UUID, itemEntity:Owner().Uid)
 
-        Logger:Log('SortItem > %s, %s, %s', holderUid, templateUid, owner)
-
+        local template = Templates:Get(templateEntity.UUID) or Templates:Get(itemEntity:SortingTemplateId())
         if template ~= nil then
-            Logger:Log('SortItem > TemplateExists - %s', templateUid)
-            Helpers:MoveItemToContainer(entityUid, Osi.GetDirectInventoryOwner(template:Read().SortingTagUuid))
+            Logger:Log('SortItem > TemplateExists - %s', template.UUID)
+            itemEntity:ToInventory(template.SortingTag)
         end
 
         return true
@@ -57,19 +36,20 @@ function Handlers:SortItem(entityUid, holderUid)
     return false
 end
 
-function Handlers:AddSortingTagToDB(entityUid, holderUid)
-    local onlyUUID = Helpers:GetUUID(holderUid)
+function Handlers:AddSortingTagToDB(itemEntity, holderEntity)
     local SortingTags = Auridh.DS.Current.Database.ST
+    local templateEntity = itemEntity:Template(true)
 
-    local tagExistsInDB = SortingTags:Exists(onlyUUID)
-    local isItemSortingTag = Helpers:GetUUID(Osi.GetTemplate(entityUid)) == TemplateIds.SortingTag
+    local tagExistsInDB = SortingTags:Exists(holderEntity.UUID)
+    local itemIsSortingTag = templateEntity.UUID == TemplateIds.SortingTag
 
     -- Add sorting tag to db
-    if not tagExistsInDB and isItemSortingTag then
-        Logger:Log('AddSortingTagToDB > AddSortingTag', entityUid)
-        local entry = Classes.DbEntries.SortingTag:Get(entityUid)
-        SortingTags:Create(entry.UUID, entry)
-
+    if not tagExistsInDB and itemIsSortingTag then
+        Logger:Log('AddSortingTagToDB > AddSortingTag', itemEntity.Uid)
+        itemEntity:SaveToDB()
+        holderEntity:SaveToDB()
+        templateEntity:SaveToDB()
+        SortingTags:Add(itemEntity.Uid)
         return true
     end
 
@@ -77,32 +57,50 @@ function Handlers:AddSortingTagToDB(entityUid, holderUid)
     return false
 end
 
-function Handlers:IsSpecialTag(entityUid, holderUid)
-    Logger:Log('IsSpecialTag > %s', SortingTemplates[entityUid] and true or false)
-    local templateUid = Helpers:GetUUID(Osi.GetTemplate(entityUid))
+function Handlers:IsSpecialTag(itemEntity, holderEntity)
+    local templateEntity = itemEntity:Template(true)
+    Logger:Log('IsSpecialTag > %s', SortingTemplates[templateEntity.UUID] and true or false)
 
-    if SortingTemplates[templateUid] ~= nil then
-        Auridh.DS.Current.Database.TP:Create(templateUid, Classes.DbEntries.Template:Get(entityUid))
+    if SortingTemplates[templateEntity.UUID] ~= nil and Auridh.DS.Current.Database.TP:Exists(template.UUID) then
+        templateEntity:SaveToDB()
+        itemEntity:SaveToDB()
+        holderEntity:SaveToDB()
+
+        Auridh.DS.Current.Database.TP:Add(templateEntity.Uid)
+
+        Helpers:IteratePlayerDB(function(playerUid)
+            Auridh.DS.Current.GobbleUp = templateEntity
+            local playerEntity = OsirisEntity:FromUid(playerUid)
+            playerEntity:IterateInventory(EventIds.GobbleUp, { EndEvent = EventIds.GobbleUpEnd })
+        end)
         return true
     end
 
     return false
 end
 
-function Handlers:IsAddedByTag(entityUid, holderUid)
-    local templateUUID = Helpers:GetUUID(Osi.GetTemplate(entityUid))
-    local onlyUUID = Helpers:GetUUID(holderUid)
+-- Added to the inventory of a sorting tag
+function Handlers:IsAddedByTag(itemEntity, holderEntity)
     local Templates = Auridh.DS.Current.Database.TP
     local SortingTags = Auridh.DS.Current.Database.ST
+    local templateEntity = itemEntity:Template(true)
 
-    if OriginalItems[templateUUID] ~= nil and SortingTags:Exists(onlyUUID) then
-        local owner = Osi.GetOwner(entityUid)
+    if OriginalItems:Exists(templateEntity.UUID) and SortingTags:Exists(holderEntity.UUID) then
+        local ownerEntity = itemEntity:Owner()
+        templateEntity:SaveToDB()
+        itemEntity:SaveToDB()
+        holderEntity:SaveToDB()
 
-        Logger:Log('IsAddedByTag > OriginalItem - %s, %s, %s', OriginalItems[templateUUID], owner, templateUUID)
-        OriginalItems[templateUUID] = nil
-        Templates:Create(templateUUID, Classes.DbEntries.Template:Get(entityUid))
-        Osi.ApplyStatus(entityUid, StatusEffects.ReduceWeight, -1, 1, entityUid)
-        Osi.ApplyStatus(owner, StatusEffects.WeightDisplayFix, 0, 1, entityUid)
+        Logger:Log('IsAddedByTag > OriginalItem - %s, %s, %s', OriginalItems:Get(templateEntity.UUID), ownerEntity.UUID, templateEntity.UUID)
+
+        OriginalItems:Delete(templateEntity.UUID)
+        Templates:Add(templateEntity.Uid)
+
+        itemEntity:ApplyStatus(StatusEffects.ReduceWeight)
+        ownerEntity:ApplyStatus(StatusEffects.WeightDisplayFix, {
+            Duration = 0,
+            SourceUid = itemEntity.Uid,
+        })
 
         return true
     end
@@ -111,37 +109,47 @@ function Handlers:IsAddedByTag(entityUid, holderUid)
     return false
 end
 
-function Handlers:RegisterInSortingTag(entityUid, holderUid)
+function Handlers:RegisterInSortingTag(itemEntity, holderEntity)
     local SortingTags = Auridh.DS.Current.Database.ST
-    local onlyUUID = Helpers:GetUUID(holderUid)
 
     -- An object was added to a sorting tag
-    if SortingTags:Exists(onlyUUID) then
+    if SortingTags:Exists(holderEntity.UUID) then
         Logger:Log('RegisterInSortingTag > SortingTag:Exists')
-        local templateUUID = Helpers:GetUUID(Osi.GetTemplate(entityUid))
-        local directOwner = Osi.GetDirectInventoryOwner(Osi.GetDirectInventoryOwner(entityUid))
 
-        Logger:Log('RegisterInSortingTag > MagicPocketsMoveTo - %s', directOwner)
-        Helpers:MoveItemToContainer(entityUid, directOwner)
+        itemEntity:SaveToDB()
+        holderEntity:SaveToDB()
+
+        local templateEntity = itemEntity:Template()
+        local directOwnerEntity = holderEntity:DirectOwner()
+
+        Logger:Log('RegisterInSortingTag > MagicPocketsMoveTo - %s', directOwnerEntity.Uid)
+        itemEntity:ToInventory(directOwnerEntity)
 
         -- Ignore our own items
-        if templateUUID == TemplateIds.SortingTag or templateUUID == TemplateIds.SortingTagCreator then
-            Logger:Log('RegisterInSortingTag > IgnoreOwnItems - %s, %s', directOwner, templateUUID)
+        if templateEntity.UUID == TemplateIds.SortingTag or templateEntity.UUID == TemplateIds.SortingTagCreator then
+            Logger:Log('RegisterInSortingTag > IgnoreOwnItems')
             return true
         end
 
         -- Add the template to the sorting tag, if it doesn't exist
-        if not SortingTags:Get(onlyUUID):Read().Templates:Exists(templateUUID) then
-            Logger:Log('RegisterInSortingTag > AddTemplateToSortingTag - %s', templateUUID)
-            OriginalItems[templateUUID] = entityUid
-            Osi.TemplateAddTo(templateUUID, holderUid, 1, 0)
+        if not SortingTags:Get(holderEntity.UUID).Templates:Exists(templateEntity.UUID) then
+            Logger:Log('RegisterInSortingTag > AddTemplateToSortingTag - %s', templateEntity.Uid)
+            OriginalItems:Create(templateEntity.UUID, itemEntity.UUID)
+
+            holderEntity:AddToInventory(templateEntity)
 
             -- Ask if all items of this type should be sorted in this container
-            local listId = Helpers:SearchForTemplateList(entityUid, templateUUID)
-            if listId ~= nil and not SortingTags:Get(onlyUUID):Read().Templates:Exists(listId) then
-                Logger:Log('RegisterInSortingTag > OpenMessageBoxYesNo - %s', listId)
-                Auridh.DS.Current.MessageBoxYesNo = { Id = listId, Message = SortingTemplates[listId].Message, SortingTagUuid = onlyUUID }
-                Osi.OpenMessageBoxYesNo(Osi.GetOwner(entityUid), SortingTemplates[listId].Message)
+            local sortingTemplateId = itemEntity:SortingTemplateId()
+            if sortingTemplateId ~= nil and not SortingTags:Get(onlyUUID).Templates:Exists(sortingTemplateId) then
+                Logger:Log('RegisterInSortingTag > OpenMessageBoxYesNo - %s', sortingTemplateId)
+
+                Auridh.DS.Current.MessageBoxYesNo = {
+                    SortingTag = holderEntity,
+                    Message = SortingTemplates[sortingTemplateId].Message,
+                    SortingTemplate = OsirisEntity:FromUid(sortingTemplateId),
+                }
+
+                Osi.OpenMessageBoxYesNo(itemEntity:Owner().Uid, SortingTemplates[sortingTemplateId].Message)
             end
         end
 

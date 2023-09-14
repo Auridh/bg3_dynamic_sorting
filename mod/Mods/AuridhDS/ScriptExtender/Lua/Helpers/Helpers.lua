@@ -41,45 +41,45 @@ function Helpers:FilePath(filename)
     return string.format('AuridhDS/%s/%s_%s.%s.%s.%s.%s.%s/%s', host, region, pX, pY, pZ, rX, rY, rZ, filename)
 end
 
-function Helpers:MoveItemToContainer(entityUid, containerUid)
-    -- call ToInventory((GUIDSTRING)_Object, (GUIDSTRING)_TargetObject, (INTEGER)_Amount, (INTEGER)_ShowNotification, (INTEGER)_ClearOriginalOwner)
-    Osi.ToInventory(entityUid, containerUid, Osi.GetStackAmount(entityUid), 0, 1)
-end
-
-function Helpers:SearchForTemplateList(entityUid, templateUid)
-    local template = templateUid or Osi.GetTemplate(entityUid)
-
-    for _, listId in pairs(SortingTemplateIds) do
-        if Helpers:CheckTmpLst(listId, entityUid, template) then
-            return listId
+function Helpers:GetSortingTemplateId(osirisEntity)
+    for _, sortingTemplateId in pairs(SortingTemplateIds) do
+        if Helpers:TestSortingTemplate(osirisEntity, sortingTemplateId) then
+            return sortingTemplateId
         end
     end
 
     return nil
 end
 
-function Helpers:CheckTmpLst(listId, entityUid, templateUid)
-    local sortingTemplate = SortingTemplates[listId]
-    local template = Helpers:GetUUID(templateUid or Osi.GetTemplate(entityUid))
+function Helpers:TestSortingTemplate(osirisEntity, sortingTemplateId)
+    local sortingTemplate = SortingTemplates[sortingTemplateId]
+    local templateEntity = osirisEntity:Template()
     local sortedByTemplate = false
 
     -- Check custom evaluator function
     if sortingTemplate.Evaluator ~= nil then
-        sortedByTemplate = sortingTemplate.Evaluator(entityUid, template)
-        Logger:Log('CheckTmpLst: list.evaluator > %s - %s, %s, %s', listId, sortedByTemplate, entityUid, template)
+        sortedByTemplate = sortingTemplate.Evaluator(osirisEntity, templateEntity)
+        Logger:Log('CheckTmpLst: list.evaluator > %s - %s, %s, %s',
+                sortingTemplateId,
+                sortedByTemplate,
+                osirisEntity.UUID,
+                templateEntity.UUID)
     end
 
     -- Check if entity is excluded by tag
-    for key, _ in pairs(sortingTemplate.ExcludedTags) do
-        if Osi.IsTagged(entityUid, key) == 1 then
-            Logger:Log('CheckTmpLst: is excluded by tag > %s - %s, %s', key, listId, entityUid)
+    for tag, _ in pairs(sortingTemplate.ExcludedTags) do
+        if osirisEntity:IsTagged(tag) then
+            Logger:Log('CheckTmpLst: is excluded by tag > %s - %s, %s', tag, sortingTemplateId, osirisEntity.UUID)
             return false
         end
     end
 
     -- Check if entity is excluded by template
-    if sortingTemplate.ExcludedTemplates[template] ~= nil then
-        Logger:Log('CheckTmpLst: is excluded by template > %s - %s, %s', template, listId, entityUid)
+    if sortingTemplate.ExcludedTemplates[templateEntity.UUID] ~= nil then
+        Logger:Log('CheckTmpLst: is excluded by template > %s - %s, %s',
+                templateEntity.UUID,
+                sortingTemplateId,
+                osirisEntity.UUID)
         return false
     end
 
@@ -88,28 +88,25 @@ function Helpers:CheckTmpLst(listId, entityUid, templateUid)
     end
 
     -- Check included tags
-    for key, _ in pairs(sortingTemplate.IncludedTags) do
-        if Osi.IsTagged(entityUid, key) == 1 then
-            Logger:Log('CheckTmpLst: is included by tag > %s - %s, %s', key, listId, entityUid)
+    for tag, _ in pairs(sortingTemplate.IncludedTags) do
+        if osirisEntity:IsTagged(tag) then
+            Logger:Log('CheckTmpLst: is included by tag > %s - %s, %s', tag, sortingTemplateId, osirisEntity.UUID)
             return true
         end
     end
 
     -- Check included templates
-    if sortingTemplate.IncludedTemplates[template] ~= nil then
-        Logger:Log('CheckTmpLst: is included by template > %s - %s, %s', template, listId, entityUid)
+    if sortingTemplate.IncludedTemplates[templateEntity.UUID] ~= nil then
+        Logger:Log('CheckTmpLst: is included by template > %s - %s, %s', templateEntity.UUID, sortingTemplateId, osirisEntity.UUID)
         return true
     end
 
-    Logger:Log('CheckTmpLst: no match found > %s, %s, %s', template, listId, entityUid)
+    Logger:Log('CheckTmpLst: no match found > %s, %s, %s', sortingTemplateId, templateEntity.UUID, osirisEntity.UUID)
     return false
 end
 
-function Helpers:IsTemplateList(templateUid)
-    for listId, listEntry in pairs(SortingTemplates) do
-        if listEntry.SortingTagUuid == templateUid then
-            return listId
-        end
-    end
-    return nil
+function Helpers:IsSortingTemplate(sortingTemplateId)
+    return SortingTemplates[sortingTemplateId] ~= nil
 end
+
+

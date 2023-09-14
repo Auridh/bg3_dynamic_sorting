@@ -1,7 +1,5 @@
 -- init global
-Auridh.DS.Classes.TempDB = {
-    DB = {}
-}
+Auridh.DS.Classes.TempDB = {}
 
 ---@class TempDB
 local TempDB = Auridh.DS.Classes.TempDB
@@ -14,16 +12,16 @@ function TempDB:New(o)
 end
 
 function TempDB:Create(key, value)
-    self.DB[key] = self:New({ DB = value })
-    return self.DB[key]
+    self[key] = self:New({ DB = value })
+    return self[key]
 end
 
 function TempDB:CreateIfNotExists(key, value)
-    if self.DB[key] == nil then
+    if self[key] == nil then
         return self:Create(key, value)
     end
 
-    return self.DB[key]
+    return self[key]
 end
 
 function TempDB:Get(key)
@@ -31,39 +29,27 @@ function TempDB:Get(key)
         return
     end
 
-    return self.DB[key]
+    return self[key]
 end
 
 function TempDB:Exists(key)
-    return self.DB[key] ~= nil
-end
-
-function TempDB:Read()
-    return self.DB
+    return self[key] ~= nil
 end
 
 function TempDB:Update(value)
-    if self.DB == nil then
-        self.DB = value
-    else
-        for k, v in pairs(value) do
-            self.DB[k] = v
-        end
+    for k, v in pairs(value) do
+        self[k] = v
     end
 end
 
 function TempDB:UpdateIfNil(value)
-    if self.DB == nil then
-        self.DB = value
-    else
-        for k, v in pairs(value) do
-            if self.DB[k] == nil then
-                self.DB[k] = v
-            end
+    for k, v in pairs(value) do
+        if self[k] == nil then
+            self[k] = v
         end
     end
 end
 
 function TempDB:Delete(key)
-    self.DB[key] = nil
+    self[key] = nil
 end

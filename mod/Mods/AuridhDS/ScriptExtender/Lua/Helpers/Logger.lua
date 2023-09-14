@@ -4,6 +4,11 @@ Auridh.DS.Helpers.Logger = {}
 local Logger = Auridh.DS.Helpers.Logger
 local LogPrefix = 'Auridh/DS'
 
+local LogLevels = {
+    Debug = 0,
+    Info = 1,
+}
+
 function Logger:Log(...)
     if not Auridh.DS.Current.State:Read().ModState.LoggingEnabled then
         return
@@ -19,6 +24,12 @@ function Logger:Log(...)
     end
 
     Ext.Utils.Print(s..f)
+end
+
+function Logger:Debug(...)
+    if LogLevels[Auridh.DS.Current.State:Read().ModState.LogLevel] == 0 then
+        self:Log(...)
+    end
 end
 
 function Logger:Dmp(info)

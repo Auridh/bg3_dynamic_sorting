@@ -4,6 +4,7 @@ Auridh.DS.Static.SortingTemplates = {}
 Auridh.DS.Static.SortingTemplates.Ids = {
     Story = '5ebe9ee1-c640-402d-8dfa-26ea32a4fab1',
     Junk = '28e3351a-e041-42fb-9a84-f50aea36426f',
+    Supply = '7a8195e9-28c9-4181-8171-992d4445ccb3',
     Scrolls = 'aec0d6f0-826d-40af-8d99-8cccd7c0ce7d',
     Books = '894b4fc4-e9bd-433a-888b-3be440d3d24a',
     Potions = '0878ab5a-5dbd-4ef9-b69c-2afb58583cc2',
@@ -78,39 +79,51 @@ Auridh.DS.Static.SortingTemplates.Templates = {
             :SetSortingTag(ListIds.Coatings),
     [ListIds.Junk] = SortingTemplate:New()
             :SetEvaluator(
-                function(entityUid, _)
-                    return Osi.IsJunk(entityUid) == 1
+                function(osirisEntity, _)
+                    return osirisEntity:IsJunk()
                 end)
             :SetMessage('Should all your junk be moved to this container?')
             :SetSortingTag(ListIds.Junk),
     [ListIds.Armor] = SortingTemplate:New()
+            :SetEvaluator(
+                function(osirisEntity, _)
+                    -- TODO
+                    return false and not osirisEntity:IsEquipped()
+                end)
             :SetMessage('Should all armor be moved to this container?')
             :SetSortingTag(ListIds.Armor),
     [ListIds.Weapon] = SortingTemplate:New()
             :SetEvaluator(
-                function(entityUid, _)
-                    return Osi.IsWeapon(entityUid) == 1 and Osi.IsRangedWeapon(entityUid) ~= 1
+                function(osirisEntity, _)
+                    return osirisEntity:IsWeapon() and not osirisEntity:IsRangedWeapon() and not osirisEntity:IsEquipped()
                 end)
             :SetMessage('Should all close range weapons be moved to this container?')
             :SetSortingTag(ListIds.Weapon),
     [ListIds.WeaponRanged] = SortingTemplate:New()
             :SetEvaluator(
-                function(entityUid, _)
-                    return Osi.IsRangedWeapon(entityUid, 0) == 1
+                function(osirisEntity, _)
+                    return osirisEntity:IsRangedWeapon() and not osirisEntity:IsEquipped()
                 end)
             :SetMessage('Should all ranged weapons be moved to this container?')
             :SetSortingTag(ListIds.WeaponRanged),
     [ListIds.Body] = SortingTemplate:New()
             :SetEvaluator(
-                function(entityUid, _)
-                    return Osi.IsCharacter(entityUid) == 1
+                function(osirisEntity, _)
+                    return osirisEntity:IsCharacter()
                 end)
             :SetMessage('Should all dead bodies be moved to this container?')
             :SetSortingTag(ListIds.Body),
     [ListIds.Story] = SortingTemplate:New()
             :SetEvaluator(
-                function(entityUid, _)
-                    return Osi.IsStoryItem(entityUid) == 1
+                function(osirisEntity, _)
+                    return osirisEntity:IsStoryItem()
+                end)
+            :SetMessage('Should all story items be moved to this container?')
+            :SetSortingTag(ListIds.Story),
+    [ListIds.Supply] = SortingTemplate:New()
+            :SetEvaluator(
+                function(osirisEntity, _)
+                    return osirisEntity:IsSupply()
                 end)
             :SetMessage('Should all story items be moved to this container?')
             :SetSortingTag(ListIds.Story),

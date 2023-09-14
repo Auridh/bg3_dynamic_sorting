@@ -5,7 +5,10 @@ Auridh.DS.Static.UniqueIds = {
         SearchBagEnd = 'Evt_SearchBagEnd',
         InitSortingTag = 'Evt_InitSortingTag',
         InitSortingTagEnd = 'Evt_InitSortingTagEnd',
+        GobbleUp = 'Evt_GobbleUp',
+        GobbleUpEnd = 'Evt_GobbleUpEnd',
         TimerInit = 'Evt_TimerInit',
+        TimerCombined = 'Evt_TimerTimerCombined',
     },
     Templates = {
         SortingTag = '834c78a0-4758-457b-aa45-74a179a3b3be',

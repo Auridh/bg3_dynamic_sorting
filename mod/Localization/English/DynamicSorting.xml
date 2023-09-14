@@ -27,6 +27,8 @@
   <content contentuid="h9d632fadg3acbg4feegbcc4g489fae166d4a" version="1">Represents ranged weapons</content>
   <content contentuid="h76ecc594gcd01g40c6g9ac9g0faf112c9d9d" version="1">Bodies Tag</content>
   <content contentuid="h8b10e9f9g85afg46b5ga90cg6318bd74aa31" version="1">Represents bodies</content>
+  <content contentuid="h776bad89gb737g4f58ga382g513e755327a4" version="1">Camp Supplies Tag</content>
+  <content contentuid="h46311a54g04f9g42f4g9ef5g36934d1f5a4c" version="1">Represents camp supplies</content>
 
   <content contentuid="h2bef2a0cg83c0g4190g876cg9f7910174136" version="1">Sortable Container</content>
 </contentList>
