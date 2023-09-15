@@ -1,4 +1,16 @@
 <contentList date="17/08/2023 10:00">
   <content contentuid="hab14774dg518fg4d8egb804g357e0b881839" version="1">Scrolls Tag</content>
   <content contentuid="h8f597a3fgdac2g48d8ga676gd0227b54b435" version="1">Represents scrolls</content>
+  <content contentuid="h234780d1g7dccg4fe2g8a53gd38c9ae9909b" version="1">Books Tag</content>
+  <content contentuid="he18e78d0g69a2g4e4dgbd6agfc486b0fca19" version="1">Represents books</content>
+  <content contentuid="hfc182432gbfedg43e7ga5c7g408e8f4396ea" version="1">Potions Tag</content>
+  <content contentuid="he09ab1ddgb7dfg4142gb077g66d3c9926d93" version="1">Represents potions</content>
+  <content contentuid="hc7b249d4gaca7g48c3ga719g47f67f79aea1" version="1">Arrows Tag</content>
+  <content contentuid="h49b9d3d8g46b4g450fg87bcgfdb9c30b1304" version="1">Represents arrows</content>
+  <content contentuid="hd6cd1ad3g117fg4c38gb36eg7e539ea6cfd2" version="1">Grenades Tag</content>
+  <content contentuid="hb93aa928gaf80g496fg82e0gec634b42a8e0" version="1">Represents grenades</content>
+  <content contentuid="h7a490747g80fag4275gaf73gf3edc0cacfa8" version="1">Weapon Coatings Tag</content>
+  <content contentuid="h63b4661eg048ag44abgabf7gaa0b6d98b0f4" version="1">Represents weapon coatings</content>
+  <content contentuid="h776bad89gb737g4f58ga382g513e755327a4" version="1">Camp Supplies Tag</content>
+  <content contentuid="h46311a54g04f9g42f4g9ef5g36934d1f5a4c" version="1">Represents camp supplies</content>
 </contentList>

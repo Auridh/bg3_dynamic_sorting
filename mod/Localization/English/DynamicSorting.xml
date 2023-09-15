@@ -5,18 +5,6 @@
   <content contentuid="h1f6904a8g7f2ag4140ga465gf241cff80363" version="1">Move this item into a container to get a new sorting tag.</content>
   <content contentuid="h94718baag52b2g42aag8ff9gce551c357901" version="1">Story Items Tag</content>
   <content contentuid="h19fee701g1742g463fg8223g261a00a4ffe1" version="1">Represents story items</content>
-  <content contentuid="hab14774dg518fg4d8egb804g357e0b881839" version="1">Scrolls Tag</content>
-  <content contentuid="h8f597a3fgdac2g48d8ga676gd0227b54b435" version="1">Represents scrolls</content>
-  <content contentuid="h234780d1g7dccg4fe2g8a53gd38c9ae9909b" version="1">Books Tag</content>
-  <content contentuid="he18e78d0g69a2g4e4dgbd6agfc486b0fca19" version="1">Represents books</content>
-  <content contentuid="hfc182432gbfedg43e7ga5c7g408e8f4396ea" version="1">Potions Tag</content>
-  <content contentuid="he09ab1ddgb7dfg4142gb077g66d3c9926d93" version="1">Represents potions</content>
-  <content contentuid="hc7b249d4gaca7g48c3ga719g47f67f79aea1" version="1">Arrows Tag</content>
-  <content contentuid="h49b9d3d8g46b4g450fg87bcgfdb9c30b1304" version="1">Represents arrows</content>
-  <content contentuid="hd6cd1ad3g117fg4c38gb36eg7e539ea6cfd2" version="1">Grenades Tag</content>
-  <content contentuid="hb93aa928gaf80g496fg82e0gec634b42a8e0" version="1">Represents grenades</content>
-  <content contentuid="h7a490747g80fag4275gaf73gf3edc0cacfa8" version="1">Weapon Coatings Tag</content>
-  <content contentuid="h63b4661eg048ag44abgabf7gaa0b6d98b0f4" version="1">Represents weapon coatings</content>
   <content contentuid="h11086262gfd46g49d5gb718gf9314e5acf48" version="1">Junk Tag</content>
   <content contentuid="h37f13c8fgabb1g4701g9513g5eb1d3586b87" version="1">Represents junk</content>
   <content contentuid="h9531b284g3ee3g4b1fga95bgcb72ee40ff4c" version="1">Armors Tag</content>
@@ -27,8 +15,6 @@
   <content contentuid="h9d632fadg3acbg4feegbcc4g489fae166d4a" version="1">Represents ranged weapons</content>
   <content contentuid="h76ecc594gcd01g40c6g9ac9g0faf112c9d9d" version="1">Bodies Tag</content>
   <content contentuid="h8b10e9f9g85afg46b5ga90cg6318bd74aa31" version="1">Represents bodies</content>
-  <content contentuid="h776bad89gb737g4f58ga382g513e755327a4" version="1">Camp Supplies Tag</content>
-  <content contentuid="h46311a54g04f9g42f4g9ef5g36934d1f5a4c" version="1">Represents camp supplies</content>
 
   <content contentuid="h2bef2a0cg83c0g4190g876cg9f7910174136" version="1">Sortable Container</content>
 </contentList>
