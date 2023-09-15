@@ -4,7 +4,6 @@ Auridh.DS = {}
 
 -- Init classes
 Auridh.DS.Classes = {}
-Auridh.DS.Classes.DbEntries = {}
 Ext.Require('Classes/ModState.lua')
 Ext.Require('Classes/OsirisEvent.lua')
 Ext.Require('Classes/OsirisEntity.lua')

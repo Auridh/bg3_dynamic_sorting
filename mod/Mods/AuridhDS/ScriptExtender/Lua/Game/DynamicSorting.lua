@@ -14,12 +14,13 @@ local Templates = Classes.TempDB:New()
 
 -- This and that
 function Templates:Add(entityUid)
-    local osirisEntity = OsirisEntity:FromUid(entityUid, {
-        SortingTag = OsirisEntity:FromUid(Osi.GetDirectInventoryOwner(entityUid)),
+    local osirisEntity = OsirisEntity:TemporaryFromUid(entityUid)
+    local templateEntity = OsirisEntity:FromUid(osirisEntity:Template().Uid, {
+        SortingTag = osirisEntity:DirectOwner(),
     })
-    Logger:Log('AddTemplate > templateUid - %s, %s', osirisEntity.Uid, Helpers:IsSortingTemplate(osirisEntity.UUID))
-    self:Create(osirisEntity.UUID, osirisEntity)
-    SortingTags:Get(osirisEntity:DirectOwner()).Templates:Create(osirisEntity.UUID, osirisEntity)
+    Logger:Log('AddTemplate > templateUid - %s, %s', templateEntity.Uid, Helpers:IsSortingTemplate(templateEntity.UUID))
+    self:Create(templateEntity.UUID, templateEntity)
+    SortingTags:Get(templateEntity.SortingTag.UUID).Templates:Create(templateEntity.UUID, templateEntity)
 end
 
 function SortingTags:Add(entityUid)
@@ -52,7 +53,7 @@ local function OnTimerFinished(timer)
         Installation:AddToCampChests()
     elseif timer == EventIds.TimerCombined then
         local combinedItem = Auridh.DS.Current.NewSortingTag
-        combinedItem.ItemEntity:CloneToInventory(combinedItem.HolderEntity, { Delete = true })
+        combinedItem.ItemEntity:CloneToInventory(combinedItem.HolderEntity, { RequestDelete = true })
         Auridh.DS.Current.NewSortingTag = nil
     end
 end
@@ -80,8 +81,8 @@ local function OnEntityEvent(entityUid, eventId)
         local templateEntity = Templates:Get(Auridh.DS.Current.GobbleUp.UUID)
         Logger:Log('GobbleUp > %s, %s', Auridh.DS.Current.GobbleUp.UUID, entityUid)
 
-        if itemEntity:DirectOwner():IsPlayer() and Helpers:TestSortingTemplate(Auridh.DS.Current.GobbleUp.UUID, itemEntity) then
-            itemEntity:ToInventory(templateEntity.SortingTag)
+        if itemEntity:DirectOwner():IsPlayer() and Helpers:TestSortingTemplate(itemEntity, Auridh.DS.Current.GobbleUp.UUID) then
+            itemEntity:ToInventory(templateEntity.SortingTag:DirectOwner())
         end
 
         return
@@ -112,7 +113,8 @@ local function OnDroppedBy(entityUid, holderUid)
     -- tag creators STAY IN THE INVENTORY
     if templateEntity.UUID == TemplateIds.SortingTagCreator then
         Logger:Log('OnDroppedBy > Creator back to inventory')
-        itemEntity.CloneToInventory(OsirisEntity:TemporaryFromUid(holderUid), { ShowNotification = true })
+        local holderEntity = OsirisEntity:TemporaryFromUid(holderUid)
+        itemEntity:CloneToInventory(holderEntity, { ShowNotification = true, RequestDelete = true })
         return
     end
 end
@@ -151,10 +153,18 @@ local function OnAddedTo(entityUid, holderUid)
     local itemEntity = OsirisEntity:TemporaryFromUid(entityUid)
     local holderEntity = OsirisEntity:TemporaryFromUid(holderUid)
 
-    if AddedTo:IsSpecialTag(itemEntity, holderEntity) then return end
-    if AddedTo:AddSortingTagToDB(itemEntity, holderEntity) then return end
-    if AddedTo:IsAddedByTag(itemEntity, holderEntity) then return end
-    if AddedTo:RegisterInSortingTag(itemEntity, holderEntity) then return end
+    if AddedTo:IsSpecialTag(itemEntity, holderEntity) then
+        return
+    end
+    if AddedTo:AddSortingTagToDB(itemEntity, holderEntity) then
+        return
+    end
+    if AddedTo:IsAddedByTag(itemEntity, holderEntity) then
+        return
+    end
+    if AddedTo:RegisterInSortingTag(itemEntity, holderEntity) then
+        return
+    end
 
     AddedTo:SortItem(itemEntity, holderEntity)
 end
@@ -167,7 +177,7 @@ local function OnMessageBoxYesNoClosed(characterUid, message, result)
     end
 
     if result == 1 then
-        MessageBoxYesNo.SortingTag:AddToInventory(MessageBoxYesNo.SortingTemplate)
+        MessageBoxYesNo.SortingTag:AddTemplateToInventory(MessageBoxYesNo.SortingTemplate)
         Auridh.DS.Current.MessageBoxYesNo = nil
     end
 end

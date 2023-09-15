@@ -55,25 +55,26 @@ function OsirisEntity:SaveToDB()
 end
 
 function OsirisEntity:RequestDelete()
+    Auridh.DS.Helpers.Logger:Log('RequestDelete: %s', self.Uid)
     Osi.RequestDelete(self.Uid)
     EntityDB[self.Uid] = nil
 end
 
 function OsirisEntity:Template(temporary)
-    self.Template = self.Template or (temporary
+    self.TemplateValue = self.TemplateValue or (temporary
             and OsirisEntity:TemporaryFromUid(Osi.GetTemplate(self.Uid))
             or OsirisEntity:FromUid(Osi.GetTemplate(self.Uid)))
-    return self.Template
+    return self.TemplateValue
 end
 
 function OsirisEntity:EquipmentSlot()
-    self.EquipmentSlot = self.EquipmentSlot or Osi.GetEquipmentSlotForItem(self.Uid)
-    return self.EquipmentSlot
+    self.EquipmentSlotValue = self.EquipmentSlotValue or Osi.GetEquipmentSlotForItem(self.Uid)
+    return self.EquipmentSlotValue
 end
 
 function OsirisEntity:SortingTemplateId()
-    self.SortingTemplateId = self.SortingTemplateId or Auridh.DS.Helpers.Misc:GetSortingTemplateId(self)
-    return self.SortingTemplateId
+    self.SortingTemplateIdValue = self.SortingTemplateIdValue or Auridh.DS.Helpers.Misc:GetSortingTemplateId(self)
+    return self.SortingTemplateIdValue
 end
 
 function OsirisEntity:StackAmount()
@@ -81,7 +82,7 @@ function OsirisEntity:StackAmount()
 end
 
 function OsirisEntity:Owner(temporary)
-    return temporary and OsirisEntity:TemporaryFromUid(Osi.Owner(self.Uid)) or OsirisEntity:FromUid(Osi.Owner(self.Uid))
+    return temporary and OsirisEntity:TemporaryFromUid(Osi.GetOwner(self.Uid)) or OsirisEntity:FromUid(Osi.GetOwner(self.Uid))
 end
 
 function OsirisEntity:DirectOwner(temporary)
@@ -97,35 +98,37 @@ function OsirisEntity:IsTagged(tag)
     return self[tagEntry]
 end
 
-function OsirisEntity:Type(questionString)
-    if self[questionString] == nil then
-        self[questionString] = Osi[questionString](self.Uid) >= 1
+function OsirisEntity:Type(questionString, ...)
+    local questionValue = questionString .. 'Value'
+    if self[questionValue] == nil then
+        local answer = Osi[questionString](self.Uid, ...)
+        self[questionValue] = answer ~= nil and answer > 0
     end
-    return self[questionString]
+    return self[questionValue]
 end
 
 function OsirisEntity:IsPlayer()
-    return self:Is('IsPlayer')
+    return self:Type('IsPlayer')
 end
 
 function OsirisEntity:IsWeapon()
-    return self:Is('IsWeapon')
+    return self:Type('IsWeapon')
 end
 
-function OsirisEntity:IsRangedWeapon()
-    return self:Is('IsRangedWeapon')
+function OsirisEntity:IsRangedWeapon(includeThrown)
+    return self:Type('IsRangedWeapon', includeThrown and 1 or 0)
 end
 
 function OsirisEntity:IsCharacter()
-    return self:Is('IsCharacter')
+    return self:Type('IsCharacter')
 end
 
 function OsirisEntity:IsStoryItem()
-    return self:Is('IsStoryItem')
+    return self:Type('IsStoryItem')
 end
 
 function OsirisEntity:IsSupply()
-    return self:Is('ItemGetSupplyValue')
+    return self:Type('ItemGetSupplyValue')
 end
 
 function OsirisEntity:IsJunk()
@@ -160,22 +163,22 @@ function OsirisEntity:IterateInventory(startEvent, options)
         return
     end
 
-    Osi.IterateInventory()
+    Osi.IterateInventory(self.Uid, startEvent, endEvent)
 end
 
 function OsirisEntity:ApplyStatus(effectId, options)
     options = options or {}
     local sourceUid = options.SourceUid or self.Uid
     local duration = options.Duration or -1
-    local force = options.Force or 1
+    local force = (options.Force or options.Force == nil) and 1 or 0
 
     Osi.ApplyStatus(self.Uid, effectId, duration, force, sourceUid)
 end
 
 function OsirisEntity:ToInventory(osirisEntity, options)
     options = options or {}
-    local notify = options.ShowNotification or 0
-    local clear = options.ClearOriginalOwner or 1
+    local notify = options.ShowNotification and 1 or 0
+    local clear = options.ClearOriginalOwner and 1 or 0
     local amount = options.Amount or self:StackAmount()
 
     -- call ToInventory((GUIDSTRING)_Object, (GUIDSTRING)_TargetObject, (INTEGER)_Amount, (INTEGER)_ShowNotification, (INTEGER)_ClearOriginalOwner)
@@ -185,20 +188,20 @@ end
 function OsirisEntity:CloneToInventory(osirisEntity, options)
     options = options or {}
     local count = options.Count or 1
-    local notify = options.ShowNotification or 0
+    local notify = options.ShowNotification and 1 or 0
     local delete = options.RequestDelete or false
 
-    Osi.TemplateAddTo(self:Template(), osirisEntity.Uid, count, notify)
+    Osi.TemplateAddTo(self:Template().Uid, osirisEntity.Uid, count, notify)
 
     if delete then
         self:RequestDelete()
     end
 end
 
-function OsirisEntity:AddToInventory(osirisEntity, options)
+function OsirisEntity:AddTemplateToInventory(osirisEntity, options)
     options = options or {}
     local count = options.Count or 1
-    local notify = options.ShowNotification or 0
+    local notify = options.ShowNotification and 1 or 0
 
-    Osi.TemplateAddTo(self:Template(), osirisEntity.Uid, count, notify)
+    Osi.TemplateAddTo(osirisEntity.Uid, self.Uid, count, notify)
 end

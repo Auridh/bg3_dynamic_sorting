@@ -17,8 +17,8 @@ local function InterpretCommand(_, arg, val1, val2)
             Logger:Log('%s: %s', v1, State[v1])
         end,
         DmpDB = function()
-            Logger:Dmp(Database.ST:Read())
-            Logger:Dmp(Database.TP:Read())
+            Logger:Dmp(Database.ST)
+            Logger:Dmp(Database.TP)
         end,
     }
 

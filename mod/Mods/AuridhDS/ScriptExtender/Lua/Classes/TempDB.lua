@@ -12,7 +12,7 @@ function TempDB:New(o)
 end
 
 function TempDB:Create(key, value)
-    self[key] = self:New({ DB = value })
+    self[key] = value
     return self[key]
 end
 

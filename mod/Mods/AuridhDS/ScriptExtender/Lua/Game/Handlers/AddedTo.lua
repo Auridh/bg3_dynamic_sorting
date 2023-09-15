@@ -26,7 +26,7 @@ function Handlers:SortItem(itemEntity, holderEntity)
         local template = Templates:Get(templateEntity.UUID) or Templates:Get(itemEntity:SortingTemplateId())
         if template ~= nil then
             Logger:Log('SortItem > TemplateExists - %s', template.UUID)
-            itemEntity:ToInventory(template.SortingTag)
+            itemEntity:ToInventory(template.SortingTag:DirectOwner())
         end
 
         return true
@@ -61,18 +61,21 @@ function Handlers:IsSpecialTag(itemEntity, holderEntity)
     local templateEntity = itemEntity:Template(true)
     Logger:Log('IsSpecialTag > %s', SortingTemplates[templateEntity.UUID] and true or false)
 
-    if SortingTemplates[templateEntity.UUID] ~= nil and Auridh.DS.Current.Database.TP:Exists(template.UUID) then
-        templateEntity:SaveToDB()
-        itemEntity:SaveToDB()
-        holderEntity:SaveToDB()
+    if SortingTemplates[templateEntity.UUID] ~= nil then
+        if not Auridh.DS.Current.Database.TP:Exists(templateEntity.UUID) then
+            templateEntity:SaveToDB()
+            itemEntity:SaveToDB()
+            holderEntity:SaveToDB()
 
-        Auridh.DS.Current.Database.TP:Add(templateEntity.Uid)
+            Auridh.DS.Current.Database.TP:Add(itemEntity.Uid)
 
-        Helpers:IteratePlayerDB(function(playerUid)
-            Auridh.DS.Current.GobbleUp = templateEntity
-            local playerEntity = OsirisEntity:FromUid(playerUid)
-            playerEntity:IterateInventory(EventIds.GobbleUp, { EndEvent = EventIds.GobbleUpEnd })
-        end)
+            Helpers:IteratePlayerDB(function(playerUid)
+                Auridh.DS.Current.GobbleUp = templateEntity
+                local playerEntity = OsirisEntity:FromUid(playerUid)
+                playerEntity:IterateInventory(EventIds.GobbleUp, { EndEvent = EventIds.GobbleUpEnd })
+            end)
+        end
+
         return true
     end
 
@@ -94,7 +97,7 @@ function Handlers:IsAddedByTag(itemEntity, holderEntity)
         Logger:Log('IsAddedByTag > OriginalItem - %s, %s, %s', OriginalItems:Get(templateEntity.UUID), ownerEntity.UUID, templateEntity.UUID)
 
         OriginalItems:Delete(templateEntity.UUID)
-        Templates:Add(templateEntity.Uid)
+        Templates:Add(itemEntity.Uid)
 
         itemEntity:ApplyStatus(StatusEffects.ReduceWeight)
         ownerEntity:ApplyStatus(StatusEffects.WeightDisplayFix, {
@@ -136,11 +139,11 @@ function Handlers:RegisterInSortingTag(itemEntity, holderEntity)
             Logger:Log('RegisterInSortingTag > AddTemplateToSortingTag - %s', templateEntity.Uid)
             OriginalItems:Create(templateEntity.UUID, itemEntity.UUID)
 
-            holderEntity:AddToInventory(templateEntity)
+            holderEntity:AddTemplateToInventory(templateEntity)
 
             -- Ask if all items of this type should be sorted in this container
             local sortingTemplateId = itemEntity:SortingTemplateId()
-            if sortingTemplateId ~= nil and not SortingTags:Get(onlyUUID).Templates:Exists(sortingTemplateId) then
+            if sortingTemplateId ~= nil and not SortingTags:Get(holderEntity.UUID).Templates:Exists(sortingTemplateId) then
                 Logger:Log('RegisterInSortingTag > OpenMessageBoxYesNo - %s', sortingTemplateId)
 
                 Auridh.DS.Current.MessageBoxYesNo = {
