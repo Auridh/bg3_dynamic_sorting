@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="0" revision="9" build="330" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<!-- Body !-->
+					<attribute id="MapKey" type="FixedString" value="310e53c2-1f33-4eed-8d71-6714099c5262" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h76ecc594gcd01g40c6g9ac9g0faf112c9d9d" version="1" />
+					<attribute id="TechnicalDescription" type="TranslatedString" handle="h8b10e9f9g85afg46b5ga90cg6318bd74aa31" version="1" />
+					<attribute id="Icon" type="FixedString" value="AuridhDS_Icon_Pin_Red" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_Bodies" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
+					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
+					<attribute id="TreasureOnDestroy" type="bool" value="False" />
+					<children>
+						<node id="GameMaster" />
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="DS_SortingTag_TT" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

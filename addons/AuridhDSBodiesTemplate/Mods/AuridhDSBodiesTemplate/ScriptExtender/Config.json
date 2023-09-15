@@ -1,0 +1,5 @@
+{
+    "RequiredVersion": 2,
+    "ModTable": "AuridhDS",
+    "FeatureFlags": ["Lua"]
+}

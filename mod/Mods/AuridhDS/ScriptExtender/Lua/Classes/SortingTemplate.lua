@@ -13,10 +13,16 @@ function SortingTemplate:New()
         ExcludedTemplates = {},
         Message = 'Should all items of this type be moved to this container?',
         SortingTagUuid = '',
+        Priority = 0,
     }
     setmetatable(newList, self)
     self.__index = self
     return newList
+end
+
+function SortingTemplate:SetPriority(value)
+    self.Priority = value
+    return self
 end
 
 function SortingTemplate:SetEvaluator(func)

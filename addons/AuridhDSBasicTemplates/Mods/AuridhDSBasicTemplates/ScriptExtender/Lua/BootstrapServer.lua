@@ -18,28 +18,32 @@ local function Init()
     }
     local Templates = {
         [TemplateIds.Scrolls] = SortingTemplate:New()
-               :IncludeTags({
+                :SetPriority(50)
+                :IncludeTags({
                         ['dd86c045-0370-4ec9-b7c5-b0b160706f09'] = {}, -- SCROLL
                     })
-               :SetMessage('Should all scrolls be moved to this container?')
-               :SetSortingTag(TemplateIds.Scrolls),
+                :SetMessage('Should all scrolls be moved to this container?')
+                :SetSortingTag(TemplateIds.Scrolls),
         [TemplateIds.Potions] = SortingTemplate:New()
-               :IncludeTags({
+                :SetPriority(50)
+                :IncludeTags({
                         ['56c99a77-8f6a-4584-8e41-2a3b9f6b5261'] = {}, -- POTION
                         ['8798a644-4720-4487-bc1a-6a4bf8f3a126'] = {}, -- ALCH_SOLUTION_POTION
                     })
-               :IncludeTemplates({
+                :IncludeTemplates({
                         ['212ca846-4766-4370-8847-454e59751598'] = {}, -- CONS_Oil_Of_The_Basilisk
                     })
                 :SetMessage('Should all potions be moved to this container?')
                 :SetSortingTag(TemplateIds.Potions),
         [TemplateIds.Arrows] = SortingTemplate:New()
+                :SetPriority(50)
                 :IncludeTags({
                         ['fa8afea4-4742-4467-bdef-69851bd15878'] = {}, -- ARROW
                     })
                 :SetMessage('Should all arrows be moved to this container?')
                 :SetSortingTag(TemplateIds.Arrows),
         [TemplateIds.Books] = SortingTemplate:New()
+                :SetPriority(50)
                 :IncludeTags({
                         ['8a8e253a-c081-45a1-9fa2-91b6901dc568'] = {}, -- BOOK
                     })
@@ -49,6 +53,7 @@ local function Init()
                 :SetMessage('Should all books and letters be moved to this container?')
                 :SetSortingTag(TemplateIds.Books),
         [TemplateIds.Grenades] = SortingTemplate:New()
+                :SetPriority(50)
                 :IncludeTags({
                         ['fe0d86c3-a562-430e-a633-d8bf9bb27284'] = {}, -- GRENADE
                         ['f87b203d-75ad-4527-b717-137044bc2ea1'] = {}, -- ALCH_SOLUTION_GRENADE
@@ -67,12 +72,14 @@ local function Init()
                 :SetMessage('Should all grenades be moved to this container?')
                 :SetSortingTag(TemplateIds.Grenades),
         [TemplateIds.Coatings] = SortingTemplate:New()
+                :SetPriority(50)
                 :IncludeTags({
                         ['9a42f996-decf-4fcc-ad11-2ba6abada287'] = {}, -- ALCH_SOLUTION_COATING
                     })
                 :SetMessage('Should all weapon coatings be moved to this container?')
                 :SetSortingTag(TemplateIds.Coatings),
         [TemplateIds.Supply] = SortingTemplate:New()
+                :SetPriority(50)
                 :SetEvaluator(
                     function(osirisEntity, _)
                         return osirisEntity:IsSupply()

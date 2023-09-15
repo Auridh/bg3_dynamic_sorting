@@ -2,19 +2,6 @@
   <content contentuid="h8cc9cef5g0ee1g44f5ga016g546bc2e79467" version="1">Sorting Tag</content>
   <content contentuid="h47613913gefa3g4431gb60aga5ea01d7cbe9" version="1">Put this where items inside should be stored.</content>
   <content contentuid="hbfbb30f6gdd3cg4323ga621ga921a5b51b77" version="1">Sorting Tag Creator</content>
-  <content contentuid="h1f6904a8g7f2ag4140ga465gf241cff80363" version="1">Move this item into a container to get a new sorting tag.</content>
-  <content contentuid="h94718baag52b2g42aag8ff9gce551c357901" version="1">Story Items Tag</content>
-  <content contentuid="h19fee701g1742g463fg8223g261a00a4ffe1" version="1">Represents story items</content>
-  <content contentuid="h11086262gfd46g49d5gb718gf9314e5acf48" version="1">Junk Tag</content>
-  <content contentuid="h37f13c8fgabb1g4701g9513g5eb1d3586b87" version="1">Represents junk</content>
-  <content contentuid="h9531b284g3ee3g4b1fga95bgcb72ee40ff4c" version="1">Armors Tag</content>
-  <content contentuid="hb40956b4ga87ag47acga4bfgb879db83f29d" version="1">Represents armors</content>
-  <content contentuid="hc9e96eb8gaf08g49e5g9e31g8fe0cae37bc9" version="1">Weapons Tag</content>
-  <content contentuid="h76826812g802bg4f14ga6d4gd10e281a4733" version="1">Represents weapons</content>
-  <content contentuid="h1c8d70d4g258eg4781gbfbfga6c02d2a7cba" version="1">Ranged Weapons Tag</content>
-  <content contentuid="h9d632fadg3acbg4feegbcc4g489fae166d4a" version="1">Represents ranged weapons</content>
-  <content contentuid="h76ecc594gcd01g40c6g9ac9g0faf112c9d9d" version="1">Bodies Tag</content>
-  <content contentuid="h8b10e9f9g85afg46b5ga90cg6318bd74aa31" version="1">Represents bodies</content>
-
+  <content contentuid="h1f6904a8g7f2ag4140ga465gf241cff80363" version="1">Combine this item with a container to create a new sorting tag.</content>
   <content contentuid="h2bef2a0cg83c0g4190g876cg9f7910174136" version="1">Sortable Container</content>
 </contentList>

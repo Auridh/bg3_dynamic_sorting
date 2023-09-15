@@ -41,7 +41,7 @@ function Helpers:FilePath(filename)
 end
 
 function Helpers:GetSortingTemplateId(osirisEntity)
-    for sortingTemplateId, _  in pairs(SortingTemplates) do
+    for _, sortingTemplateId  in ipairs(Auridh.DS.Static.SortingTemplates.ByPriority) do
         if Helpers:TestSortingTemplate(osirisEntity, sortingTemplateId) then
             return sortingTemplateId
         end
