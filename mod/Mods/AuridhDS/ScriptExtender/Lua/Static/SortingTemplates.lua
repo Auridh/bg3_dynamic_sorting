@@ -1,6 +1,5 @@
 -- init global
 Auridh.DS.Static.SortingTemplates = {}
-
 Auridh.DS.Static.SortingTemplates.Ids = {
     Story = '5ebe9ee1-c640-402d-8dfa-26ea32a4fab1',
     Junk = '28e3351a-e041-42fb-9a84-f50aea36426f',
@@ -59,3 +58,9 @@ Auridh.DS.Static.SortingTemplates.Templates = {
             :SetMessage('Should all story items be moved to this container?')
             :SetSortingTag(ListIds.Story),
 }
+
+function Auridh.DS.Static.SortingTemplates:Add(templates)
+    for key, value in pairs(templates) do
+        Auridh.DS.Static.SortingTemplates.Templates[key] = value
+    end
+end

@@ -30,4 +30,6 @@ Ext.Require('Game/FirstInstall.lua')
 Ext.Require('Game/Handlers/AddedTo.lua')
 Ext.Require('Game/DynamicSorting.lua')
 
-Mods.AuridhDS.Library = Auridh.DS
+Ext.Events.SessionLoaded:Subscribe(function()
+    Mods.AuridhDS.Library = Auridh.DS
+end)

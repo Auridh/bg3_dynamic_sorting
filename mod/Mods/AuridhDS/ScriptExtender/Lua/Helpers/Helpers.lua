@@ -2,7 +2,6 @@ Auridh.DS.Helpers.Misc = {}
 
 local Helpers = Auridh.DS.Helpers.Misc
 local SortingTemplates = Auridh.DS.Static.SortingTemplates.Templates
-local SortingTemplateIds = Auridh.DS.Static.SortingTemplates.Ids
 local Logger = Auridh.DS.Helpers.Logger
 
 function Helpers:IteratePlayerDB(action)
@@ -42,7 +41,7 @@ function Helpers:FilePath(filename)
 end
 
 function Helpers:GetSortingTemplateId(osirisEntity)
-    for _, sortingTemplateId in pairs(SortingTemplateIds) do
+    for sortingTemplateId, _  in pairs(SortingTemplates) do
         if Helpers:TestSortingTemplate(osirisEntity, sortingTemplateId) then
             return sortingTemplateId
         end

@@ -2,7 +2,7 @@ local function Init()
     local DS = Mods.AuridhDS.Library
 
     if not DS then
-        Ext.Utils.Warning('[AuridhDS/BT] > Main mod is required but is not installed!')
+        Ext.Utils.PrintWarning('[AuridhDS/BT] > Main mod is required but is not installed!')
         return
     end
 
@@ -81,10 +81,7 @@ local function Init()
                 :SetSortingTag(TemplateIds.Story),
     }
 
-    for key, value in pairs(TemplateIds) do
-        DS.Static.SortingTemplates.Ids[key] = value
-        DS.Static.SortingTemplates.Templates[value] = Templates[value]
-    end
+    DS.Static.SortingTemplates:Add(Templates)
 end
 
 Ext.Events.SessionLoaded:Subscribe(Init)
