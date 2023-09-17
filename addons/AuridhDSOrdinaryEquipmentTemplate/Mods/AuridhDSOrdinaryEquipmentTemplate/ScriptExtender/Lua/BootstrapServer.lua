@@ -18,7 +18,7 @@ local function Init()
                 :SetEvaluator(
                     function(osirisEntity, _)
                         if not osirisEntity:IsEquipable() or osirisEntity:IsEquipped() then
-                            return
+                            return false
                         end
                         local objectStats = Ext.Stats.Get(osirisEntity:StatString())
                         Logger:Log('Rarity: %s -> %s', osirisEntity.Uid, objectStats.Rarity)
