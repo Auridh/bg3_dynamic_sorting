@@ -230,31 +230,6 @@
 					</children>
 				</node>
 				<node id="GameObjects">
-					<!-- Light source !-->
-					<attribute id="MapKey" type="FixedString" value="80c24ef4-781d-41a8-8717-2a87365e8e24" />
-					<attribute id="DisplayName" type="TranslatedString" handle="h2029f85cgb920g4753g8256g98db96f8ddbd" version="1" />
-					<attribute id="TechnicalDescription" type="TranslatedString" handle="h9857b538gb7deg4eadg80abg540c7aa20352" version="1" />
-					<attribute id="Icon" type="FixedString" value="AuridhDS_Icon_Pin_Red" />
-					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_CampSupplies" />
-					<attribute id="LevelName" type="FixedString" value="" />
-					<attribute id="Type" type="FixedString" value="item" />
-					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
-					<attribute id="VisualTemplate" type="FixedString" value="564ac843-ea39-4fd9-b9ee-b37cee7e6734" />
-					<attribute id="PhysicsTemplate" type="FixedString" value="56184af3-63ea-442e-b111-fe81bff2c2f4" />
-					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
-					<attribute id="TreasureOnDestroy" type="bool" value="False" />
-					<children>
-						<node id="GameMaster" />
-						<node id="InventoryList">
-							<children>
-								<node id="InventoryItem">
-									<attribute id="Object" type="FixedString" value="DS_SortingTag_TT" />
-								</node>
-							</children>
-						</node>
-					</children>
-				</node>
-				<node id="GameObjects">
 					<!-- Melee weapons !-->
 					<attribute id="MapKey" type="FixedString" value="2e87b029-b9f1-45c7-a54c-d07e7a26abd9" />
 					<attribute id="DisplayName" type="TranslatedString" handle="hc618b495gaf91g4ce5gaac2gc746b0d3fc12" version="1" />

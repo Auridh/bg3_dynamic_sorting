@@ -54,7 +54,7 @@ local function OnTimerFinished(timer)
         Installation:AddToCampChests()
     elseif timer == EventIds.TimerCombined then
         local combinedItem = Auridh.DS.Current.NewSortingTag
-        local sortingContainer = SortingContainers[combinedItem.HolderEntity:Template().Uid]
+        local sortingContainer = SortingContainers[combinedItem.HolderEntity:Template().UUID]
 
         if sortingContainer then
             combinedItem.ItemEntity:SetTag(sortingContainer.Tag)

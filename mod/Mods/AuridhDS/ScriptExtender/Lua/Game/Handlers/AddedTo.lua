@@ -86,7 +86,6 @@ end
 function Handlers:IsAddedByTag(itemEntity, holderEntity)
     local Templates = Auridh.DS.Current.Database.TP
     local SortingTags = Auridh.DS.Current.Database.ST
-    local SortingContainers = Auridh.DS.Static.SortingTemplates.Containers
 
     local templateEntity = itemEntity:Template(true)
 
@@ -107,11 +106,6 @@ function Handlers:IsAddedByTag(itemEntity, holderEntity)
             SourceUid = itemEntity.Uid,
         })
 
-        -- Handle sorting containers
-        if SortingContainers[holderEntity:DirectOwner():Template().Uid] then
-            itemEntity:SetTag(SortingContainers[holderEntity:DirectOwner():Template().Uid].Tag)
-        end
-
         return true
     end
 
@@ -121,7 +115,6 @@ end
 
 function Handlers:RegisterInSortingTag(itemEntity, holderEntity)
     local SortingTags = Auridh.DS.Current.Database.ST
-    local SortingContainers = Auridh.DS.Static.SortingTemplates.Containers
 
     -- An object was added to a sorting tag
     if SortingTags:Exists(holderEntity.UUID) then
@@ -132,11 +125,6 @@ function Handlers:RegisterInSortingTag(itemEntity, holderEntity)
 
         local templateEntity = itemEntity:Template()
         local directOwnerEntity = holderEntity:DirectOwner()
-
-        -- Handle sorting containers
-        if SortingContainers[directOwnerEntity:Template().Uid] then
-            itemEntity:SetTag(SortingContainers[directOwnerEntity:Template().Uid].Tag)
-        end
 
         Logger:Log('RegisterInSortingTag > Move to destination - %s', directOwnerEntity.Uid)
         itemEntity:ToInventory(directOwnerEntity)

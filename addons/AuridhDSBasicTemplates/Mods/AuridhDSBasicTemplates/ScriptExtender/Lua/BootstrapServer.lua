@@ -99,7 +99,7 @@ local function AddSortingTemplates()
                     function(osirisEntity, _)
                         return osirisEntity:IsSupply()
                     end)
-                :SetMessage('Should all story items be moved to this container?')
+                :SetMessage('Should all camp supplies be moved to this container?')
                 :SetSortingTag(TemplateIds.Story),
     }
 
@@ -119,45 +119,59 @@ local function AddSortingContainers()
                 :SetTag(Tags.Key),
         [Templates.AlchemyPouch] = SortingContainer:New()
                 :SetTemplate(Templates.AlchemyPouch)
+                :SetSortingTag(TemplateIds.Alchemy)
                 :SetTag(Tags.AlchIngredient),
         [Templates.CampSupplyPack] = SortingContainer:New()
                 :SetTemplate(Templates.CampSupplyPack)
+                :SetSortingTag(TemplateIds.Supply)
                 :SetTag(Tags.CampSupplies),
         [Templates.Letterbox] = SortingContainer:New()
                 :SetTemplate(Templates.Letterbox)
+                :SetSortingTag(TemplateIds.Books)
                 :SetTag(Tags.Book),
         [Templates.AC_CoatingVials] = SortingContainer:New()
                 :SetTemplate(Templates.AC_CoatingVials)
+                :SetSortingTag(TemplateIds.Coatings)
                 :SetTag(Tags.AlchSolutionCoating),
         [Templates.AC_GrenadeBox] = SortingContainer:New()
                 :SetTemplate(Templates.AC_GrenadeBox)
+                :SetSortingTag(TemplateIds.Grenades)
                 :SetTag(Tags.Grenade),
         [Templates.AC_PotionPouch] = SortingContainer:New()
                 :SetTemplate(Templates.AC_PotionPouch)
+                :SetSortingTag(TemplateIds.Potions)
                 :SetTag(Tags.Potion),
         [Templates.AC_Quiver] = SortingContainer:New()
                 :SetTemplate(Templates.AC_Quiver)
+                :SetSortingTag(TemplateIds.Arrows)
                 :SetTag(Tags.Arrow),
         [Templates.AC_ScrollCase] = SortingContainer:New()
                 :SetTemplate(Templates.AC_ScrollCase)
+                :SetSortingTag(TemplateIds.Scrolls)
                 :SetTag(Tags.Scroll),
         [Templates.LIA_ScrollCase] = SortingContainer:New()
                 :SetTemplate(Templates.LIA_ScrollCase)
+                :SetSortingTag(TemplateIds.Scrolls)
                 :SetTag(Tags.Scroll),
         [Templates.LIA_PotionPouch] = SortingContainer:New()
                 :SetTemplate(Templates.LIA_PotionPouch)
+                :SetSortingTag(TemplateIds.Potions)
                 :SetTag(Tags.Potion),
         [Templates.LIA_Arrows] = SortingContainer:New()
                 :SetTemplate(Templates.LIA_Arrows)
+                :SetSortingTag(TemplateIds.Arrows)
                 :SetTag(Tags.Arrow),
         [Templates.LIA_Books] = SortingContainer:New()
                 :SetTemplate(Templates.LIA_Books)
+                :SetSortingTag(TemplateIds.Books)
                 :SetTag(Tags.Book),
         [Templates.LIA_GrenadeSatchel] = SortingContainer:New()
                 :SetTemplate(Templates.LIA_GrenadeSatchel)
+                :SetSortingTag(TemplateIds.Grenades)
                 :SetTag(Tags.Grenade),
         [Templates.LIA_Poisons] = SortingContainer:New()
                 :SetTemplate(Templates.LIA_Poisons)
+                :SetSortingTag(TemplateIds.Coatings)
                 :SetTag(Tags.AlchSolutionCoating),
     })
 end

@@ -15,12 +15,12 @@ function SortingContainer:SetTemplate(templateUid)
     return self
 end
 
-function SortingContainer:SetTag(tag)
-    self.Tag = tag
+function SortingContainer:SetSortingTag(tagUuid)
+    self.SortingTag = Auridh.DS.Classes.OsirisEntity:FromUid(tagUuid)
     return self
 end
 
-function SortingContainer:SetSortingTag(tag)
-    self.SortingTag = tag
+function SortingContainer:SetTag(tag)
+    self.Tag = tag
     return self
 end

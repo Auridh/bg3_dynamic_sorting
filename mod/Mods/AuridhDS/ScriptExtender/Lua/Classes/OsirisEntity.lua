@@ -188,7 +188,9 @@ function OsirisEntity:ToInventory(osirisEntity, options)
     options = options or {}
     local notify = options.ShowNotification and 1 or 0
     local clear = options.ClearOriginalOwner and 1 or 0
-    local amount = options.Amount or self:StackAmount()
+    local amount = options.Amount or 1000
+
+    Auridh.DS.Helpers.Misc:AddRequiredTagsForInventory(self, osirisEntity)
 
     -- call ToInventory((GUIDSTRING)_Object, (GUIDSTRING)_TargetObject, (INTEGER)_Amount, (INTEGER)_ShowNotification, (INTEGER)_ClearOriginalOwner)
     Osi.ToInventory(self.Uid, osirisEntity.Uid, amount, notify, clear)
@@ -200,6 +202,7 @@ function OsirisEntity:CloneToInventory(osirisEntity, options)
     local notify = options.ShowNotification and 1 or 0
     local delete = options.RequestDelete or false
 
+    Auridh.DS.Helpers.Misc:AddRequiredTagsForInventory(self, osirisEntity)
     Osi.TemplateAddTo(self:Template().Uid, osirisEntity.Uid, count, notify)
 
     if delete then
@@ -212,12 +215,13 @@ function OsirisEntity:AddTemplateToInventory(osirisEntity, options)
     local count = options.Count or 1
     local notify = options.ShowNotification and 1 or 0
 
+    Auridh.DS.Helpers.Misc:AddRequiredTagsForInventory(osirisEntity, self)
     Osi.TemplateAddTo(osirisEntity.Uid, self.Uid, count, notify)
 end
 
 function OsirisEntity:SetTag(tag)
     Osi.SetTag(self.Uid, tag)
-    self:IsTagged(tag)
+    self['TAG_' .. tag] = true
 end
 
 function OsirisEntity:ClearTag(tag)

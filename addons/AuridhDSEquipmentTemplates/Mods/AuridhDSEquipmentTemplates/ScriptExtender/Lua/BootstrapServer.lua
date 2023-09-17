@@ -19,7 +19,6 @@ local function Init()
         Gloves = '11b26e68-80d3-4b82-b8a1-48ad4e71ce5b',
         Footwear = '7762e242-b9d3-4373-9153-ab78875f6cbd',
         Instruments = '8ffc8da9-2d07-40c8-ab3a-cd70f8653f42',
-        Lightsource = '80c24ef4-781d-41a8-8717-2a87365e8e24',
         Melee = '2e87b029-b9f1-45c7-a54c-d07e7a26abd9',
         Shields = '63168caf-272c-48ee-9956-709c9242d254',
         Ranged = 'f45f9410-3536-49f6-b707-c6e98d57b3de',
@@ -30,11 +29,14 @@ local function Init()
                 :SetPriority(100)
                 :SetEvaluator(
                     function(osirisEntity, _)
+                        if not osirisEntity:IsEquipable() or osirisEntity:IsEquipped() then
+                            return false
+                        end
+
                         local eqSlot = osirisEntity:EquipmentSlot()
                         return (eqSlot == EquipmentSlotIds.CampTop
                                 or eqSlot == EquipmentSlotIds.CampBottom
                                 or eqSlot == EquipmentSlotIds.Underwear)
-                                and not osirisEntity:IsEquipped()
                     end)
                 :SetMessage('Should all camp clothes be moved to this container?')
                 :SetSortingTag(TemplateIds.CampClothes),
@@ -42,10 +44,13 @@ local function Init()
                 :SetPriority(100)
                 :SetEvaluator(
                     function(osirisEntity, _)
+                        if not osirisEntity:IsEquipable() or osirisEntity:IsEquipped() then
+                            return false
+                        end
+
                         local eqSlot = osirisEntity:EquipmentSlot()
                         return (eqSlot == EquipmentSlotIds.RingTop
                                 or eqSlot == EquipmentSlotIds.RingBottom)
-                                and not osirisEntity:IsEquipped()
                     end)
                 :SetMessage('Should all rings be moved to this container?')
                 :SetSortingTag(TemplateIds.Rings),
@@ -53,9 +58,12 @@ local function Init()
                 :SetPriority(100)
                 :SetEvaluator(
                     function(osirisEntity, _)
+                        if not osirisEntity:IsEquipable() or osirisEntity:IsEquipped() then
+                            return false
+                        end
+
                         local eqSlot = osirisEntity:EquipmentSlot()
                         return eqSlot == EquipmentSlotIds.Necklace
-                                and not osirisEntity:IsEquipped()
                     end)
                 :SetMessage('Should all necklaces be moved to this container?')
                 :SetSortingTag(TemplateIds.Necklaces),
@@ -63,9 +71,13 @@ local function Init()
                 :SetPriority(100)
                 :SetEvaluator(
                     function(osirisEntity, _)
+                        if not osirisEntity:IsEquipable() or osirisEntity:IsEquipped() then
+                            return false
+                        end
+
                         local eqSlot = osirisEntity:EquipmentSlot()
-                        return eqSlot == EquipmentSlotIds.Headwear
-                                and not osirisEntity:IsEquipped()
+                        return (eqSlot == EquipmentSlotIds.Headwear
+                                or eqSlot == EquipmentSlotIds.Overhead)
                     end)
                 :SetMessage('Should all headwear be moved to this container?')
                 :SetSortingTag(TemplateIds.Headwear),
@@ -73,9 +85,13 @@ local function Init()
                 :SetPriority(100)
                 :SetEvaluator(
                     function(osirisEntity, _)
+                        if not osirisEntity:IsEquipable() or osirisEntity:IsEquipped() then
+                            return false
+                        end
+
                         local eqSlot = osirisEntity:EquipmentSlot()
-                        return eqSlot == EquipmentSlotIds.Cloak
-                                and not osirisEntity:IsEquipped()
+                        return (eqSlot == EquipmentSlotIds.Cloak
+                                or eqSlot == EquipmentSlotIds.Wings)
                     end)
                 :SetMessage('Should all cloaks be moved to this container?')
                 :SetSortingTag(TemplateIds.Cloak),
@@ -83,9 +99,12 @@ local function Init()
                 :SetPriority(100)
                 :SetEvaluator(
                     function(osirisEntity, _)
+                        if not osirisEntity:IsEquipable() or osirisEntity:IsEquipped() then
+                            return false
+                        end
+
                         local eqSlot = osirisEntity:EquipmentSlot()
                         return eqSlot == EquipmentSlotIds.Body
-                                and not osirisEntity:IsEquipped()
                     end)
                 :SetMessage('Should all armors be moved to this container?')
                 :SetSortingTag(TemplateIds.Body),
@@ -93,9 +112,12 @@ local function Init()
                 :SetPriority(100)
                 :SetEvaluator(
                     function(osirisEntity, _)
+                        if not osirisEntity:IsEquipable() or osirisEntity:IsEquipped() then
+                            return false
+                        end
+
                         local eqSlot = osirisEntity:EquipmentSlot()
                         return eqSlot == EquipmentSlotIds.Gloves
-                                and not osirisEntity:IsEquipped()
                     end)
                 :SetMessage('Should all gloves be moved to this container?')
                 :SetSortingTag(TemplateIds.Gloves),
@@ -103,9 +125,12 @@ local function Init()
                 :SetPriority(100)
                 :SetEvaluator(
                     function(osirisEntity, _)
+                        if not osirisEntity:IsEquipable() or osirisEntity:IsEquipped() then
+                            return false
+                        end
+
                         local eqSlot = osirisEntity:EquipmentSlot()
                         return eqSlot == EquipmentSlotIds.Gloves
-                                and not osirisEntity:IsEquipped()
                     end)
                 :SetMessage('Should all gloves be moved to this container?')
                 :SetSortingTag(TemplateIds.Gloves),
@@ -113,9 +138,12 @@ local function Init()
                 :SetPriority(100)
                 :SetEvaluator(
                     function(osirisEntity, _)
+                        if not osirisEntity:IsEquipable() or osirisEntity:IsEquipped() then
+                            return false
+                        end
+
                         local eqSlot = osirisEntity:EquipmentSlot()
                         return eqSlot == EquipmentSlotIds.Footwear
-                                and not osirisEntity:IsEquipped()
                     end)
                 :SetMessage('Should all footwear be moved to this container?')
                 :SetSortingTag(TemplateIds.Footwear),
@@ -123,9 +151,12 @@ local function Init()
                 :SetPriority(100)
                 :SetEvaluator(
                     function(osirisEntity, _)
+                        if not osirisEntity:IsEquipable() or osirisEntity:IsEquipped() then
+                            return false
+                        end
+
                         local eqSlot = osirisEntity:EquipmentSlot()
                         return eqSlot == EquipmentSlotIds.Instruments
-                                and not osirisEntity:IsEquipped()
                     end)
                 :SetMessage('Should all instruments be moved to this container?')
                 :SetSortingTag(TemplateIds.Instruments),
@@ -133,29 +164,25 @@ local function Init()
                 :SetPriority(100)
                 :SetEvaluator(
                     function(osirisEntity, _)
+                        if not osirisEntity:IsEquipable() or osirisEntity:IsEquipped() then
+                            return false
+                        end
+
                         local eqSlot = osirisEntity:EquipmentSlot()
                         return eqSlot == EquipmentSlotIds.Instruments
-                                and not osirisEntity:IsEquipped()
                     end)
                 :SetMessage('Should all instruments be moved to this container?')
                 :SetSortingTag(TemplateIds.Instruments),
-        [TemplateIds.Lightsource] = SortingTemplate:New()
-                :SetPriority(100)
-                :SetEvaluator(
-                    function(osirisEntity, _)
-                        local eqSlot = osirisEntity:EquipmentSlot()
-                        return eqSlot == EquipmentSlotIds.Lightsource
-                                and not osirisEntity:IsEquipped()
-                    end)
-                :SetMessage('Should all light sources be moved to this container?')
-                :SetSortingTag(TemplateIds.Lightsource),
         [TemplateIds.Melee] = SortingTemplate:New()
                 :SetPriority(100)
                 :SetEvaluator(
                     function(osirisEntity, _)
+                        if not osirisEntity:IsEquipable() or osirisEntity:IsEquipped() then
+                            return false
+                        end
+
                         local eqSlot = osirisEntity:EquipmentSlot()
                         return eqSlot == EquipmentSlotIds.MeleeMain
-                                and not osirisEntity:IsEquipped()
                     end)
                 :SetMessage('Should all melee weapons be moved to this container?')
                 :SetSortingTag(TemplateIds.Melee),
@@ -163,9 +190,12 @@ local function Init()
                 :SetPriority(100)
                 :SetEvaluator(
                     function(osirisEntity, _)
+                        if not osirisEntity:IsEquipable() or osirisEntity:IsEquipped() then
+                            return false
+                        end
+
                         local eqSlot = osirisEntity:EquipmentSlot()
                         return eqSlot == EquipmentSlotIds.MeleeOff
-                                and not osirisEntity:IsEquipped()
                     end)
                 :SetMessage('Should all shields be moved to this container?')
                 :SetSortingTag(TemplateIds.Shields),
@@ -173,10 +203,13 @@ local function Init()
                 :SetPriority(100)
                 :SetEvaluator(
                     function(osirisEntity, _)
+                        if not osirisEntity:IsEquipable() or osirisEntity:IsEquipped() then
+                            return false
+                        end
+
                         local eqSlot = osirisEntity:EquipmentSlot()
-                        return eqSlot == EquipmentSlotIds.RangedMain
-                                or eqSlot == EquipmentSlotIds.RangedOff
-                                and not osirisEntity:IsEquipped()
+                        return (eqSlot == EquipmentSlotIds.RangedMain
+                                or eqSlot == EquipmentSlotIds.RangedOff)
                     end)
                 :SetMessage('Should all ranged weapons be moved to this container?')
                 :SetSortingTag(TemplateIds.Ranged),

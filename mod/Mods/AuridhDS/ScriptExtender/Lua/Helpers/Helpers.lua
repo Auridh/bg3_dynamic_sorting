@@ -108,4 +108,10 @@ function Helpers:IsSortingTemplate(sortingTemplateId)
     return SortingTemplates[sortingTemplateId] ~= nil
 end
 
-
+function Helpers:AddRequiredTagsForInventory(itemEntity, holderEntity)
+    local SortingContainers = Auridh.DS.Static.SortingTemplates.Containers
+    -- Handle sorting containers
+    if SortingContainers[holderEntity:Template().UUID] then
+        itemEntity:SetTag(SortingContainers[holderEntity:Template().UUID].Tag)
+    end
+end
