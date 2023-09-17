@@ -14,6 +14,8 @@
 					<attribute id="LevelName" type="FixedString" value="" />
 					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
+					<attribute id="VisualTemplate" type="FixedString" value="564ac843-ea39-4fd9-b9ee-b37cee7e6734" />
+					<attribute id="PhysicsTemplate" type="FixedString" value="56184af3-63ea-442e-b111-fe81bff2c2f4" />
 					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
 					<children>
@@ -37,6 +39,8 @@
 					<attribute id="LevelName" type="FixedString" value="" />
 					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
+					<attribute id="VisualTemplate" type="FixedString" value="564ac843-ea39-4fd9-b9ee-b37cee7e6734" />
+					<attribute id="PhysicsTemplate" type="FixedString" value="56184af3-63ea-442e-b111-fe81bff2c2f4" />
 					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
 					<children>
@@ -60,6 +64,8 @@
 					<attribute id="LevelName" type="FixedString" value="" />
 					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
+					<attribute id="VisualTemplate" type="FixedString" value="564ac843-ea39-4fd9-b9ee-b37cee7e6734" />
+					<attribute id="PhysicsTemplate" type="FixedString" value="56184af3-63ea-442e-b111-fe81bff2c2f4" />
 					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
 					<children>
@@ -83,6 +89,8 @@
 					<attribute id="LevelName" type="FixedString" value="" />
 					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
+					<attribute id="VisualTemplate" type="FixedString" value="564ac843-ea39-4fd9-b9ee-b37cee7e6734" />
+					<attribute id="PhysicsTemplate" type="FixedString" value="56184af3-63ea-442e-b111-fe81bff2c2f4" />
 					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
 					<children>
@@ -106,6 +114,8 @@
 					<attribute id="LevelName" type="FixedString" value="" />
 					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
+					<attribute id="VisualTemplate" type="FixedString" value="564ac843-ea39-4fd9-b9ee-b37cee7e6734" />
+					<attribute id="PhysicsTemplate" type="FixedString" value="56184af3-63ea-442e-b111-fe81bff2c2f4" />
 					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
 					<children>
@@ -129,6 +139,8 @@
 					<attribute id="LevelName" type="FixedString" value="" />
 					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
+					<attribute id="VisualTemplate" type="FixedString" value="564ac843-ea39-4fd9-b9ee-b37cee7e6734" />
+					<attribute id="PhysicsTemplate" type="FixedString" value="56184af3-63ea-442e-b111-fe81bff2c2f4" />
 					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
 					<children>
@@ -152,6 +164,8 @@
 					<attribute id="LevelName" type="FixedString" value="" />
 					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
+					<attribute id="VisualTemplate" type="FixedString" value="564ac843-ea39-4fd9-b9ee-b37cee7e6734" />
+					<attribute id="PhysicsTemplate" type="FixedString" value="56184af3-63ea-442e-b111-fe81bff2c2f4" />
 					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
 					<children>

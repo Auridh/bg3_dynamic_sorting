@@ -1,5 +1,5 @@
 {
     "RequiredVersion": 2,
-    "ModTable": "AuridhDSSIT",
+    "ModTable": "AuridhDSET",
     "FeatureFlags": ["Lua"]
 }

@@ -72,6 +72,11 @@ function OsirisEntity:EquipmentSlot()
     return self.EquipmentSlotValue
 end
 
+function OsirisEntity:StatString()
+    self.StatStringValue = self.StatStringValue or Osi.GetStatString(self.Uid)
+    return self.EquipmentSlotValue
+end
+
 function OsirisEntity:SortingTemplateId()
     self.SortingTemplateIdValue = self.SortingTemplateIdValue or Auridh.DS.Helpers.Misc:GetSortingTemplateId(self)
     return self.SortingTemplateIdValue
@@ -129,6 +134,10 @@ end
 
 function OsirisEntity:IsSupply()
     return self:Type('ItemGetSupplyValue')
+end
+
+function OsirisEntity:IsEquipable()
+    return self:Type('IsEquipable')
 end
 
 function OsirisEntity:IsJunk()

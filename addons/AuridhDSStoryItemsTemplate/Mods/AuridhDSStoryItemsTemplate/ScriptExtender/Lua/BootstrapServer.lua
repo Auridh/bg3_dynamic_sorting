@@ -12,7 +12,7 @@ local function Init()
     }
     local Templates = {
         [TemplateIds.Story] = SortingTemplate:New()
-                :SetPriority(100)
+                :SetPriority(1000)
                 :SetEvaluator(
                     function(osirisEntity, _)
                         return osirisEntity:IsStoryItem()
