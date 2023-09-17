@@ -8,6 +8,7 @@ Ext.Require('Classes/ModState.lua')
 Ext.Require('Classes/OsirisEvent.lua')
 Ext.Require('Classes/OsirisEntity.lua')
 Ext.Require('Classes/SortingTemplate.lua')
+Ext.Require('Classes/SortingContainer.lua')
 Ext.Require('Classes/TempDB.lua')
 
 -- Init static vars
