@@ -13,4 +13,8 @@
   <content contentuid="h63b4661eg048ag44abgabf7gaa0b6d98b0f4" version="1">Represents weapon coatings</content>
   <content contentuid="h776bad89gb737g4f58ga382g513e755327a4" version="1">Camp Supplies Tag</content>
   <content contentuid="h46311a54g04f9g42f4g9ef5g36934d1f5a4c" version="1">Represents camp supplies</content>
+  <content contentuid="h0642ecb1g2c89g4dcfg8450g34ed070e4745" version="1">Alchemy Ingredients Tag</content>
+  <content contentuid="h6bc77c89gab70g4ea3g80e3g751f6da30c95" version="1">Represents alchemy ingredients</content>
+  <content contentuid="h496b90bdg145dg4c6aga870g84d8d55ba86f" version="1">Keys Tag</content>
+  <content contentuid="hbcdef91ag1efdg4b14g9cbcg068ea313390c" version="1">Represents keys</content>
 </contentList>

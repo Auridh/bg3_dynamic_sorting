@@ -19,6 +19,13 @@
 					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
 					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="14e17bf7-a466-404a-97b0-64299224b2a2" />
+								</node>
+							</children>
+						</node>
 						<node id="GameMaster" />
 						<node id="InventoryList">
 							<children>
@@ -44,6 +51,13 @@
 					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
 					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="dd86c045-0370-4ec9-c5b7-b1b07060096f" />
+								</node>
+							</children>
+						</node>
 						<node id="GameMaster" />
 						<node id="InventoryList">
 							<children>
@@ -69,6 +83,13 @@
 					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
 					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="8a8e253a-c081-45a1-a29f-b6911d9068c5" />
+								</node>
+							</children>
+						</node>
 						<node id="GameMaster" />
 						<node id="InventoryList">
 							<children>
@@ -94,6 +115,13 @@
 					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
 					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="56c99a77-8f6a-4584-418e-3b2a6b9f6152" />
+								</node>
+							</children>
+						</node>
 						<node id="GameMaster" />
 						<node id="InventoryList">
 							<children>
@@ -119,6 +147,13 @@
 					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
 					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="fa8afea4-4742-4467-efbd-8569d11b7858" />
+								</node>
+							</children>
+						</node>
 						<node id="GameMaster" />
 						<node id="InventoryList">
 							<children>
@@ -144,6 +179,13 @@
 					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
 					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="fe0d86c3-a562-430e-33a6-bfd8b29b8472" />
+								</node>
+							</children>
+						</node>
 						<node id="GameMaster" />
 						<node id="InventoryList">
 							<children>
@@ -169,6 +211,77 @@
 					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
 					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="9a42f996-decf-4fcc-11ad-a62badab87a2" />
+								</node>
+							</children>
+						</node>
+						<node id="GameMaster" />
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="DS_SortingTag_TT" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+				<node id="GameObjects">
+					<!-- Alchemy ingredients !-->
+					<attribute id="MapKey" type="FixedString" value="0c40175d-83d7-47a0-b7f5-cd7ee78945a6" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h0642ecb1g2c89g4dcfg8450g34ed070e4745" version="1" />
+					<attribute id="TechnicalDescription" type="TranslatedString" handle="h6bc77c89gab70g4ea3g80e3g751f6da30c95" version="1" />
+					<attribute id="Icon" type="FixedString" value="AuridhDS_Icon_Pin_Red" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_Coatings" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
+					<attribute id="VisualTemplate" type="FixedString" value="564ac843-ea39-4fd9-b9ee-b37cee7e6734" />
+					<attribute id="PhysicsTemplate" type="FixedString" value="56184af3-63ea-442e-b111-fe81bff2c2f4" />
+					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
+					<attribute id="TreasureOnDestroy" type="bool" value="False" />
+					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="64b824e7-50c5-475a-c298-0252376e772d" />
+								</node>
+							</children>
+						</node>
+						<node id="GameMaster" />
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="DS_SortingTag_TT" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+				<node id="GameObjects">
+					<!-- Keys !-->
+					<attribute id="MapKey" type="FixedString" value="661b5899-45b8-4c20-aa9c-f2d304016126" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h496b90bdg145dg4c6aga870g84d8d55ba86f" version="1" />
+					<attribute id="TechnicalDescription" type="TranslatedString" handle="hbcdef91ag1efdg4b14g9cbcg068ea313390c" version="1" />
+					<attribute id="Icon" type="FixedString" value="AuridhDS_Icon_Pin_Red" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_Coatings" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
+					<attribute id="VisualTemplate" type="FixedString" value="564ac843-ea39-4fd9-b9ee-b37cee7e6734" />
+					<attribute id="PhysicsTemplate" type="FixedString" value="56184af3-63ea-442e-b111-fe81bff2c2f4" />
+					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
+					<attribute id="TreasureOnDestroy" type="bool" value="False" />
+					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="9851fa99-5538-432a-778e-09c9a8297489" />
+								</node>
+							</children>
+						</node>
 						<node id="GameMaster" />
 						<node id="InventoryList">
 							<children>

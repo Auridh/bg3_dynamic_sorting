@@ -214,3 +214,13 @@ function OsirisEntity:AddTemplateToInventory(osirisEntity, options)
 
     Osi.TemplateAddTo(osirisEntity.Uid, self.Uid, count, notify)
 end
+
+function OsirisEntity:SetTag(tag)
+    Osi.SetTag(self.Uid, tag)
+    self:IsTagged(tag)
+end
+
+function OsirisEntity:ClearTag(tag)
+    Osi.ClearTag(self.Uid, tag)
+    self['TAG_' .. tag] = nil
+end

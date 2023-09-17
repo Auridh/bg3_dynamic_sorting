@@ -8,6 +8,7 @@ local Installation = Auridh.DS.Helpers.Install
 local State = Auridh.DS.Current.State
 local AddedTo = Auridh.DS.Handlers.AddedTo
 local OsirisEntity = Auridh.DS.Classes.OsirisEntity
+local SortingContainers = Auridh.DS.Static.SortingTemplates.Containers
 
 local SortingTags = Classes.TempDB:New()
 local Templates = Classes.TempDB:New()
@@ -53,7 +54,14 @@ local function OnTimerFinished(timer)
         Installation:AddToCampChests()
     elseif timer == EventIds.TimerCombined then
         local combinedItem = Auridh.DS.Current.NewSortingTag
-        combinedItem.ItemEntity:CloneToInventory(combinedItem.HolderEntity, { RequestDelete = true })
+        local sortingContainer = SortingContainers[combinedItem.HolderEntity:Template().Uid]
+
+        if sortingContainer then
+            combinedItem.ItemEntity:SetTag(sortingContainer.Tag)
+            combinedItem.ItemEntity:AddTemplateToInventory(sortingContainer.SortingTag)
+        end
+
+        combinedItem.ItemEntity:ToInventory(combinedItem.HolderEntity)
         Auridh.DS.Current.NewSortingTag = nil
     end
 end
