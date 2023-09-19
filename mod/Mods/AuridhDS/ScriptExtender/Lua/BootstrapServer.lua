@@ -6,6 +6,7 @@ Auridh.DS = {}
 Auridh.DS.Classes = {}
 Ext.Require('Classes/ModState.lua')
 Ext.Require('Classes/OsirisEvent.lua')
+Ext.Require('Classes/EngineEntity.lua')
 Ext.Require('Classes/OsirisEntity.lua')
 Ext.Require('Classes/SortingTemplate.lua')
 Ext.Require('Classes/SortingContainer.lua')
@@ -27,7 +28,7 @@ Ext.Require('Helpers/Helpers.lua')
 Auridh.DS.Current = {}
 Auridh.DS.Handlers = {}
 Ext.Require('Game/PersistentState.lua')
-Ext.Require('Game/FirstInstall.lua')
+Ext.Require('Game/Handlers/FirstInstall.lua')
 Ext.Require('Game/Handlers/AddedTo.lua')
 Ext.Require('Game/DynamicSorting.lua')
 

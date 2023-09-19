@@ -4,7 +4,7 @@ local Helpers = Auridh.DS.Helpers.Misc
 local Logger = Auridh.DS.Helpers.Logger
 local EventIds = Auridh.DS.Static.UniqueIds.Events
 local TemplateIds = Auridh.DS.Static.UniqueIds.Templates
-local Installation = Auridh.DS.Helpers.Install
+local Installation = Auridh.DS.Handlers.Install
 local State = Auridh.DS.Current.State
 local AddedTo = Auridh.DS.Handlers.AddedTo
 local OsirisEntity = Auridh.DS.Classes.OsirisEntity
@@ -28,22 +28,24 @@ function SortingTags:Add(entityUid)
     local osirisEntity = OsirisEntity:FromUid(entityUid, { Templates = Classes.TempDB:New() })
     Logger:Log('AddSortingTag > %s', osirisEntity.Uid)
     self:Create(osirisEntity.UUID, osirisEntity)
+    table.insert(State:Read().SortingTags, osirisEntity.Uid)
     osirisEntity:IterateInventory(EventIds.InitSortingTag, { EndEvent = EventIds.InitSortingTagEnd })
-end
-
-local function SearchForTags(playerUid)
-    local holderEntity = OsirisEntity:FromUid(playerUid)
-    holderEntity:IterateInventory(EventIds.SearchBag, {
-        EndEvent = EventIds.SearchBagEnd,
-        Template = TemplateIds.SortingTag,
-    })
 end
 
 local function InitDB()
     Auridh.DS.Current.Database = {}
     Auridh.DS.Current.Database.ST = SortingTags
     Auridh.DS.Current.Database.TP = Templates
-    Helpers:IteratePlayerDB(SearchForTags)
+
+    local savedSortingTags = State:Read().SortingTags
+    if not savedSortingTags then
+        savedSortingTags = {}
+        return
+    end
+
+    for _, sortingTagUid in ipairs(savedSortingTags) do
+        SortingTags:Add(sortingTagUid)
+    end
 end
 
 
@@ -76,10 +78,6 @@ local function OnSavegameLoaded()
 end
 
 local function OnEntityEvent(entityUid, eventId)
-    if eventId == EventIds.SearchBag then
-        SortingTags:Add(entityUid)
-        return
-    end
     if eventId == EventIds.InitSortingTag then
         Templates:Add(entityUid)
         return

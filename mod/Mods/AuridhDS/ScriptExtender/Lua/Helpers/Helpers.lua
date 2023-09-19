@@ -11,6 +11,13 @@ function Helpers:IteratePlayerDB(action)
     end
 end
 
+function Helpers:IterateCampChestDB(action)
+    local campChests = Osi.DB_Camp_UserCampChest:Get(nil, nil)
+    for _, v in pairs(campChests) do
+        action(v[1], v[2])
+    end
+end
+
 function Helpers:GetUUID(mergeString)
     local length = mergeString:len()
     return mergeString:sub(length-35, length)

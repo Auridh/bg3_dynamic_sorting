@@ -60,6 +60,11 @@ function OsirisEntity:RequestDelete()
     EntityDB[self.Uid] = nil
 end
 
+function OsirisEntity:EngineEntity()
+    self.EngineEntity = self.EngineEntity or Ext.Entity.Get(self.Uid)
+    return self.EngineEntity
+end
+
 function OsirisEntity:Template(temporary)
     self.TemplateValue = self.TemplateValue or (temporary
             and OsirisEntity:TemporaryFromUid(Osi.GetTemplate(self.Uid))
@@ -146,6 +151,10 @@ end
 
 function OsirisEntity:IsEquipped()
     return Osi.IsEquipped(self.Uid) == 1
+end
+
+function OsirisEntity:Exists()
+    return Osi.Exists(self.Uid) == 1
 end
 
 function OsirisEntity:Owns(osirisEntity, options)

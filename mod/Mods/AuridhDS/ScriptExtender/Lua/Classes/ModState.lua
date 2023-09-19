@@ -4,7 +4,7 @@ Auridh.DS.Classes.ModState = {
     PersistentState = {
         ModState = {
             Installed = false,
-            LoggingEnabled = true,
+            LoggingEnabled = false,
         },
     },
 }

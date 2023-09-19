@@ -12,14 +12,16 @@ end
 function InstallHandler:AddToCampChests()
     local Logger = Auridh.DS.Helpers.Logger
     local State = Auridh.DS.Current.State:Read()
+    local Helpers = Auridh.DS.Helpers.Misc
+    
     State.AddedToCampChests = {}
+    State.SortingTags = {}
 
-    local campChests = Osi.DB_Camp_UserCampChest:Get(nil, nil)
-    for _, v in pairs(campChests) do
-        if State.AddedToCampChests[v[2]] == nil then
-            Logger:Log('AddToCampChest: %s, %s', v[2], v[1])
-            Osi.TemplateAddTo(Auridh.DS.Static.UniqueIds.Templates.SortingTag, v[2], 1, 1)
-            State.AddedToCampChests[v[2]] = true
+    Helpers:IterateCampChestDB(function(_, chestUid)
+        if State.AddedToCampChests[chestUid] == nil then
+            Logger:Log('AddToCampChest: %s, %s', chestUid, v[1])
+            Osi.TemplateAddTo(Auridh.DS.Static.UniqueIds.Templates.SortingTag, chestUid, 1, 1)
+            State.AddedToCampChests[chestUid] = true
         end
-    end
+    end)
 end

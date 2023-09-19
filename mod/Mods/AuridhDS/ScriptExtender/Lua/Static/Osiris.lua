@@ -32,6 +32,8 @@ Auridh.DS.Static.Osiris = {
         UseStarted = OsirisEvent:New({ Name = 'UseStarted', Arity = 2 }),
         -- event UseFinished((CHARACTER)_Character, (ITEM)_Item, (INTEGER)_Sucess)
         UseFinished = OsirisEvent:New({ Name = 'UseFinished', Arity = 3 }),
+        -- event TagSet((GUIDSTRING)_Target, (TAG)_Tag)
+        TagSet = OsirisEvent:New({ Name = 'TagSet', Arity = 2 }),
     },
     ExecTime = {
         After = 'after',
