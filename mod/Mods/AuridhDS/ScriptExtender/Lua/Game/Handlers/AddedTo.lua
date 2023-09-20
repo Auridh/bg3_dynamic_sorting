@@ -17,26 +17,14 @@ function Handlers:SortItem(itemEntity, holderEntity)
     itemEntity:SaveToDB()
     holderEntity:SaveToDB()
 
-    -- Logger:Log('IsPlayer %s', holderEntity:IsPlayer())
-    -- if holderEntity:IsPlayer() then
-    --     Logger:Log('Owns %s', holderEntity:Owns(itemEntity, { DirectOwner = true }))
-    --     Logger:Dmp(itemEntity:DirectOwner())
-    --     Logger:Log('LastDO')
-    --     Logger:Dmp(itemEntity:LastDirectOwner())
-    --     if itemEntity:LastDirectOwner() then
-    --         Logger:Log('Equals %s', holderEntity:Equals(itemEntity:LastDirectOwner()))
-    --         Logger:Log('LastDO Owns %s', holderEntity:Owns(itemEntity:LastDirectOwner()))
-    --     end
-    -- end
-
     -- is in direct player inventory
     if holderEntity:IsPlayer()
             -- player owns item
             and holderEntity:Owns(itemEntity, { DirectOwner = true })
             -- was not moved in own inventory
-            -- and (not itemEntity:LastDirectOwner()
-            --     or holderEntity:Equals(itemEntity:LastDirectOwner())
-            --     or not holderEntity:Owns(itemEntity:LastDirectOwner()))
+            and (not itemEntity:LastDirectOwner()
+                or holderEntity:Equals(itemEntity:LastDirectOwner())
+                or not holderEntity:Owns(itemEntity:LastDirectOwner()))
     then
         local templateEntity = itemEntity:Template()
         Logger:Log('SortItem > %s, %s, %s', holderEntity.UUID, templateEntity.UUID, itemEntity:Owner().Uid)
