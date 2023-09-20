@@ -75,6 +75,10 @@ local function OnAddedTo(entityUid, holderUid)
     local itemEntity = OsirisEntity:TemporaryFromUid(entityUid)
     local holderEntity = OsirisEntity:TemporaryFromUid(holderUid)
 
+    if not itemEntity:Exists() then
+        return
+    end
+
     if AddedTo:AddSortingTemplate(itemEntity, holderEntity) then
         return
     end
