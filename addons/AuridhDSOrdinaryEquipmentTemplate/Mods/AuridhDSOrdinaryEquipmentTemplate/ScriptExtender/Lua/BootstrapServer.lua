@@ -25,7 +25,7 @@ local function Init()
                         local isUnique = osirisEntity:EngineEntity():IsUnique()
 
                         Logger:Debug('Rarity: %s -> %s, %s', osirisEntity.Uid, rarity, isUnique)
-                        return rarity > 0 and not isUnique
+                        return rarity == 0 and not isUnique
                     end)
                 :SetMessage('Should all ordinary equipment be moved to this container?')
                 :SetSortingTag(TemplateIds.OrdinaryEquipment),
