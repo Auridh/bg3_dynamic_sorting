@@ -81,8 +81,7 @@ function Handlers:AddSortingTemplate(itemEntity, holderEntity)
                 local playerEntity = OsirisEntity:FromUid(playerUid)
 
                 -- Move matching items to their container
-                playerEntity:EngineEntity():IterateInventory(function(index, engineEntity)
-                    Logger:Log('Idx: %s', index)
+                playerEntity:EngineEntity():IterateInventory(function(_, engineEntity)
                     local osirisEntity = engineEntity:OsirisEntity()
 
                     if templateEntity.UUID == osirisEntity:SortingTemplateId() then
@@ -175,7 +174,7 @@ function Handlers:RegisterInSortingTag(itemEntity, holderEntity)
                     TemplateEntity = templateEntity,
                 }
 
-                Osi.OpenMessageBoxYesNo(itemEntity:Owner().Uid, SortingTemplates[sortingTemplateId].Message)
+                Osi.OpenMessageBoxYesNo(Osi.GetHostCharacter(), SortingTemplates[sortingTemplateId].Message)
             else
                 TransformQueue:Push({
                     TransformTarget = templateEntity.Uid,
