@@ -10,7 +10,7 @@
 					<attribute id="DisplayName" type="TranslatedString" handle="h7dcb681eg21b2g42adga02ag1aa670542cbe" version="1" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="hc2f486feg7a78g4950g8469g9c51335707c5" version="1" />
 					<attribute id="Icon" type="FixedString" value="AuridhDS_Icon_Pin_Red" />
-					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_StoryItems" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_Junk" />
 					<attribute id="LevelName" type="FixedString" value="" />
 					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
@@ -20,13 +20,6 @@
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
 					<children>
 						<node id="GameMaster" />
-						<node id="InventoryList">
-							<children>
-								<node id="InventoryItem">
-									<attribute id="Object" type="FixedString" value="DS_SortingTag_TT" />
-								</node>
-							</children>
-						</node>
 					</children>
 				</node>
 			</children>

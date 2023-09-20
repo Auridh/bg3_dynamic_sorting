@@ -27,13 +27,6 @@
 							</children>
 						</node>
 						<node id="GameMaster" />
-						<node id="InventoryList">
-							<children>
-								<node id="InventoryItem">
-									<attribute id="Object" type="FixedString" value="DS_SortingTag_TT" />
-								</node>
-							</children>
-						</node>
 					</children>
 				</node>
 				<node id="GameObjects">
@@ -59,13 +52,6 @@
 							</children>
 						</node>
 						<node id="GameMaster" />
-						<node id="InventoryList">
-							<children>
-								<node id="InventoryItem">
-									<attribute id="Object" type="FixedString" value="DS_SortingTag_TT" />
-								</node>
-							</children>
-						</node>
 					</children>
 				</node>
 				<node id="GameObjects">
@@ -91,13 +77,6 @@
 							</children>
 						</node>
 						<node id="GameMaster" />
-						<node id="InventoryList">
-							<children>
-								<node id="InventoryItem">
-									<attribute id="Object" type="FixedString" value="DS_SortingTag_TT" />
-								</node>
-							</children>
-						</node>
 					</children>
 				</node>
 				<node id="GameObjects">
@@ -123,13 +102,6 @@
 							</children>
 						</node>
 						<node id="GameMaster" />
-						<node id="InventoryList">
-							<children>
-								<node id="InventoryItem">
-									<attribute id="Object" type="FixedString" value="DS_SortingTag_TT" />
-								</node>
-							</children>
-						</node>
 					</children>
 				</node>
 				<node id="GameObjects">
@@ -155,13 +127,6 @@
 							</children>
 						</node>
 						<node id="GameMaster" />
-						<node id="InventoryList">
-							<children>
-								<node id="InventoryItem">
-									<attribute id="Object" type="FixedString" value="DS_SortingTag_TT" />
-								</node>
-							</children>
-						</node>
 					</children>
 				</node>
 				<node id="GameObjects">
@@ -187,13 +152,6 @@
 							</children>
 						</node>
 						<node id="GameMaster" />
-						<node id="InventoryList">
-							<children>
-								<node id="InventoryItem">
-									<attribute id="Object" type="FixedString" value="DS_SortingTag_TT" />
-								</node>
-							</children>
-						</node>
 					</children>
 				</node>
 				<node id="GameObjects">
@@ -219,13 +177,6 @@
 							</children>
 						</node>
 						<node id="GameMaster" />
-						<node id="InventoryList">
-							<children>
-								<node id="InventoryItem">
-									<attribute id="Object" type="FixedString" value="DS_SortingTag_TT" />
-								</node>
-							</children>
-						</node>
 					</children>
 				</node>
 				<node id="GameObjects">
@@ -234,7 +185,7 @@
 					<attribute id="DisplayName" type="TranslatedString" handle="h0642ecb1g2c89g4dcfg8450g34ed070e4745" version="1" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="h6bc77c89gab70g4ea3g80e3g751f6da30c95" version="1" />
 					<attribute id="Icon" type="FixedString" value="AuridhDS_Icon_Pin_Red" />
-					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_Coatings" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_Alchemy" />
 					<attribute id="LevelName" type="FixedString" value="" />
 					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
@@ -251,13 +202,6 @@
 							</children>
 						</node>
 						<node id="GameMaster" />
-						<node id="InventoryList">
-							<children>
-								<node id="InventoryItem">
-									<attribute id="Object" type="FixedString" value="DS_SortingTag_TT" />
-								</node>
-							</children>
-						</node>
 					</children>
 				</node>
 				<node id="GameObjects">
@@ -266,7 +210,7 @@
 					<attribute id="DisplayName" type="TranslatedString" handle="h496b90bdg145dg4c6aga870g84d8d55ba86f" version="1" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="hbcdef91ag1efdg4b14g9cbcg068ea313390c" version="1" />
 					<attribute id="Icon" type="FixedString" value="AuridhDS_Icon_Pin_Red" />
-					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_Coatings" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_Keys" />
 					<attribute id="LevelName" type="FixedString" value="" />
 					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
@@ -283,13 +227,6 @@
 							</children>
 						</node>
 						<node id="GameMaster" />
-						<node id="InventoryList">
-							<children>
-								<node id="InventoryItem">
-									<attribute id="Object" type="FixedString" value="DS_SortingTag_TT" />
-								</node>
-							</children>
-						</node>
 					</children>
 				</node>
 			</children>

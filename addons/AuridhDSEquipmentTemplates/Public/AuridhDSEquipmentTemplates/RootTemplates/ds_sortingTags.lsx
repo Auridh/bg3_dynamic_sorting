@@ -10,7 +10,7 @@
 					<attribute id="DisplayName" type="TranslatedString" handle="h20db801cg49c5g409cg9c98g7cc885325417" version="1" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="h352ea492g8037g4442g845eg0d91dcc55300" version="1" />
 					<attribute id="Icon" type="FixedString" value="AuridhDS_Icon_Pin_Red" />
-					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_CampSupplies" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_CampClothes" />
 					<attribute id="LevelName" type="FixedString" value="" />
 					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
@@ -20,13 +20,6 @@
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
 					<children>
 						<node id="GameMaster" />
-						<node id="InventoryList">
-							<children>
-								<node id="InventoryItem">
-									<attribute id="Object" type="FixedString" value="DS_SortingTag_TT" />
-								</node>
-							</children>
-						</node>
 					</children>
 				</node>
 				<node id="GameObjects">
@@ -35,7 +28,7 @@
 					<attribute id="DisplayName" type="TranslatedString" handle="hf518978fg3efag4380g856dgd16ba61e10da" version="1" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="h44d9ffb4gb918g4ceag857eg29ff79e111cd" version="1" />
 					<attribute id="Icon" type="FixedString" value="AuridhDS_Icon_Pin_Red" />
-					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_CampSupplies" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_Rings" />
 					<attribute id="LevelName" type="FixedString" value="" />
 					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
@@ -45,13 +38,6 @@
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
 					<children>
 						<node id="GameMaster" />
-						<node id="InventoryList">
-							<children>
-								<node id="InventoryItem">
-									<attribute id="Object" type="FixedString" value="DS_SortingTag_TT" />
-								</node>
-							</children>
-						</node>
 					</children>
 				</node>
 				<node id="GameObjects">
@@ -60,7 +46,7 @@
 					<attribute id="DisplayName" type="TranslatedString" handle="h1a635119g379dg4f24gb9e5g6556f41db0be" version="1" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="hab630e1cg86c8g4e20gb8bdg4420f4592bf2" version="1" />
 					<attribute id="Icon" type="FixedString" value="AuridhDS_Icon_Pin_Red" />
-					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_CampSupplies" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_Necklaces" />
 					<attribute id="LevelName" type="FixedString" value="" />
 					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
@@ -70,13 +56,6 @@
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
 					<children>
 						<node id="GameMaster" />
-						<node id="InventoryList">
-							<children>
-								<node id="InventoryItem">
-									<attribute id="Object" type="FixedString" value="DS_SortingTag_TT" />
-								</node>
-							</children>
-						</node>
 					</children>
 				</node>
 				<node id="GameObjects">
@@ -85,7 +64,7 @@
 					<attribute id="DisplayName" type="TranslatedString" handle="hd9f984c7g1bb4g4fe3ga4fcg7c0bd5d25be5" version="1" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="h321da4acg46ddg46b4gb128g7acf7d100d45" version="1" />
 					<attribute id="Icon" type="FixedString" value="AuridhDS_Icon_Pin_Red" />
-					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_CampSupplies" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_Headwear" />
 					<attribute id="LevelName" type="FixedString" value="" />
 					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
@@ -95,13 +74,6 @@
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
 					<children>
 						<node id="GameMaster" />
-						<node id="InventoryList">
-							<children>
-								<node id="InventoryItem">
-									<attribute id="Object" type="FixedString" value="DS_SortingTag_TT" />
-								</node>
-							</children>
-						</node>
 					</children>
 				</node>
 				<node id="GameObjects">
@@ -110,7 +82,7 @@
 					<attribute id="DisplayName" type="TranslatedString" handle="h7e872a4fgc7feg4b63g8e20gc7efb8fd2f50" version="1" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="hb1be02feg8f60g4677g9ee7g82b6bf2e623a" version="1" />
 					<attribute id="Icon" type="FixedString" value="AuridhDS_Icon_Pin_Red" />
-					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_CampSupplies" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_Cloak" />
 					<attribute id="LevelName" type="FixedString" value="" />
 					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
@@ -120,13 +92,6 @@
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
 					<children>
 						<node id="GameMaster" />
-						<node id="InventoryList">
-							<children>
-								<node id="InventoryItem">
-									<attribute id="Object" type="FixedString" value="DS_SortingTag_TT" />
-								</node>
-							</children>
-						</node>
 					</children>
 				</node>
 				<node id="GameObjects">
@@ -135,7 +100,7 @@
 					<attribute id="DisplayName" type="TranslatedString" handle="hd447e7c3g214cg489eg8486g20d01ad01f4a" version="1" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="h7ab2d68cg131fg4b30g9baag40bf4d1d3e85" version="1" />
 					<attribute id="Icon" type="FixedString" value="AuridhDS_Icon_Pin_Red" />
-					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_CampSupplies" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_Body" />
 					<attribute id="LevelName" type="FixedString" value="" />
 					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
@@ -145,13 +110,6 @@
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
 					<children>
 						<node id="GameMaster" />
-						<node id="InventoryList">
-							<children>
-								<node id="InventoryItem">
-									<attribute id="Object" type="FixedString" value="DS_SortingTag_TT" />
-								</node>
-							</children>
-						</node>
 					</children>
 				</node>
 				<node id="GameObjects">
@@ -160,7 +118,7 @@
 					<attribute id="DisplayName" type="TranslatedString" handle="h20bf5097gf8e5g45d8g9a26gc12e6abefcc6" version="1" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="hd3699cccge3c1g46e1gb391gd4b95157ae1f" version="1" />
 					<attribute id="Icon" type="FixedString" value="AuridhDS_Icon_Pin_Red" />
-					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_CampSupplies" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_Gloves" />
 					<attribute id="LevelName" type="FixedString" value="" />
 					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
@@ -170,13 +128,6 @@
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
 					<children>
 						<node id="GameMaster" />
-						<node id="InventoryList">
-							<children>
-								<node id="InventoryItem">
-									<attribute id="Object" type="FixedString" value="DS_SortingTag_TT" />
-								</node>
-							</children>
-						</node>
 					</children>
 				</node>
 				<node id="GameObjects">
@@ -185,7 +136,7 @@
 					<attribute id="DisplayName" type="TranslatedString" handle="h1f3848b8g4cb4g48e4ga92cg1dabb4de440e" version="1" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="hf9176f04g401eg41d5g92e5g1a6b7c4fd5c1" version="1" />
 					<attribute id="Icon" type="FixedString" value="AuridhDS_Icon_Pin_Red" />
-					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_CampSupplies" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_Footwear" />
 					<attribute id="LevelName" type="FixedString" value="" />
 					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
@@ -195,13 +146,6 @@
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
 					<children>
 						<node id="GameMaster" />
-						<node id="InventoryList">
-							<children>
-								<node id="InventoryItem">
-									<attribute id="Object" type="FixedString" value="DS_SortingTag_TT" />
-								</node>
-							</children>
-						</node>
 					</children>
 				</node>
 				<node id="GameObjects">
@@ -210,7 +154,7 @@
 					<attribute id="DisplayName" type="TranslatedString" handle="h4cbfe08ag1727g4476g986fg65b4b65963b4" version="1" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="hf3359f2egd22cg4409gba4eg53214dc08ed0" version="1" />
 					<attribute id="Icon" type="FixedString" value="AuridhDS_Icon_Pin_Red" />
-					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_CampSupplies" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_Instruments" />
 					<attribute id="LevelName" type="FixedString" value="" />
 					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
@@ -220,13 +164,6 @@
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
 					<children>
 						<node id="GameMaster" />
-						<node id="InventoryList">
-							<children>
-								<node id="InventoryItem">
-									<attribute id="Object" type="FixedString" value="DS_SortingTag_TT" />
-								</node>
-							</children>
-						</node>
 					</children>
 				</node>
 				<node id="GameObjects">
@@ -235,7 +172,7 @@
 					<attribute id="DisplayName" type="TranslatedString" handle="hc618b495gaf91g4ce5gaac2gc746b0d3fc12" version="1" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="h55301021g16ecg41a3ga202gc73d9f177f5b" version="1" />
 					<attribute id="Icon" type="FixedString" value="AuridhDS_Icon_Pin_Red" />
-					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_CampSupplies" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_MeleeWeapons" />
 					<attribute id="LevelName" type="FixedString" value="" />
 					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
@@ -245,13 +182,6 @@
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
 					<children>
 						<node id="GameMaster" />
-						<node id="InventoryList">
-							<children>
-								<node id="InventoryItem">
-									<attribute id="Object" type="FixedString" value="DS_SortingTag_TT" />
-								</node>
-							</children>
-						</node>
 					</children>
 				</node>
 				<node id="GameObjects">
@@ -260,7 +190,7 @@
 					<attribute id="DisplayName" type="TranslatedString" handle="ha4922214g5291g43e6gbff4g852d917d87bd" version="1" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="haf1897fdgf362g4354g8277gc9114cbae18c" version="1" />
 					<attribute id="Icon" type="FixedString" value="AuridhDS_Icon_Pin_Red" />
-					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_CampSupplies" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_Shields" />
 					<attribute id="LevelName" type="FixedString" value="" />
 					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
@@ -270,13 +200,6 @@
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
 					<children>
 						<node id="GameMaster" />
-						<node id="InventoryList">
-							<children>
-								<node id="InventoryItem">
-									<attribute id="Object" type="FixedString" value="DS_SortingTag_TT" />
-								</node>
-							</children>
-						</node>
 					</children>
 				</node>
 				<node id="GameObjects">
@@ -285,7 +208,7 @@
 					<attribute id="DisplayName" type="TranslatedString" handle="h28fe7f44g38f9g41eaga57cgb2d4997d5af0" version="1" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="h84aaca64gc1a0g44e4g8261g9f8d5bfd5baf" version="1" />
 					<attribute id="Icon" type="FixedString" value="AuridhDS_Icon_Pin_Red" />
-					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_CampSupplies" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_RangedWeapons" />
 					<attribute id="LevelName" type="FixedString" value="" />
 					<attribute id="Type" type="FixedString" value="item" />
 					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
@@ -295,13 +218,6 @@
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
 					<children>
 						<node id="GameMaster" />
-						<node id="InventoryList">
-							<children>
-								<node id="InventoryItem">
-									<attribute id="Object" type="FixedString" value="DS_SortingTag_TT" />
-								</node>
-							</children>
-						</node>
 					</children>
 				</node>
 			</children>

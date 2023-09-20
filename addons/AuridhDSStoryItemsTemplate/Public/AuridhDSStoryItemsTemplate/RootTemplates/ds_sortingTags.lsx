@@ -20,13 +20,6 @@
 					<attribute id="TreasureOnDestroy" type="bool" value="False" />
 					<children>
 						<node id="GameMaster" />
-						<node id="InventoryList">
-							<children>
-								<node id="InventoryItem">
-									<attribute id="Object" type="FixedString" value="DS_SortingTag_TT" />
-								</node>
-							</children>
-						</node>
 					</children>
 				</node>
 			</children>
