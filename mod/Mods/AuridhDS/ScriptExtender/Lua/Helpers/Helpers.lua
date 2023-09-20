@@ -80,7 +80,7 @@ function Helpers:TestSortingTemplate(osirisEntity, sortingTemplateId)
     local templateEntity = osirisEntity:Template()
     local sortedByTemplate = false
 
-    Logger:Log('Check Sorting Template: %s', sortingTemplate.Message)
+    Logger:Debug('Check Sorting Template: %s', sortingTemplate.Message)
 
     -- Check custom evaluator function
     if sortingTemplate.Evaluator ~= nil then
