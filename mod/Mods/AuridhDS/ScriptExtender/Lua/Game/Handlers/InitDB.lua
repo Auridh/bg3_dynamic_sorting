@@ -24,8 +24,7 @@ function Templates:Add(entityUid, templateUid, sortingTemplateMatch)
     self:Create(templateEntity.UUID, templateEntity)
     SortingTags:Get(templateEntity.SortingTag.UUID).Templates:Create(templateEntity.UUID, templateEntity)
 
-    Logger:Dmp(templateEntity)
-    Logger:Log(
+    Logger:Debug(
             'ModState.SortingTags.'
                     .. templateEntity.SortingTag.UUID
                     .. '.Templates.'

@@ -85,7 +85,7 @@ function Helpers:TestSortingTemplate(osirisEntity, sortingTemplateId)
     -- Check custom evaluator function
     if sortingTemplate.Evaluator ~= nil then
         sortedByTemplate = sortingTemplate.Evaluator(osirisEntity, templateEntity)
-        Logger:Log('CheckTmpLst: list.evaluator > %s - %s, %s, %s',
+        Logger:Debug('CheckTmpLst: list.evaluator > %s - %s, %s, %s',
                 sortingTemplateId,
                 sortedByTemplate,
                 osirisEntity.UUID,
@@ -110,6 +110,7 @@ function Helpers:TestSortingTemplate(osirisEntity, sortingTemplateId)
     end
 
     if sortedByTemplate then
+        Logger:Log('CheckTmpLst: included by list.evaluator > %s - %s', osirisEntity, sortingTemplateId)
         return true
     end
 
