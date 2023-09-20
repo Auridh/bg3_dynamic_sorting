@@ -1,18 +1,13 @@
 -- init global
 Auridh.DS.Static.UniqueIds = {
     Events = {
-        SearchBag = 'Evt_SearchBag',
-        SearchBagEnd = 'Evt_SearchBagEnd',
-        InitSortingTag = 'Evt_InitSortingTag',
-        InitSortingTagEnd = 'Evt_InitSortingTagEnd',
-        GobbleUp = 'Evt_GobbleUp',
-        GobbleUpEnd = 'Evt_GobbleUpEnd',
         TimerInit = 'Evt_TimerInit',
         TimerCombined = 'Evt_TimerTimerCombined',
     },
     Templates = {
         SortingTag = '834c78a0-4758-457b-aa45-74a179a3b3be',
         SortingTagCreator = '27097129-2259-4a84-ac40-c27229c1093e',
+        TransformOrigin = '13fc0f86-da7f-4f62-abd5-99f975ab39fc',
         Keychain = 'ee329627-dbee-405f-b9a6-b260de9ad34c',
         AlchemyPouch = 'b7543ff4-5010-4c01-9bcd-4da1047aebfc',
         CampSupplyPack = 'efcb70b7-868b-4214-968a-e23f6ad586bc',
@@ -29,6 +24,11 @@ Auridh.DS.Static.UniqueIds = {
         LIA_GrenadeSatchel = 'd36cdb48-5d94-46cc-81d3-c53ed5b59429',
         LIA_Poisons = '97788c3e-1b3d-474a-a030-6414315c6a50',
     },
+    ShapeShiftRules = {
+        DisguiseChestOfMundane = 'DisguiseChestOfMundane_4c99bf1b-d983-42c3-9eda-b6cfdba1d93f',
+        Physical = 'Physical_4acc6277-6dcd-4110-9450-b9379beaedac',
+        Disguise = 'Disguise_ceccc4eb-d774-4cd5-9147-12322b81b763',
+    },
     Tags = {
         Key = '9851fa99-5538-432a-8e77-c90929a88974',
         Scroll = 'dd86c045-0370-4ec9-b7c5-b0b160706f09',
@@ -44,10 +44,6 @@ Auridh.DS.Static.UniqueIds = {
         CampSupplies = '14e17bf7-a466-404a-b097-29642492a2b2',
         AlchIngredient = '64b824e7-50c5-475a-98c2-52026e372d77',
         AlchExtract = '85b58b89-c881-43c2-bbbe-7c8a0b3bf981',
-    },
-    StatusEffects = {
-        ReduceWeight = 'DS_REDUCE_WEIGHT_MAIN',
-        WeightDisplayFix = 'DS_REDUCE_WEIGHT_FIX',
     },
     EquipmentSlotIds = {
         Headwear = 0,

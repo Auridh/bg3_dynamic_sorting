@@ -18,6 +18,24 @@ function Helpers:IterateCampChestDB(action)
     end
 end
 
+function Helpers:SupplementUid(uuid)
+    if uuid:len() > 36 then
+        return uuid
+    end
+    local template = Osi.GetTemplate(uuid)
+    if not template then
+        return uuid
+    end
+
+    local entityId = Helpers:GetEntityId(template)
+    return entityId .. '_' .. uuid
+end
+
+function Helpers:GetEntityId(mergeString)
+    local length = mergeString:len()
+    return mergeString:sub(1, length-37)
+end
+
 function Helpers:GetUUID(mergeString)
     local length = mergeString:len()
     return mergeString:sub(length-35, length)
@@ -61,6 +79,8 @@ function Helpers:TestSortingTemplate(osirisEntity, sortingTemplateId)
     local sortingTemplate = SortingTemplates[sortingTemplateId]
     local templateEntity = osirisEntity:Template()
     local sortedByTemplate = false
+
+    Logger:Log('Check Sorting Template: %s', sortingTemplate.Message)
 
     -- Check custom evaluator function
     if sortingTemplate.Evaluator ~= nil then
@@ -107,7 +127,7 @@ function Helpers:TestSortingTemplate(osirisEntity, sortingTemplateId)
         return true
     end
 
-    Logger:Log('CheckTmpLst: no match found > %s, %s, %s', sortingTemplateId, templateEntity.UUID, osirisEntity.UUID)
+    Logger:Debug('CheckTmpLst: no match found > %s, %s, %s', sortingTemplateId, templateEntity.UUID, osirisEntity.UUID)
     return false
 end
 

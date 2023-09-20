@@ -11,6 +11,7 @@ Ext.Require('Classes/OsirisEntity.lua')
 Ext.Require('Classes/SortingTemplate.lua')
 Ext.Require('Classes/SortingContainer.lua')
 Ext.Require('Classes/TempDB.lua')
+Ext.Require('Classes/Queue.lua')
 
 -- Init static vars
 Auridh.DS.Static = {}
@@ -23,11 +24,13 @@ Auridh.DS.Helpers = {}
 Ext.Require('Helpers/Console.lua')
 Ext.Require('Helpers/Logger.lua')
 Ext.Require('Helpers/Helpers.lua')
+Ext.Require('Helpers/Basic.lua')
 
 -- Init game code
 Auridh.DS.Current = {}
 Auridh.DS.Handlers = {}
 Ext.Require('Game/PersistentState.lua')
+Ext.Require('Game/Handlers/InitDB.lua')
 Ext.Require('Game/Handlers/FirstInstall.lua')
 Ext.Require('Game/Handlers/AddedTo.lua')
 Ext.Require('Game/DynamicSorting.lua')

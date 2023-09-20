@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="0" revision="9" build="330" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="13fc0f86-da7f-4f62-abd5-99f975ab39fc" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_Creator" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
+					<attribute id="VisualTemplate" type="FixedString" value="49496adb-fce9-56f3-0053-6c40ed8c10a2" />
+					<attribute id="PhysicsTemplate" type="FixedString" value="93ab554f-0f32-c518-645c-de0927b520c5" />
+					<attribute id="InventoryMoveSound" type="FixedString" value="23c6ee88-e1ae-88e5-71d5-b127b60f68ee" />
+					<attribute id="DropSound" type="FixedString" value="23c6ee88-e1ae-88e5-71d5-b127b60f68ee" />
+					<attribute id="PickupSound" type="FixedString" value="06cee190-7109-18f2-8c2e-6eedc1eff4b2" />
+					<attribute id="DisplayName" type="TranslatedString" handle="hd7900903g0533g4e1eg8411g5f73b82dce40" version="1" />
+					<attribute id="TechnicalDescription" type="TranslatedString" handle="he1966ad5gc84eg43feg8079gaa00759cf4b1" version="1" />
+					<attribute id="Icon" type="FixedString" value="AuridhDS_Icon_Pin_Blue" />
+					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag_Creator" />
+					<attribute id="ReadinessFlags" type="uint32" value="63" />
+					<attribute id="TreasureOnDestroy" type="bool" value="False" />
+					<children>
+						<node id="GameMaster" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

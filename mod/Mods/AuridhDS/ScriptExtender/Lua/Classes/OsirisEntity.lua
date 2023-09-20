@@ -13,14 +13,15 @@ function OsirisEntity:New(o)
 end
 
 function OsirisEntity:FromUid(entityUid, extra)
-    local template = EntityDB[entityUid]
+    local uuid = Auridh.DS.Helpers.Misc:GetUUID(entityUid)
+    local template = EntityDB[uuid]
 
     if not template then
-        local entityId, uuid = Auridh.DS.Helpers.Misc:SplitEntityString(entityUid)
+        entityUid = Auridh.DS.Helpers.Misc:SupplementUid(entityUid)
         template = self:New({
             Uid = entityUid,
             UUID = uuid,
-            EntityId = entityId,
+            EntityId = Auridh.DS.Helpers.Misc:GetEntityId(entityUid),
         })
     end
 
@@ -30,19 +31,20 @@ function OsirisEntity:FromUid(entityUid, extra)
         end
     end
 
-    EntityDB[entityUid] = template
-    return EntityDB[entityUid]
+    EntityDB[uuid] = template
+    return EntityDB[uuid]
 end
 
 function OsirisEntity:TemporaryFromUid(entityUid)
-    local template = EntityDB[entityUid]
+    local uuid = Auridh.DS.Helpers.Misc:GetUUID(entityUid)
+    local template = EntityDB[uuid]
 
     if not template then
-        local entityId, uuid = Auridh.DS.Helpers.Misc:SplitEntityString(entityUid)
+        entityUid = Auridh.DS.Helpers.Misc:SupplementUid(entityUid)
         template = self:New({
             Uid = entityUid,
             UUID = uuid,
-            EntityId = entityId,
+            EntityId = Auridh.DS.Helpers.Misc:GetEntityId(entityUid),
         })
     end
 
@@ -50,19 +52,19 @@ function OsirisEntity:TemporaryFromUid(entityUid)
 end
 
 function OsirisEntity:SaveToDB()
-    EntityDB[self.Uid] = self
+    EntityDB[self.UUID] = self
     return self
 end
 
 function OsirisEntity:RequestDelete()
     Auridh.DS.Helpers.Logger:Log('RequestDelete: %s', self.Uid)
     Osi.RequestDelete(self.Uid)
-    EntityDB[self.Uid] = nil
+    EntityDB[self.UUID] = nil
 end
 
 function OsirisEntity:EngineEntity()
-    self.EngineEntity = self.EngineEntity or Ext.Entity.Get(self.Uid)
-    return self.EngineEntity
+    self.EngineEntityValue = self.EngineEntityValue or Auridh.DS.Classes.EngineEntity:FromUid(self.Uid)
+    return self.EngineEntityValue
 end
 
 function OsirisEntity:Template(temporary)
@@ -92,12 +94,43 @@ function OsirisEntity:StackAmount()
 end
 
 function OsirisEntity:Owner(temporary)
-    return temporary and OsirisEntity:TemporaryFromUid(Osi.GetOwner(self.Uid)) or OsirisEntity:FromUid(Osi.GetOwner(self.Uid))
+    local owner = Osi.GetOwner(self.Uid)
+    if not owner then
+        return nil
+    end
+
+    local ownerEntity = temporary and OsirisEntity:TemporaryFromUid(owner) or OsirisEntity:FromUid(owner)
+
+    if self.LastOwnerValue ~= self.OwnerValue then
+        self.LastOwnerValue = self.OwnerValue
+    end
+
+    self.OwnerValue = ownerEntity
+    return ownerEntity
 end
 
 function OsirisEntity:DirectOwner(temporary)
     local directOwner = Osi.GetDirectInventoryOwner(self.Uid)
-    return temporary and OsirisEntity:TemporaryFromUid(directOwner) or OsirisEntity:FromUid(directOwner)
+    if not directOwner then
+        return nil
+    end
+
+    local ownerEntity = temporary and OsirisEntity:TemporaryFromUid(directOwner) or OsirisEntity:FromUid(directOwner)
+
+    if self.LastDirectOwnerValue ~= self.DirectOwnerValue then
+        self.LastDirectOwnerValue = self.DirectOwnerValue
+    end
+
+    self.DirectOwnerValue = ownerEntity
+    return ownerEntity
+end
+
+function OsirisEntity:LastOwner()
+    return self.LastOwnerValue
+end
+
+function OsirisEntity:LastDirectOwner()
+    return self.LastDirectOwnerValue
 end
 
 function OsirisEntity:IsTagged(tag)
@@ -145,6 +178,10 @@ function OsirisEntity:IsEquipable()
     return self:Type('IsEquipable')
 end
 
+function OsirisEntity:ItemIsInPartyInventory(playerEntity)
+    return self:Type('ItemIsInPartyInventory', playerEntity.Uid, 0)
+end
+
 function OsirisEntity:IsJunk()
     return Osi.IsJunk(self.Uid) == 1
 end
@@ -157,15 +194,21 @@ function OsirisEntity:Exists()
     return Osi.Exists(self.Uid) == 1
 end
 
+function OsirisEntity:Equals(osirisEntity)
+    return self.UUID == osirisEntity.UUID
+end
+
 function OsirisEntity:Owns(osirisEntity, options)
     options = options or {}
     local directOwner = options.DirectOwner or false
 
     if directOwner then
-        return self.UUID == osirisEntity:DirectOwner().UUID
+        local directOwnerEntity = osirisEntity:DirectOwner()
+        return directOwnerEntity and self.UUID == directOwnerEntity.UUID
     end
 
-    return self.UUID == osirisEntity:Owner().UUID
+    local owner = osirisEntity:Owner()
+    return owner and self.UUID == owner.UUID
 end
 
 function OsirisEntity:IterateInventory(startEvent, options)
@@ -236,4 +279,14 @@ end
 function OsirisEntity:ClearTag(tag)
     Osi.ClearTag(self.Uid, tag)
     self['TAG_' .. tag] = nil
+end
+
+function OsirisEntity:Transform(templateEntity, options)
+    options = options or {}
+    local shapeShiftRule = options.ShapeShiftRule or Auridh.DS.Static.UniqueIds.ShapeShiftRules.DisguiseChestOfMundane
+    Osi.Transform(self.Uid, templateEntity.Uid, shapeShiftRule)
+end
+
+function OsirisEntity:RemoveTransforms()
+    Osi.RemoveTransforms(self.Uid)
 end

@@ -8,7 +8,7 @@ local function InterpretCommand(_, arg, val1, val2)
             State.ModState[v1] = v2
         end,
         PrintModState = function(_, _)
-            Logger:Dmp(State:Read().ModState)
+            Logger:Dmp(State:GetVar('ModState'))
         end,
         SetVar = function(v1, v2)
             State[v1] = v2

@@ -5,7 +5,9 @@ Auridh.DS.Classes.ModState = {
         ModState = {
             Installed = false,
             LoggingEnabled = false,
+            LogLevel = 1,
         },
+        Addons = {},
     },
 }
 
@@ -19,8 +21,40 @@ function ModState:New(o)
     return o
 end
 
-function ModState:Read()
-    return self.PersistentState
+function ModState:GetVar(key)
+    return Auridh.DS.Helpers.Misc:GetNestedVar(self.PersistentState, key)
+end
+
+function ModState:SetVar(key, value)
+    Auridh.DS.Helpers.Misc:SetNestedVar(self.PersistentState, key, value)
+    return self
+end
+
+function ModState:AddAddon(uid)
+    if self.PersistentState.Addons[uid] then
+        return
+    end
+
+    self.PersistentState.Addons[uid] = {
+        Installed = true,
+    }
+    return self
+end
+
+function ModState:RemoveAddon(uid)
+    if self.PersistentState.Addons[uid] then
+        self.PersistentState.Addons[uid].Installed = false
+    end
+    return self
+end
+
+function ModState:GetAddonVar(addonUid, key)
+    return Auridh.DS.Helpers.Misc:GetNestedVar(self.PersistentState.Addons[addonUid], key)
+end
+
+function ModState:SetAddonVar(addonUid, key, value)
+    Auridh.DS.Helpers.Misc:SetNestedVar(self.PersistentState.Addons[addonUid], key, value)
+    return self
 end
 
 function ModState:Save()

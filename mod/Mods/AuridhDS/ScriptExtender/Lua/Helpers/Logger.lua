@@ -10,7 +10,7 @@ local LogLevels = {
 }
 
 function Logger:Log(...)
-    if not Auridh.DS.Current.State:Read().ModState.LoggingEnabled then
+    if not Auridh.DS.Current.State:GetVar('ModState.LoggingEnabled') then
         return
     end
 
@@ -27,13 +27,13 @@ function Logger:Log(...)
 end
 
 function Logger:Debug(...)
-    if LogLevels[Auridh.DS.Current.State:Read().ModState.LogLevel] == 0 then
+    if LogLevels[Auridh.DS.Current.State:GetVar('ModState.LogLevel')] == 0 then
         self:Log(...)
     end
 end
 
 function Logger:Dmp(info)
-    if not Auridh.DS.Current.State:Read().ModState.LoggingEnabled then
+    if not Auridh.DS.Current.State:GetVar('ModState.LoggingEnabled') then
         return
     end
 
