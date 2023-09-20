@@ -20,9 +20,12 @@ local function Init()
                         if not osirisEntity:IsEquipable() or osirisEntity:IsEquipped() then
                             return false
                         end
-                        local objectStats = Ext.Stats.Get(osirisEntity:StatString())
-                        Logger:Log('Rarity: %s -> %s', osirisEntity.Uid, objectStats.Rarity)
-                        return objectStats.Rarity ~= 'Common'
+
+                        local rarity = osirisEntity:EngineEntity():Rarity()
+                        local isUnique = osirisEntity:EngineEntity():IsUnique()
+
+                        Logger:Debug('Rarity: %s -> %s, %s', osirisEntity.Uid, rarity, isUnique)
+                        return rarity > 0 and not isUnique
                     end)
                 :SetMessage('Should all ordinary equipment be moved to this container?')
                 :SetSortingTag(TemplateIds.OrdinaryEquipment),
