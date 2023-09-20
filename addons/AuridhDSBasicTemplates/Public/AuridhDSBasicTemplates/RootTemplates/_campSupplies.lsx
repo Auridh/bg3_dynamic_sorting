@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="0" revision="9" build="330" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="efcb70b7-868b-4214-968a-e23f6ad586bc" />
+					<attribute id="Name" type="LSString" value="CONT_GEN_CampSupplySack" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="47805d79-88f1-4933-86eb-f78f67cbc33f" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h5ddd2bdbg0d9cg4595gac43gd100fa81fa8c" version="3" />
+					<attribute id="Icon" type="FixedString" value="Item_CONT_GEN_CampSupplySack" />
+					<attribute id="Stats" type="FixedString" value="OBJ_Backpack_CampSupplies" />
+					<attribute id="StoryItem" type="bool" value="True" />
+					<attribute id="Description" type="TranslatedString" handle="h16a858cdgb1a9g4d9dg96b3g25af02da2135" version="5" />
+					<attribute id="TechnicalDescription" type="TranslatedString" handle="hd0b2c62dg6fb1g42a7g8689g823fd9ba7058" version="1" />
+					<attribute id="ContainerAutoAddOnPickup" type="bool" value="True" />
+					<attribute id="ContainerContentFilterCondition" type="LSString" value="IsSupply() or Tagged('CAMPSUPPLIES')" />
+					<children>
+						<node id="InventoryList" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>
