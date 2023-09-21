@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="0" revision="9" build="330" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<!-- Valuables !-->
+					<attribute id="MapKey" type="FixedString" value="ef1677e5-26b8-4213-a94f-8ac5c9761ef9" />
+					<attribute id="DisplayName" type="TranslatedString" handle="he262a4fbg1067g4725ga2eeg3f63ccb0c0de" version="1" />
+					<attribute id="TechnicalDescription" type="TranslatedString" handle="h71052cb1g6291g43eag9b06ge80c9b4b3b73" version="1" />
+					<attribute id="Icon" type="FixedString" value="AuridhDS_Icon_Pin_Red" />
+					<attribute id="Name" type="LSString" value="DS_OBJ_SortingTag_Valuables" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="c9e45e5a-f089-480b-ab3a-7f5f76dccc3b" />
+					<attribute id="VisualTemplate" type="FixedString" value="564ac843-ea39-4fd9-b9ee-b37cee7e6734" />
+					<attribute id="PhysicsTemplate" type="FixedString" value="56184af3-63ea-442e-b111-fe81bff2c2f4" />
+					<attribute id="Stats" type="FixedString" value="DS_OBJ_SortingTag" />
+					<attribute id="TreasureOnDestroy" type="bool" value="False" />
+					<children>
+						<node id="GameMaster" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>
