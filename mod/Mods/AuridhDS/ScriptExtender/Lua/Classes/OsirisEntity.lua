@@ -85,8 +85,7 @@ function OsirisEntity:StatString()
 end
 
 function OsirisEntity:SortingTemplateId()
-    self.SortingTemplateIdValue = self.SortingTemplateIdValue or Auridh.DS.Helpers.Misc:GetSortingTemplateId(self)
-    return self.SortingTemplateIdValue
+    return self.SortingTemplateIdValue or Auridh.DS.Helpers.Misc:GetSortingTemplateId(self)
 end
 
 function OsirisEntity:StackAmount()
@@ -183,7 +182,18 @@ function OsirisEntity:ItemIsInPartyInventory(playerEntity)
 end
 
 function OsirisEntity:IsJunk()
-    return Osi.IsJunk(self.Uid) == 1
+    local isJunk = Osi.IsJunk(self.Uid) == 1
+
+    local directOwner = self:DirectOwner()
+    if directOwner and directOwner:IsPlayer() and self.WasAddedAsJunkValue ~= isJunk then
+        self.WasAddedAsJunkValue = isJunk
+    end
+
+    return isJunk
+end
+
+function OsirisEntity:WasAddedAsJunk()
+    return self.WasAddedAsJunkValue
 end
 
 function OsirisEntity:IsEquipped()

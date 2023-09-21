@@ -11,7 +11,7 @@ local function Init()
 
     API.RegisterAddon(AddonUid)
 
-    local Logger = API.GetLogger(AddonUid, 'OET')
+    -- local Logger = API.GetLogger(AddonUid, 'OET')
     local TemplateIds = {
         OrdinaryEquipment = '7f244612-c496-4a65-88ec-b2b4e4ad59b7',
     }
@@ -27,7 +27,7 @@ local function Init()
                         local rarity = osirisEntity:EngineEntity():Rarity()
                         local isUnique = osirisEntity:EngineEntity():IsUnique()
 
-                        Logger:Debug('Rarity: %s -> %s, %s', osirisEntity.Uid, rarity, isUnique)
+                        -- Logger:Debug('Rarity: %s -> %s, %s', osirisEntity.Uid, rarity, isUnique)
                         return rarity == 0 and not isUnique
                     end)
                 :SetMessage('Should all ordinary equipment be moved to this container?')

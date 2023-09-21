@@ -1,3 +1,5 @@
+PersistentVars = {}
+
 -- init global
 Auridh.DS.Classes.ModState = {
     StateFile = 'State.json',
@@ -5,7 +7,7 @@ Auridh.DS.Classes.ModState = {
         ModState = {
             Installed = false,
             LoggingEnabled = true,
-            LogLevel = 2,
+            LogLevel = "Warning",
         },
         Addons = {},
     },
@@ -45,7 +47,7 @@ function ModState:AddAddon(uid, options)
     self.PersistentState.Addons[uid] = {
         Installed = true,
         LoggingEnabled = options.LoggingEnabled == nil or options.LoggingEnabled,
-        LogLevel = options.LogLevel or 2,
+        LogLevel = options.LogLevel or "Warning",
     }
     return self
 end
@@ -67,6 +69,7 @@ function ModState:SetAddonVar(addonUid, key, value)
 end
 
 function ModState:Save()
+    -- PersistentVars = self.PersistentState
     Ext.IO.SaveFile(Auridh.DS.Helpers.Misc:FilePath(self.StateFile), Ext.Json.Stringify(self.PersistentState))
 end
 
@@ -76,6 +79,10 @@ function ModState:Load()
     if fileContent ~= nil then
         self.PersistentState = Ext.Json.Parse(fileContent)
     end
+
+    -- if PersistentVars.ModState then
+    --     self.PersistentState = PersistentVars
+    -- end
 
     Auridh.DS.Helpers.Logger:Log('PersistentState Loaded')
     Auridh.DS.Helpers.Logger:Dmp(self.PersistentState)

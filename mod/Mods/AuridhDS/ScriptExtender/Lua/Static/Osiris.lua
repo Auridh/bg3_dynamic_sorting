@@ -34,6 +34,14 @@ Auridh.DS.Static.Osiris = {
         UseFinished = OsirisEvent:New({ Name = 'UseFinished', Arity = 3 }),
         -- event TagSet((GUIDSTRING)_Target, (TAG)_Tag)
         TagSet = OsirisEvent:New({ Name = 'TagSet', Arity = 2 }),
+        -- event TextEvent((STRING)_Event)
+        TextEvent = OsirisEvent:New({ Name = 'TextEvent', Arity = 1 }),
+        -- event FlagSet((FLAG)_Flag, (GUIDSTRING)_Speaker, (INTEGER)_DialogInstance)
+        FlagSet = OsirisEvent:New({ Name = 'FlagSet', Arity = 3 }),
+        -- event StatusTagSet((GUIDSTRING)_Target, (TAG)_Tag, (GUIDSTRING)_SourceOwner, (GUIDSTRING)_Source, (INTEGER)_StoryActionID)
+        StatusTagSet = OsirisEvent:New({ Name = 'StatusTagSet', Arity = 5 }),
+        -- event StatusApplied((GUIDSTRING)_Object, (STRING)_Status, (GUIDSTRING)_Causee, (INTEGER)_StoryActionID)
+        StatusApplied = OsirisEvent:New({ Name = 'StatusApplied', Arity = 4 }),
     },
     ExecTime = {
         After = 'after',

@@ -40,6 +40,8 @@ Ext.Require('Game/DynamicSorting.lua')
 Ext.Require('API.lua')
 
 Ext.Events.SessionLoaded:Subscribe(function()
+    -- Auridh.DS.Current.State:Load()
+
     Mods.AuridhDS.Library = Auridh.DS
     Mods.AuridhDS.API = Auridh.DS_API
 end)

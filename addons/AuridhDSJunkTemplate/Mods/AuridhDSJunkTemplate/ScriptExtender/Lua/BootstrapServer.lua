@@ -18,7 +18,7 @@ local function Init()
                 :SetPriority(999)
                 :SetEvaluator(
                     function(osirisEntity, _)
-                        return osirisEntity:IsJunk()
+                        return osirisEntity:IsJunk() or osirisEntity:WasAddedAsJunk()
                     end)
                 :SetMessage('Should all junk be moved to this container?')
                 :SetSortingTag(TemplateIds.Junk),
