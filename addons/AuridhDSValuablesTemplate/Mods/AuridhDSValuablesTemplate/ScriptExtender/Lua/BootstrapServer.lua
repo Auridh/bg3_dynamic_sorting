@@ -17,7 +17,7 @@ local function Init()
                 :IncludeTags({
                         ['bd836d99-19d3-4fc3-7385-dab82e8855d9'] = {},
                     })
-                :SetMessage('Should all dyes be moved to this container?')
+                :SetMessage('Should all valuables be moved to this container?')
                 :SetSortingTag(TemplateIds.Valuables),
     })
 end
