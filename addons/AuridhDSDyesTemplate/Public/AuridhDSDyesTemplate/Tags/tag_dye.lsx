@@ -7,7 +7,7 @@
 			<attribute id="DisplayDescription" type="TranslatedString" handle="" version="0" />
 			<attribute id="DisplayName" type="TranslatedString" handle="hab14035fgce5cg4f33gadd9gf095a414b76c" version="1" />
 			<attribute id="Icon" type="FixedString" value="" />
-			<attribute id="Name" type="FixedString" value="AC_DYE" />
+			<attribute id="Name" type="FixedString" value="DS_DYE" />
 			<attribute id="UUID" type="guid" value="5bcf4b4e-4842-45cc-b5be-7b7f4ba8cccf" />
 			<children>
 				<node id="Categories">
