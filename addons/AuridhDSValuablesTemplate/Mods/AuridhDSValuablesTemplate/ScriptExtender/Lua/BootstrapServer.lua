@@ -15,7 +15,7 @@ local function Init()
         [TemplateIds.Valuables] = API.CreateSortingTemplate()
                 :SetPriority(100)
                 :IncludeTags({
-                        ['bd836d99-19d3-4fc3-8573-b8da882ed955'] = {},
+                        ['bd836d99-19d3-4fc3-7385-dab82e8855d9'] = {},
                     })
                 :SetMessage('Should all dyes be moved to this container?')
                 :SetSortingTag(TemplateIds.Valuables),
