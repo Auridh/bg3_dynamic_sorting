@@ -4,6 +4,7 @@ Auridh.DS = {}
 
 -- Init classes
 Auridh.DS.Classes = {}
+Ext.Require('Classes/Logger.lua')
 Ext.Require('Classes/ModState.lua')
 Ext.Require('Classes/OsirisEvent.lua')
 Ext.Require('Classes/EngineEntity.lua')
@@ -35,6 +36,10 @@ Ext.Require('Game/Handlers/FirstInstall.lua')
 Ext.Require('Game/Handlers/AddedTo.lua')
 Ext.Require('Game/DynamicSorting.lua')
 
+-- Init Addon API
+Ext.Require('API.lua')
+
 Ext.Events.SessionLoaded:Subscribe(function()
     Mods.AuridhDS.Library = Auridh.DS
+    Mods.AuridhDS.API = Auridh.DS_API
 end)

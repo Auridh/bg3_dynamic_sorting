@@ -9,21 +9,22 @@ local TemplateIds = {
     Alchemy = '0c40175d-83d7-47a0-b7f5-cd7ee78945a6',
     Keys = '661b5899-45b8-4c20-aa9c-f2d304016126',
 }
+local AddonUid = 'b3883931-9e08-4e92-bd5d-77d87316cfa4'
 
 local function AddSortingTemplates()
-    local DS = Mods.AuridhDS.Library
-    local SortingTemplate = DS.Classes.SortingTemplate
-    local Tags = DS.Static.UniqueIds.Tags
+    local Library = Mods.AuridhDS.Library
+    local Tags = Library.Static.UniqueIds.Tags
+    local API = Mods.AuridhDS.API
 
-    local Templates = {
-        [TemplateIds.Keys] = SortingTemplate:New()
+    API.RegisterSortingTemplates({
+        [TemplateIds.Keys] = API.CreateSortingTemplate()
                 :SetPriority(50)
                 :IncludeTags({
                         [Tags.Key] = {},
                     })
                 :SetMessage('Should all keys be moved to this container?')
                 :SetSortingTag(TemplateIds.Keys),
-        [TemplateIds.Alchemy] = SortingTemplate:New()
+        [TemplateIds.Alchemy] = API.CreateSortingTemplate()
                 :SetPriority(50)
                 :IncludeTags({
                         [Tags.AlchIngredient] = {},
@@ -31,14 +32,14 @@ local function AddSortingTemplates()
                     })
                 :SetMessage('Should all alchemy ingredients be moved to this container?')
                 :SetSortingTag(TemplateIds.Alchemy),
-        [TemplateIds.Scrolls] = SortingTemplate:New()
+        [TemplateIds.Scrolls] = API.CreateSortingTemplate()
                 :SetPriority(50)
                 :IncludeTags({
                         [Tags.Scroll] = {},
                     })
                 :SetMessage('Should all scrolls be moved to this container?')
                 :SetSortingTag(TemplateIds.Scrolls),
-        [TemplateIds.Potions] = SortingTemplate:New()
+        [TemplateIds.Potions] = API.CreateSortingTemplate()
                 :SetPriority(50)
                 :IncludeTags({
                         [Tags.Potion] = {},
@@ -49,14 +50,14 @@ local function AddSortingTemplates()
                     })
                 :SetMessage('Should all potions be moved to this container?')
                 :SetSortingTag(TemplateIds.Potions),
-        [TemplateIds.Arrows] = SortingTemplate:New()
+        [TemplateIds.Arrows] = API.CreateSortingTemplate()
                 :SetPriority(50)
                 :IncludeTags({
                         [Tags.Arrow] = {},
                     })
                 :SetMessage('Should all arrows be moved to this container?')
                 :SetSortingTag(TemplateIds.Arrows),
-        [TemplateIds.Books] = SortingTemplate:New()
+        [TemplateIds.Books] = API.CreateSortingTemplate()
                 :SetPriority(50)
                 :IncludeTags({
                         [Tags.Book] = {},
@@ -66,7 +67,7 @@ local function AddSortingTemplates()
                     })
                 :SetMessage('Should all books and letters be moved to this container?')
                 :SetSortingTag(TemplateIds.Books),
-        [TemplateIds.Grenades] = SortingTemplate:New()
+        [TemplateIds.Grenades] = API.CreateSortingTemplate()
                 :SetPriority(50)
                 :IncludeTags({
                         [Tags.Grenade] = {},
@@ -85,7 +86,7 @@ local function AddSortingTemplates()
                     })
                 :SetMessage('Should all grenades be moved to this container?')
                 :SetSortingTag(TemplateIds.Grenades),
-        [TemplateIds.Coatings] = SortingTemplate:New()
+        [TemplateIds.Coatings] = API.CreateSortingTemplate()
                 :SetPriority(50)
                 :IncludeTags({
                         [Tags.Coating] = {},
@@ -93,7 +94,7 @@ local function AddSortingTemplates()
                     })
                 :SetMessage('Should all weapon coatings be moved to this container?')
                 :SetSortingTag(TemplateIds.Coatings),
-        [TemplateIds.Supply] = SortingTemplate:New()
+        [TemplateIds.Supply] = API.CreateSortingTemplate()
                 :SetPriority(50)
                 :SetEvaluator(
                     function(osirisEntity, _)
@@ -101,75 +102,74 @@ local function AddSortingTemplates()
                     end)
                 :SetMessage('Should all camp supplies be moved to this container?')
                 :SetSortingTag(TemplateIds.Story),
-    }
-
-    DS.Static.SortingTemplates:Add(Templates)
+    })
 end
 
 local function AddSortingContainers()
-    local DS = Mods.AuridhDS.Library
-    local SortingContainer = DS.Classes.SortingContainer
-    local Tags = DS.Static.UniqueIds.Tags
-    local Templates = DS.Static.UniqueIds.Templates
+    local Library = Mods.AuridhDS.Library
+    local Tags = Library.Static.UniqueIds.Tags
+    local Templates = Library.Static.UniqueIds.Templates
 
-    DS.Static.SortingTemplates:AddContainers({
-        [Templates.Keychain] = SortingContainer:New()
+    local API = Mods.AuridhDS.API
+
+    API.RegisterSortingContainers({
+        [Templates.Keychain] = API.CreateSortingContainer()
                 :SetTemplate(Templates.Keychain)
                 :SetSortingTag(TemplateIds.Keys)
                 :SetTag(Tags.Key),
-        [Templates.AlchemyPouch] = SortingContainer:New()
+        [Templates.AlchemyPouch] = API.CreateSortingContainer()
                 :SetTemplate(Templates.AlchemyPouch)
                 :SetSortingTag(TemplateIds.Alchemy)
                 :SetTag(Tags.AlchIngredient),
-        [Templates.CampSupplyPack] = SortingContainer:New()
+        [Templates.CampSupplyPack] = API.CreateSortingContainer()
                 :SetTemplate(Templates.CampSupplyPack)
                 :SetSortingTag(TemplateIds.Supply)
                 :SetTag(Tags.CampSupplies),
-        [Templates.Letterbox] = SortingContainer:New()
+        [Templates.Letterbox] = API.CreateSortingContainer()
                 :SetTemplate(Templates.Letterbox)
                 :SetSortingTag(TemplateIds.Books)
                 :SetTag(Tags.Book),
-        [Templates.AC_CoatingVials] = SortingContainer:New()
+        [Templates.AC_CoatingVials] = API.CreateSortingContainer()
                 :SetTemplate(Templates.AC_CoatingVials)
                 :SetSortingTag(TemplateIds.Coatings)
                 :SetTag(Tags.AlchSolutionCoating),
-        [Templates.AC_GrenadeBox] = SortingContainer:New()
+        [Templates.AC_GrenadeBox] = API.CreateSortingContainer()
                 :SetTemplate(Templates.AC_GrenadeBox)
                 :SetSortingTag(TemplateIds.Grenades)
                 :SetTag(Tags.Grenade),
-        [Templates.AC_PotionPouch] = SortingContainer:New()
+        [Templates.AC_PotionPouch] = API.CreateSortingContainer()
                 :SetTemplate(Templates.AC_PotionPouch)
                 :SetSortingTag(TemplateIds.Potions)
                 :SetTag(Tags.Potion),
-        [Templates.AC_Quiver] = SortingContainer:New()
+        [Templates.AC_Quiver] = API.CreateSortingContainer()
                 :SetTemplate(Templates.AC_Quiver)
                 :SetSortingTag(TemplateIds.Arrows)
                 :SetTag(Tags.Arrow),
-        [Templates.AC_ScrollCase] = SortingContainer:New()
+        [Templates.AC_ScrollCase] = API.CreateSortingContainer()
                 :SetTemplate(Templates.AC_ScrollCase)
                 :SetSortingTag(TemplateIds.Scrolls)
                 :SetTag(Tags.Scroll),
-        [Templates.LIA_ScrollCase] = SortingContainer:New()
+        [Templates.LIA_ScrollCase] = API.CreateSortingContainer()
                 :SetTemplate(Templates.LIA_ScrollCase)
                 :SetSortingTag(TemplateIds.Scrolls)
                 :SetTag(Tags.Scroll),
-        [Templates.LIA_PotionPouch] = SortingContainer:New()
+        [Templates.LIA_PotionPouch] = API.CreateSortingContainer()
                 :SetTemplate(Templates.LIA_PotionPouch)
                 :SetSortingTag(TemplateIds.Potions)
                 :SetTag(Tags.Potion),
-        [Templates.LIA_Arrows] = SortingContainer:New()
+        [Templates.LIA_Arrows] = API.CreateSortingContainer()
                 :SetTemplate(Templates.LIA_Arrows)
                 :SetSortingTag(TemplateIds.Arrows)
                 :SetTag(Tags.Arrow),
-        [Templates.LIA_Books] = SortingContainer:New()
+        [Templates.LIA_Books] = API.CreateSortingContainer()
                 :SetTemplate(Templates.LIA_Books)
                 :SetSortingTag(TemplateIds.Books)
                 :SetTag(Tags.Book),
-        [Templates.LIA_GrenadeSatchel] = SortingContainer:New()
+        [Templates.LIA_GrenadeSatchel] = API.CreateSortingContainer()
                 :SetTemplate(Templates.LIA_GrenadeSatchel)
                 :SetSortingTag(TemplateIds.Grenades)
                 :SetTag(Tags.Grenade),
-        [Templates.LIA_Poisons] = SortingContainer:New()
+        [Templates.LIA_Poisons] = API.CreateSortingContainer()
                 :SetTemplate(Templates.LIA_Poisons)
                 :SetSortingTag(TemplateIds.Coatings)
                 :SetTag(Tags.AlchSolutionCoating),
@@ -177,12 +177,15 @@ local function AddSortingContainers()
 end
 
 local function Init()
-    local DS = Mods.AuridhDS.Library
+    local Library = Mods.AuridhDS.Library
+    local API = Mods.AuridhDS.API
 
-    if not DS then
+    if not Library or not API then
         Ext.Utils.PrintWarning('[AuridhDS/BT] > Main mod is required but is not installed!')
         return
     end
+
+    API.RegisterAddon(AddonUid)
 
     AddSortingTemplates()
     AddSortingContainers()

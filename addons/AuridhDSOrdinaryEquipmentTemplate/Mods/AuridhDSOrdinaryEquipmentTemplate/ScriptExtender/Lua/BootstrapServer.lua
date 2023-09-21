@@ -1,19 +1,22 @@
-local function Init()
-    local DS = Mods.AuridhDS.Library
+local AddonUid = '13afb013-1aa1-4f26-a096-2159b4ae49b7'
 
-    if not DS then
+local function Init()
+    local Library = Mods.AuridhDS.Library
+    local API = Mods.AuridhDS.API
+
+    if not Library or not API then
         Ext.Utils.PrintWarning('[AuridhDS/OET] > Main mod is required but is not installed!')
         return
     end
 
-    local SortingTemplate = DS.Classes.SortingTemplate
-    local Logger = DS.Helpers.Logger
+    API.RegisterAddon(AddonUid)
 
+    local Logger = API.GetLogger(AddonUid, 'OET')
     local TemplateIds = {
         OrdinaryEquipment = '7f244612-c496-4a65-88ec-b2b4e4ad59b7',
     }
-    local Templates = {
-        [TemplateIds.OrdinaryEquipment] = SortingTemplate:New()
+    API.RegisterSortingTemplates({
+        [TemplateIds.OrdinaryEquipment] = API.CreateSortingTemplate()
                 :SetPriority(500)
                 :SetEvaluator(
                     function(osirisEntity, _)
@@ -29,9 +32,7 @@ local function Init()
                     end)
                 :SetMessage('Should all ordinary equipment be moved to this container?')
                 :SetSortingTag(TemplateIds.OrdinaryEquipment),
-    }
-
-    DS.Static.SortingTemplates:Add(Templates)
+    })
 end
 
 Ext.Events.SessionLoaded:Subscribe(Init)

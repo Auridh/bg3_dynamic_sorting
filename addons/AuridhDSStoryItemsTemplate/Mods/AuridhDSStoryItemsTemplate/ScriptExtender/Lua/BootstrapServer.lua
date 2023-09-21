@@ -1,17 +1,20 @@
-local function Init()
-    local DS = Mods.AuridhDS.Library
+local AddonUid = '2a0b42cc-3535-4904-8b4a-2fa9e962be79'
 
-    if not DS then
+local function Init()
+    local API = Mods.AuridhDS.API
+
+    if not API then
         Ext.Utils.PrintWarning('[AuridhDS/SIT] > Main mod is required but is not installed!')
         return
     end
 
-    local SortingTemplate = DS.Classes.SortingTemplate
+    API.RegisterAddon(AddonUid)
+
     local TemplateIds = {
         Story = '5ebe9ee1-c640-402d-8dfa-26ea32a4fab1',
     }
-    local Templates = {
-        [TemplateIds.Story] = SortingTemplate:New()
+    API.RegisterSortingTemplates({
+        [TemplateIds.Story] = API.CreateSortingTemplate()
                 :SetPriority(1000)
                 :SetEvaluator(
                     function(osirisEntity, _)
@@ -36,9 +39,7 @@ local function Init()
                     })
                 :SetMessage('Should all story items be moved to this container?')
                 :SetSortingTag(TemplateIds.Story),
-    }
-
-    DS.Static.SortingTemplates:Add(Templates)
+    })
 end
 
 Ext.Events.SessionLoaded:Subscribe(Init)

@@ -4,8 +4,8 @@ Auridh.DS.Classes.ModState = {
     PersistentState = {
         ModState = {
             Installed = false,
-            LoggingEnabled = false,
-            LogLevel = 1,
+            LoggingEnabled = true,
+            LogLevel = 2,
         },
         Addons = {},
     },
@@ -30,13 +30,22 @@ function ModState:SetVar(key, value)
     return self
 end
 
-function ModState:AddAddon(uid)
+function ModState:HasAddon(uid)
+    local exists = self.PersistentState.Addons[uid] ~= nil
+    local installed = exists and self.PersistentState.Addons[uid].Installed
+    return installed
+end
+
+function ModState:AddAddon(uid, options)
     if self.PersistentState.Addons[uid] then
         return
     end
 
+    options = options or {}
     self.PersistentState.Addons[uid] = {
         Installed = true,
+        LoggingEnabled = options.LoggingEnabled == nil or options.LoggingEnabled,
+        LogLevel = options.LogLevel or 2,
     }
     return self
 end

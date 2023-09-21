@@ -1,17 +1,18 @@
 local function Init()
-    local DS = Mods.AuridhDS.Library
+    local API = Mods.AuridhDS.API
 
-    if not DS then
+    if not API then
         Ext.Utils.PrintWarning('[AuridhDS/BodyTemplate] > Main mod is required but is not installed!')
         return
     end
 
-    local SortingTemplate = DS.Classes.SortingTemplate
+    API.RegisterAddon('416e02f2-1a49-4193-be59-9b1f8fcb2ff8')
+
     local TemplateIds = {
         Body = '310e53c2-1f33-4eed-8d71-6714099c5262',
     }
-    local Templates = {
-        [TemplateIds.Body] = SortingTemplate:New()
+    API.RegisterSortingTemplates({
+        [TemplateIds.Body] = API.CreateSortingTemplate()
                 :SetPriority(0)
                 :SetEvaluator(
                     function(osirisEntity, _)
@@ -19,9 +20,7 @@ local function Init()
                     end)
                 :SetMessage('Should all dead bodies be moved to this container?')
                 :SetSortingTag(TemplateIds.Body),
-    }
-
-    DS.Static.SortingTemplates:Add(Templates)
+    })
 end
 
 Ext.Events.SessionLoaded:Subscribe(Init)
