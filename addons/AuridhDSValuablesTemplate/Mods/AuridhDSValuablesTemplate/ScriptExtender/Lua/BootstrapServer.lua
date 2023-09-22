@@ -17,6 +17,9 @@ local function Init()
                 :IncludeTags({
                         ['bd836d99-19d3-4fc3-7385-dab82e8855d9'] = {},
                     })
+                :ExcludeTags({
+                        ['5bcf4b4e-4842-45cc-beb5-7f7ba84bcfcc'] = {}, -- Dyes
+                    })
                 :SetMessage('Should all valuables be moved to this container?')
                 :SetSortingTag(TemplateIds.Valuables),
     })
