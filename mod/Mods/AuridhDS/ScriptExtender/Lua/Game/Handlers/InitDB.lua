@@ -98,10 +98,27 @@ local function InitDB()
     end
 
     for sortingTagUid, sortingTagObject in pairs(savedSortingTags) do
-        SortingTags:Add(sortingTagUid)
+        if OsirisEntity:TemporaryFromUid(sortingTagUid):Exists() then
+            SortingTags:Add(sortingTagUid)
 
-        for transformUid, transformObject in pairs(sortingTagObject.Templates) do
-            Templates:Add(transformUid, transformObject.TemplateUid, transformObject.SortingTemplateMatch)
+            for transformUid, transformObject in pairs(sortingTagObject.Templates) do
+                if OsirisEntity:TemporaryFromUid(transformUid):Exists() then
+                    Templates:Add(transformUid, transformObject.TemplateUid, transformObject.SortingTemplateMatch)
+                else
+                    Logger:Warn('Template (%s) not found in save game!', transformUid)
+                    State:SetVar(
+                            'ModState.SortingTags.'
+                                    .. sortingTagUid
+                                    .. '.Templates.'
+                                    .. transformUid,
+                            nil)
+                end
+            end
+        else
+            Logger:Warn('Tag (%s) not found in save game!', sortingTagUid)
+            State:SetVar(
+                    'ModState.SortingTags.' .. sortingTagUid,
+                    nil)
         end
     end
 end
