@@ -137,7 +137,7 @@ function ModState:Load()
         self.PersistentState.ModState.IsNewSave = true
     end
 
-    Auridh.DS.Helpers.Logger:Log('ModState:Load Version %s', self.Version.String)
+    Auridh.DS.Helpers.Logger:Log('ModState:Load Version %s', Auridh.DS.Version.String)
     Auridh.DS.Helpers.Logger:Dmp(self.PersistentState)
 end
 
@@ -149,9 +149,9 @@ function ModState:LoadFromFile()
         PersistentVars.ModState.IsNewSave = nil
     end
 
-    local fileContent = pcall(Ext.IO.LoadFile, Auridh.DS.Helpers.Misc:FilePath(self.StateFile))
+    local couldLoadFile, fileContent = pcall(Ext.IO.LoadFile, Auridh.DS.Helpers.Misc:FilePath(self.StateFile))
 
-    if fileContent then
+    if couldLoadFile and fileContent ~= nil then
         for i, v in pairs(Ext.Json.Parse(fileContent)) do
             self.PersistentState[i] = v
         end

@@ -31,7 +31,7 @@ function InstallHandler:TransitionVersions()
     local State = Auridh.DS.Current.State
 
     local lastUsedVersion = State:GetVar('ModState.Version')
-    local currentVersion = State.Version
+    local currentVersion = Auridh.DS.Version
     local versionComparison = State:CompareVersions(lastUsedVersion, currentVersion)
 
     if versionComparison == 0 then
