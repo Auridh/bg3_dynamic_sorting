@@ -10,7 +10,7 @@ function API.RegisterAddon(uid, options)
     local state = Auridh.DS.Current.State
 
     if state:HasAddon(uid) then
-        Auridh.DS.Helpers.Logger:Warn('Addon [%s] was already registered!')
+        Auridh.DS.Helpers.Logger:Warn('Addon [%s] was already registered!', uid)
         return API
     end
 
@@ -24,7 +24,7 @@ function API.RemoveAddon(uid)
     local state = Auridh.DS.Current.State
 
     if not state:HasAddon(uid) then
-        Auridh.DS.Helpers.Logger:Warn('Addon [%s] was not registered!')
+        Auridh.DS.Helpers.Logger:Warn('Addon [%s] was not registered!', uid)
         return API
     end
 
