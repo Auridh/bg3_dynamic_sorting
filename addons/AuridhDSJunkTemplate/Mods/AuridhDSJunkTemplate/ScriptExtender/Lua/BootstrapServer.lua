@@ -1,3 +1,6 @@
+-- Init version
+Ext.Require('Version.lua')
+
 local TemplateIds = {
     Junk = '3322a401-51aa-45c7-aadd-dd4763f2b27a',
 }

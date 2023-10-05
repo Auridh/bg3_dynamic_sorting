@@ -1,3 +1,6 @@
+-- Init version
+Ext.Require('Version.lua')
+
 local function Init()
     local Library = Mods.AuridhDS.Library
     local API = Mods.AuridhDS.API

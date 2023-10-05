@@ -1,3 +1,6 @@
+-- Init version
+Ext.Require('Version.lua')
+
 local TemplateIds = {
     Supply = '7a8195e9-28c9-4181-8171-992d4445ccb3',
     Scrolls = 'aec0d6f0-826d-40af-8d99-8cccd7c0ce7d',

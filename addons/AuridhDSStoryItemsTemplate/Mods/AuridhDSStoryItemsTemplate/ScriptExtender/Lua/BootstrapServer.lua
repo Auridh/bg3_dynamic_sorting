@@ -1,3 +1,6 @@
+-- Init version
+Ext.Require('Version.lua')
+
 local AddonUid = '2a0b42cc-3535-4904-8b4a-2fa9e962be79'
 
 local function Init()
