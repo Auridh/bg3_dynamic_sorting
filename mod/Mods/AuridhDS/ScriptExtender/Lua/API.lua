@@ -5,16 +5,39 @@ local API = Auridh.DS_API
 
 
 ---@param uid string Unique mod identifier
+---@param version Version Addon version
+---@param options table Custom options ("LoggingEnabled", "LogLevel" and a "Custom" table)
 ---@return API
-function API.RegisterAddon(uid, options)
+function API.RegisterAddon(uid, version, options)
     local state = Auridh.DS.Current.State
 
     if state:HasAddon(uid) then
+        local installedAddonVersion = state:GetAddonVar(uid, 'Version')
+        local versionComparison = state:CompareVersions(version, installedAddonVersion)
+
+        if versionComparison == 2 then
+            state:SetAddonVar(uid, 'Version', version)
+            Auridh.DS.Helpers.Logger:Warn('Addon [%s] was moved from legacy to current version [%s].', uid, version.String)
+            return API
+        end
+        if versionComparison > 0 then
+            if options.TransitionVersions then
+                options.TransitionVersions(installedAddonVersion)
+            end
+            state:SetAddonVar(uid, 'Version', version)
+            Auridh.DS.Helpers.Logger:Warn('New version [%s] of addon [%s] installed.', version.String, uid)
+            return API
+        end
+        if versionComparison < 0 then
+            Auridh.DS.Helpers.Logger:Warn('Addon [%s] was already registered with a newer version [%s > %s]!', uid, installedAddonVersion.String, version.String)
+            return API
+        end
+
         Auridh.DS.Helpers.Logger:Warn('Addon [%s] was already registered!', uid)
         return API
     end
 
-    state:AddAddon(uid, options)
+    state:AddAddon(uid, version, options)
     return API
 end
 

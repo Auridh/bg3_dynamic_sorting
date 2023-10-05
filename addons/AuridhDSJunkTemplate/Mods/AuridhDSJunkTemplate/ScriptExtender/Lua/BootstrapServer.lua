@@ -12,7 +12,7 @@ local function Init()
         return
     end
 
-    API.RegisterAddon(AddonUid)
+    API.RegisterAddon(AddonUid, Version)
     API.RegisterSortingTemplates({
         [TemplateIds.Junk] = API.CreateSortingTemplate()
                 :SetPriority(999)

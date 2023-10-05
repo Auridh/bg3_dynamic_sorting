@@ -9,7 +9,7 @@ local function Init()
         return
     end
 
-    API.RegisterAddon(AddonUid)
+    API.RegisterAddon(AddonUid, Version)
 
     -- local Logger = API.GetLogger(AddonUid, 'OET')
     local TemplateIds = {

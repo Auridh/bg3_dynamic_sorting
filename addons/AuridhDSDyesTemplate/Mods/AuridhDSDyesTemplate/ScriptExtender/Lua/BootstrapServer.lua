@@ -6,7 +6,7 @@ local function Init()
         return
     end
 
-    API.RegisterAddon('40429fca-3eae-45e7-a8b6-0c8ae3710e55')
+    API.RegisterAddon('40429fca-3eae-45e7-a8b6-0c8ae3710e55', Version)
 
     local TemplateIds = {
         Dyes = '9e9da133-7522-46ee-90fa-e6b1c55f7c17',

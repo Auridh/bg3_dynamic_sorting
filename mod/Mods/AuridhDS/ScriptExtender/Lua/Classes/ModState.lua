@@ -85,7 +85,7 @@ function ModState:HasAddon(uid)
     return installed
 end
 
-function ModState:AddAddon(uid, options)
+function ModState:AddAddon(uid, version, options)
     if self.PersistentState.Addons[uid] then
         return
     end
@@ -95,6 +95,7 @@ function ModState:AddAddon(uid, options)
         Installed = true,
         LoggingEnabled = options.LoggingEnabled == nil or options.LoggingEnabled,
         LogLevel = options.LogLevel or "Warning",
+        Version = version,
         Custom = options.Custom,
     }
     return self

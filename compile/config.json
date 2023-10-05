@@ -1,0 +1,92 @@
+{
+  "main": {
+    "path": "mod",
+    "pakName": "DynamicAutosort",
+    "handle": "AuridhDS",
+    "versions": {
+      "main": {
+        "branch": "main"
+      }
+    }
+  },
+  "basic": {
+    "path": "addons/AuridhDSBasicTemplates",
+    "pakName": "DynamicAutosort_BasicTemplates",
+    "handle": "AuridhDSBasicTemplates",
+    "versions": {
+      "main": {
+        "branch": "main"
+      }
+    }
+  },
+  "bodies": {
+    "path": "addons/AuridhDSBodiesTemplate",
+    "pakName": "DynamicAutosort_BodiesTemplate",
+    "handle": "AuridhDSBodiesTemplate",
+    "versions": {
+      "main": {
+        "branch": "main"
+      }
+    }
+  },
+  "dyes": {
+    "path": "addons/AuridhDSDyesTemplate",
+    "pakName": "DynamicAutosort_DyesTemplate",
+    "handle": "AuridhDSDyesTemplate",
+    "versions": {
+      "main": {
+        "branch": "main"
+      }
+    }
+  },
+  "equipment": {
+    "path": "addons/AuridhDSEquipmentTemplates",
+    "pakName": "DynamicAutosort_EquipmentTemplates",
+    "handle": "AuridhDSEquipmentTemplates",
+    "versions": {
+      "main": {
+        "branch": "main"
+      }
+    }
+  },
+  "junk": {
+    "path": "addons/AuridhDSJunkTemplate",
+    "pakName": "DynamicAutosort_JunkTemplate",
+    "handle": "AuridhDSJunkTemplate",
+    "versions": {
+      "main": {
+        "branch": "main"
+      }
+    }
+  },
+  "ordinaryEquipment": {
+    "path": "addons/AuridhDSOrdinaryEquipmentTemplate",
+    "pakName": "DynamicAutosort_OrdinaryEquipmentTemplate",
+    "handle": "AuridhDSOrdinaryEquipmentTemplate",
+    "versions": {
+      "main": {
+        "branch": "main"
+      }
+    }
+  },
+  "story": {
+    "path": "addons/AuridhDSStoryItemsTemplate",
+    "pakName": "DynamicAutosort_StoryItemsTemplate",
+    "handle": "AuridhDSStoryItemsTemplate",
+    "versions": {
+      "main": {
+        "branch": "main"
+      }
+    }
+  },
+  "valuables": {
+    "path": "addons/AuridhDSValuablesTemplate",
+    "pakName": "DynamicAutosort_ValuablesTemplate",
+    "handle": "AuridhDSValuablesTemplate",
+    "versions": {
+      "main": {
+        "branch": "main"
+      }
+    }
+  }
+}

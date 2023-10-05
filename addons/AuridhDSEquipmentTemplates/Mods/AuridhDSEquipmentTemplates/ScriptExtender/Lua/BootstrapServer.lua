@@ -7,7 +7,7 @@ local function Init()
         return
     end
 
-    API.RegisterAddon('51202e5f-c90c-4066-9a59-55554759bd9e')
+    API.RegisterAddon('51202e5f-c90c-4066-9a59-55554759bd9e', Version)
 
     local EquipmentSlotIds = Library.Static.UniqueIds.EquipmentSlotIds
     local TemplateIds = {

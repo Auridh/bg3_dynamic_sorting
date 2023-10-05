@@ -8,7 +8,7 @@ local function Init()
         return
     end
 
-    API.RegisterAddon(AddonUid)
+    API.RegisterAddon(AddonUid, Version)
 
     local TemplateIds = {
         Story = '5ebe9ee1-c640-402d-8dfa-26ea32a4fab1',

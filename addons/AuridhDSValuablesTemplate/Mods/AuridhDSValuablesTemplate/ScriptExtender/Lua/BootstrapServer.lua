@@ -6,7 +6,7 @@ local function Init()
         return
     end
 
-    API.RegisterAddon('c0811fb3-7dc7-4e0a-a01e-103b7e06b8e0')
+    API.RegisterAddon('c0811fb3-7dc7-4e0a-a01e-103b7e06b8e0', Version)
 
     local TemplateIds = {
         Valuables = 'ef1677e5-26b8-4213-a94f-8ac5c9761ef9',
