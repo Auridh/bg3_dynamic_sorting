@@ -2,6 +2,9 @@
 Auridh = Auridh or {}
 Auridh.DS = {}
 
+-- Init version
+Ext.Require('Version.lua')
+
 -- Init classes
 Auridh.DS.Classes = {}
 Ext.Require('Classes/Logger.lua')
@@ -31,8 +34,8 @@ Ext.Require('Helpers/Basic.lua')
 Auridh.DS.Current = {}
 Auridh.DS.Handlers = {}
 Ext.Require('Game/PersistentState.lua')
+Ext.Require('Game/Handlers/Installation.lua')
 Ext.Require('Game/Handlers/InitDB.lua')
-Ext.Require('Game/Handlers/FirstInstall.lua')
 Ext.Require('Game/Handlers/AddedTo.lua')
 Ext.Require('Game/DynamicSorting.lua')
 
@@ -40,7 +43,7 @@ Ext.Require('Game/DynamicSorting.lua')
 Ext.Require('API.lua')
 
 Ext.Events.SessionLoaded:Subscribe(function()
-    -- Auridh.DS.Current.State:Load()
+    Auridh.DS.Current.State:Load()
 
     Mods.AuridhDS.Library = Auridh.DS
     Mods.AuridhDS.API = Auridh.DS_API

@@ -4,6 +4,7 @@ local Logger = Auridh.DS.Helpers.Logger
 local State = Auridh.DS.Current.State
 local EventIds = Auridh.DS.Static.UniqueIds.Events
 local Osiris = Auridh.DS.Static.Osiris
+local Installation = Auridh.DS.Handlers.Install
 
 local SortingTags = Classes.TempDB:New()
 local Templates = Classes.TempDB:New()
@@ -124,7 +125,8 @@ local function InitDB()
 end
 
 local function OnSavegameLoaded()
-    State:Load()
+    State:LoadFromFile()
+    Installation:TransitionVersions()
     InitDB()
 
     if not State:GetVar('ModState.Installed') then

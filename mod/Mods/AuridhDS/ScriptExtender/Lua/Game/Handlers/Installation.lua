@@ -25,3 +25,30 @@ function InstallHandler:AddToCampChests()
         end
     end)
 end
+
+function InstallHandler:TransitionVersions()
+    local Logger = Auridh.DS.Helpers.Logger
+    local State = Auridh.DS.Current.State
+
+    local lastUsedVersion = State:GetVar('ModState.Version')
+    local currentVersion = State.Version
+    local versionComparison = State:CompareVersions(lastUsedVersion, currentVersion)
+
+    if versionComparison == 0 then
+        return
+    end
+    if versionComparison > 0 then
+        Logger:Warn(
+                'Mod version (%s) is lower than previously used version (%s). Let\'s hope you know what you are doing.',
+                currentVersion.String,
+                lastUsedVersion.String)
+        return
+    end
+
+    if lastUsedVersion == nil then
+        State:SetVar('ModState.Version', currentVersion)
+        State:SetVar('ModState.SaveToFile', false)
+        Logger:Log('Upgraded from legacy to version %s.', currentVersion.String)
+        return
+    end
+end

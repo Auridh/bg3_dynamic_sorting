@@ -7,7 +7,9 @@ Auridh.DS.Classes.ModState = {
         ModState = {
             Installed = false,
             LoggingEnabled = true,
-            LogLevel = "Warning",
+            LogLevel = 'Warning',
+            SaveToFile = false,
+            Version = Auridh.DS.Version,
         },
         Addons = {},
     },
@@ -21,6 +23,51 @@ function ModState:New(o)
     setmetatable(o, self)
     self.__index = self
     return o
+end
+
+---@param version1 Version version object
+---@param version2 Version version object
+---@param compareBuild boolean
+---@return INTEGER64 <0: version1 < version2, 0: version1 == version2, >0: version1 > version2
+function ModState:CompareVersions(version1, version2, compareBuild)
+    if version1 == nil then
+        return -2
+    end
+    if version2 == nil then
+        return 2
+    end
+
+    if version1.Major > version2.Major then
+        return 1
+    end
+    if version1.Major < version2.Major then
+        return -1
+    end
+
+    if version1.Minor > version2.Minor then
+        return 1
+    end
+    if version1.Minor < version1.Minor then
+        return -1
+    end
+
+    if version1.Patch > version2.Patch then
+        return 1
+    end
+    if version1.Patch < version2.Patch then
+        return -1
+    end
+
+    if compareBuild then
+        if version1.Build > version2.Build then
+            return 1
+        end
+        if version1.Build < version2.Build then
+            return -1
+        end
+    end
+
+    return 0
 end
 
 function ModState:GetVar(key)
@@ -48,6 +95,7 @@ function ModState:AddAddon(uid, options)
         Installed = true,
         LoggingEnabled = options.LoggingEnabled == nil or options.LoggingEnabled,
         LogLevel = options.LogLevel or "Warning",
+        Custom = options.Custom,
     }
     return self
 end
@@ -68,22 +116,47 @@ function ModState:SetAddonVar(addonUid, key, value)
     return self
 end
 
-function ModState:Save()
-    -- PersistentVars = self.PersistentState
+function ModState:SaveToFile()
+    if not self.PersistentState.ModState.SaveToFile then
+        Auridh.DS.Helpers.Logger:Warn('ModState:SaveToFile call aborted! To use a file based state, set "SaveToFile" to "true".')
+        return
+    end
+
     Ext.IO.SaveFile(Auridh.DS.Helpers.Misc:FilePath(self.StateFile), Ext.Json.Stringify(self.PersistentState))
+    Auridh.DS.Helpers.Logger:Warn('ModState:SaveToFile legacy method used!')
 end
 
 function ModState:Load()
-    local fileContent = Ext.IO.LoadFile(Auridh.DS.Helpers.Misc:FilePath(self.StateFile))
+    local tempState = self.PersistentState
+    self.PersistentState = PersistentVars
 
-    if fileContent ~= nil then
-        self.PersistentState = Ext.Json.Parse(fileContent)
+    if not self.PersistentState.ModState then
+        for i, v in pairs(tempState) do
+            self.PersistentState[i] = v
+        end
+        self.PersistentState.ModState.IsNewSave = true
     end
 
-    -- if PersistentVars.ModState then
-    --     self.PersistentState = PersistentVars
-    -- end
+    Auridh.DS.Helpers.Logger:Log('ModState:Load Version %s', self.Version.String)
+    Auridh.DS.Helpers.Logger:Dmp(self.PersistentState)
+end
 
-    Auridh.DS.Helpers.Logger:Log('PersistentState Loaded')
+function ModState:LoadFromFile()
+    if PersistentVars.ModState and not PersistentVars.ModState.IsNewSave then
+        Auridh.DS.Helpers.Logger:Warn('ModState:LoadFromFile call aborted! PersistentState was already initialised.')
+        return
+    else
+        PersistentVars.ModState.IsNewSave = nil
+    end
+
+    local fileContent = pcall(Ext.IO.LoadFile, Auridh.DS.Helpers.Misc:FilePath(self.StateFile))
+
+    if fileContent then
+        for i, v in pairs(Ext.Json.Parse(fileContent)) do
+            self.PersistentState[i] = v
+        end
+    end
+
+    Auridh.DS.Helpers.Logger:Warn('ModState:LoadFromFile legacy method used!')
     Auridh.DS.Helpers.Logger:Dmp(self.PersistentState)
 end
