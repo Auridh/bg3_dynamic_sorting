@@ -31,7 +31,7 @@
                     <attribute id="Tags" type="LSString" value=""/>
                     <attribute id="Type" type="FixedString" value="Add-on"/>
                     <attribute id="UUID" type="FixedString" value="b3883931-9e08-4e92-bd5d-77d87316cfa4"/>
-                    <attribute id="Version" type="int64" value="36028797018963969"/>
+                    <attribute id="Version" type="int64" value="36028797018963979"/>
                     <children>
                         <node id="PublishVersion">
                             <attribute id="Version" type="int64" value="72057606922829824"/>

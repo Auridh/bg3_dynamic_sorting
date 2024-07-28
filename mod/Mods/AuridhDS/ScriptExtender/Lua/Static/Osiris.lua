@@ -42,6 +42,10 @@ Auridh.DS.Static.Osiris = {
         StatusTagSet = OsirisEvent:New({ Name = 'StatusTagSet', Arity = 5 }),
         -- event StatusApplied((GUIDSTRING)_Object, (STRING)_Status, (GUIDSTRING)_Causee, (INTEGER)_StoryActionID)
         StatusApplied = OsirisEvent:New({ Name = 'StatusApplied', Arity = 4 }),
+        -- event ReadyCheckPassed((STRING)_Id)
+        ReadyCheckPassed = OsirisEvent:New({ Name = 'ReadyCheckPassed', Arity = 1 }),
+        -- event ReadyCheckFailed((STRING)_Id)
+        ReadyCheckFailed = OsirisEvent:New({ Name = 'ReadyCheckFailed', Arity = 1 }),
     },
     ExecTime = {
         After = 'after',

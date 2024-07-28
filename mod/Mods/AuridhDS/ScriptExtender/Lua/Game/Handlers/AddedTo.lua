@@ -174,7 +174,16 @@ function Handlers:RegisterInSortingTag(itemEntity, holderEntity)
                     TemplateEntity = templateEntity,
                 }
 
-                Osi.OpenMessageBoxYesNo(Osi.GetHostCharacter(), SortingTemplates[sortingTemplateId].Message)
+                -- Fix for patch 6
+                -- Osi.OpenMessageBoxYesNo(Osi.GetHostCharacter(), SortingTemplates[sortingTemplateId].Message)
+                Osi.ReadyCheckSpecific(
+                    SortingTemplates[sortingTemplateId].Message,
+                    SortingTemplates[sortingTemplateId].Message,
+                    1,
+                    Osi.GetHostCharacter(),
+                    "NULL_00000000-0000-0000-0000-000000000000",
+                    "NULL_00000000-0000-0000-0000-000000000000",
+                    "NULL_00000000-0000-0000-0000-000000000000")
             else
                 TransformQueue:Push({
                     TransformTarget = templateEntity.Uid,

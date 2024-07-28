@@ -128,8 +128,19 @@ local function OnCombined(item1, item2, item3, item4, item5, characterUid, newIt
     end
 end
 
+local function OnReadyCheckPassed(id)
+    -- This is a temporary fix because the messagebox events are no longer fired...
+    OnMessageBoxYesNoClosed(Osi.GetHostCharacter(), id, 1)
+end
+
+local function OnReadyCheckFailed(id)
+    -- This is a temporary fix because the messagebox events are no longer fired...
+    OnMessageBoxYesNoClosed(Osi.GetHostCharacter(), id, 0)
+end
 
 -- Osiris Event Handlers
+Osiris.Evt.ReadyCheckPassed:Register(Osiris.ExecTime.After, OnReadyCheckPassed)
+Osiris.Evt.ReadyCheckFailed:Register(Osiris.ExecTime.After, OnReadyCheckFailed)
 Osiris.Evt.MessageBoxYesNoClosed:Register(Osiris.ExecTime.After, OnMessageBoxYesNoClosed)
 Osiris.Evt.AddedTo:Register(Osiris.ExecTime.After, OnAddedTo)
 Osiris.Evt.RemovedFrom:Register(Osiris.ExecTime.After, OnRemovedFrom)

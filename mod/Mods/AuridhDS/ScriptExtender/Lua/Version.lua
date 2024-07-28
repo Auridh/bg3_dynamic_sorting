@@ -1,8 +1,8 @@
 ---@class Version
 Auridh.DS.Version = {
-    String = '1.0.1.18',
+    String = '1.0.1.28',
     Major = 1,
     Minor = 0,
     Patch = 1,
-    Build = 18,
+    Build = 28,
 }
