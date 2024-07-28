@@ -5,16 +5,16 @@ local function InterpretCommand(_, arg, val1, val2)
 
     local arguments = {
         SetModStateVar = function(v1, v2)
-            State.ModState[v1] = v2
+            State:SetVar('ModState.' .. v1, v2)
         end,
         PrintModState = function(_, _)
             Logger:Dmp(State:GetVar('ModState'))
         end,
         SetVar = function(v1, v2)
-            State[v1] = v2
+            State:SetVar(v1, v2)
         end,
         PrintVar = function(v1, _)
-            Logger:Log('%s: %s', v1, State[v1])
+            Logger:Log('%s: %s', v1, Ext.DumpExport(State:GetVar(v1)))
         end,
         DmpDB = function()
             Logger:Dmp(Database.ST)
