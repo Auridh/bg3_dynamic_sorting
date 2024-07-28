@@ -13,7 +13,7 @@
 					<attribute id="DisplayName" type="TranslatedString" handle="h5ddd2bdbg0d9cg4595gac43gd100fa81fa8c" version="3" />
 					<attribute id="Icon" type="FixedString" value="Item_CONT_GEN_CampSupplySack" />
 					<attribute id="Stats" type="FixedString" value="OBJ_Backpack_CampSupplies" />
-					<attribute id="StoryItem" type="bool" value="True" />
+					<attribute id="StoryItem" type="bool" value="False" />
 					<attribute id="Description" type="TranslatedString" handle="h16a858cdgb1a9g4d9dg96b3g25af02da2135" version="5" />
 					<attribute id="TechnicalDescription" type="TranslatedString" handle="hd0b2c62dg6fb1g42a7g8689g823fd9ba7058" version="1" />
 					<attribute id="ContainerAutoAddOnPickup" type="bool" value="True" />
